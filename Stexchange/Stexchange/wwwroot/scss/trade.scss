@@ -1,0 +1,32 @@
+﻿/* Remove bulletpoints */
+ul, #filter_list {
+    list-style-type: none !important;
+}
+
+/* Add pointer cursor to the caret and prevent text selection*/
+.caret {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Create and style caret*/
+.caret::before {
+    content: "\25B6";
+    display: inline;
+    margin-right: 5px;
+}
+
+/* Rotate element by 90 deg*/
+.rotate90::before {
+    transform: rotate(90deg);
+}
+
+/* Hide nested elements default*/
+.nested {
+    display: none;
+}
+
+/* Show nested elements when expanded*/
+.expanded {
+    display: block;
+}

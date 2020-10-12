@@ -1,0 +1,126 @@
+﻿@model TradeViewModel
+@{
+    ViewData["Title"] = "Ruiloverzicht";
+}
+<link rel="stylesheet" href="~/scss/trade.scss" />
+
+<div class="" id="filters">
+    <form id="filer_form">
+        <ul id="filter_list">
+            <li>
+                <span class="caret">Zonlicht</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="zonlicht1" name="zonlicht" value="zon" />
+                        <label for="zonlicht1">Zon</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="zonlicht2" name="zonlicht" value="halfschaduw" />
+                        <label for="zonlicht2">Halfschaduw</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="zonlicht3" name="zonlicht" value="schaduw" />
+                        <label for="zonlicht3">Schaduw</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="caret">Herkomst</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="herkomst1" name="herkomst" value="inheems" />
+                        <label for="herkomst1">Inheems</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="herkomst2" name="herkomst" value="niet_inheems" />
+                        <label for="herkomst2">Niet inheems</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="caret">Zuurgraad</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="zuurgraad1" name="zuurgraad" value="zuur" />
+                        <label for="zuurgraad1">Zuur</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="zuurgraad2" name="zuurgraad" value="neutraal" />
+                        <label for="zuurgraad2">Neutraal</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="zuurgraad3" name="zuurgraad" value="kalkrijk" />
+                        <label for="zuurgraad3">Kalkrijk</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="caret">Voedselrijkdom</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="voedselrijkdom1" name="voedselrijkdom" value="arm" />
+                        <label for="voedselrijkdom1">Arm</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="voedselrijkdom2" name="voedselrijkdom" value="matig" />
+                        <label for="voedselrijkdom2">Matig</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="voedselrijkdom3" name="voedselrijkdom" value="rijk" />
+                        <label for="voedselrijkdom3">Rijk</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="caret">Vocht</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="vocht1" name="vocht" value="droog" />
+                        <label for="vocht1">Droog</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="vocht2" name="vocht" value="matig" />
+                        <label for="vocht2">Matig vochtig</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="vocht3" name="vocht" value="vochtig" />
+                        <label for="vocht3">Vochtig</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="vocht4" name="vocht" value="wisselnat" />
+                        <label for="vocht4">Wisselnat</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <span class="caret">Faunawaarde</span>
+                <ul class="nested">
+                    <li>
+                        <input type="checkbox" id="faunawaarde1" name="faunawaarde" value="vlinders" />
+                        <label for="faunawaarde1">Vlinders</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="faunawaarde2" name="faunawaarde" value="wilde_bijen" />
+                        <label for="faunawaarde2">Wilde bijen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="faunawaarde3" name="faunawaarde" value="honing_bijen" />
+                        <label for="faunawaarde3">Honing bijen</label>
+                    <li>
+                        <input type="checkbox" id="faunawaarde4" name="faunawaarde" value="hommels" />
+                        <label for="faunawaarde4">Hommels</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="faunawaarde5" name="faunawaarde" value="vogels" />
+                        <label for="faunawaarde5">Vogels</label>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button id="apply">Filters toepassen</button>
+    </form>
+</div>
+<div class="" id="search"></div>
+<div class="" id="listings"></div>
+
+<script type="text/javascript" src="~/js/trade.js"></script>
