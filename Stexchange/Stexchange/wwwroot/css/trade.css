@@ -1,0 +1,26 @@
+﻿body {
+  /* Remove bulletpoints */ }
+  body ul, body #filter_list {
+    list-style-type: none !important;
+    /* Add pointer cursor to the caret and prevent text selection*/
+    /* Rotate element by 90 deg*/
+    /* Hide nested elements default*/
+    /* Show nested elements when expanded*/ }
+    body ul .caret, body #filter_list .caret {
+      cursor: pointer;
+      user-select: none;
+      color: black;
+      display: inline;
+      transition: all 0.5s ease; }
+    body ul .rotated, body #filter_list .rotated {
+      transition: all 0.5s ease;
+      transform: rotate(90deg); }
+    body ul .nested, body #filter_list .nested {
+      display: none; }
+    body ul .expanded, body #filter_list .expanded {
+      display: block; }
+    body ul .span, body #filter_list .span {
+      vertical-align: middle; }
+  body #filter_list {
+    margin: 0px;
+    padding: 0px; }

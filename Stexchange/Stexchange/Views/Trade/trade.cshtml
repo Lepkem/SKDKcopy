@@ -2,14 +2,14 @@
 @{
     ViewData["Title"] = "Ruiloverzicht";
 }
-<link rel="stylesheet" href="~/scss/trade.scss" />
 
 <div class="" id="filters">
     <form id="filer_form">
+        <strong>Filters</strong>
         <ul id="filter_list">
             <li>
-                <span class="caret">Zonlicht</span>
-                <ul class="nested">
+                <img class="caret rotated" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Zonlicht</span>
+                <ul class="nested expanded">
                     <li>
                         <input type="checkbox" id="zonlicht1" name="zonlicht" value="zon" />
                         <label for="zonlicht1">Zon</label>
@@ -25,7 +25,7 @@
                 </ul>
             </li>
             <li>
-                <span class="caret">Herkomst</span>
+                <img class="caret" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Herkomst</span>
                 <ul class="nested">
                     <li>
                         <input type="checkbox" id="herkomst1" name="herkomst" value="inheems" />
@@ -38,7 +38,7 @@
                 </ul>
             </li>
             <li>
-                <span class="caret">Zuurgraad</span>
+                <img class="caret" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Zuurgraad</span>
                 <ul class="nested">
                     <li>
                         <input type="checkbox" id="zuurgraad1" name="zuurgraad" value="zuur" />
@@ -55,7 +55,7 @@
                 </ul>
             </li>
             <li>
-                <span class="caret">Voedselrijkdom</span>
+                <img class="caret" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Voedselrijkdom</span>
                 <ul class="nested">
                     <li>
                         <input type="checkbox" id="voedselrijkdom1" name="voedselrijkdom" value="arm" />
@@ -72,7 +72,7 @@
                 </ul>
             </li>
             <li>
-                <span class="caret">Vocht</span>
+                <img class="caret" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Vocht</span>
                 <ul class="nested">
                     <li>
                         <input type="checkbox" id="vocht1" name="vocht" value="droog" />
@@ -93,7 +93,7 @@
                 </ul>
             </li>
             <li>
-                <span class="caret">Faunawaarde</span>
+                <img class="caret" src="~/img/caret_leaf.svg" alt="arrow" width="20"><span>Faunawaarde</span>
                 <ul class="nested">
                     <li>
                         <input type="checkbox" id="faunawaarde1" name="faunawaarde" value="vlinders" />
