@@ -12,6 +12,7 @@ ul, #filter_list {
 /* Create and style caret*/
 .caret::before {
     content: "\25B6";
+    color: black;
     display: inline;
     margin-right: 5px;
 }
