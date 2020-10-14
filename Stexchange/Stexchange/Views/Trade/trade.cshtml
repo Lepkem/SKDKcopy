@@ -3,7 +3,7 @@
     ViewData["Title"] = "Ruiloverzicht";
 }
 
-<div class="" id="filters">
+<div class="" id="forms">
     <form id="filer_form">
         <strong>Filters</strong>
         <ul id="filter_list">
@@ -117,7 +117,35 @@
                 </ul>
             </li>
         </ul>
-        <button id="apply">Filters toepassen</button>
+        <button id="apply_filter">Filters toepassen</button>
+    </form>
+    <form id="sort_form">
+        <strong>Sorteren</strong>
+        <br />
+        <label for="sort">Kies een criterium om op te sorteren</label>
+        <select name="sort" id="sort">
+            <option value="recent">Meest recent</option>
+            <option value="distance">Afstand oplopend</option>
+            <option value="rating">Beoordeling aflopend</option>
+        </select>
+        <br />
+
+        <input type="checkbox" class="sort-range-toggle" name="distance_toggle" id="distance_toggle" />
+        <label for="distance_toggle">Afstand begrenzen</label>
+        <input type="range" class="sort-range" name="distance" id="distance" min="5" max="30" onchange="distance_amount.value=distance.value" disabled />
+        <p class="sort-range-display" name="distance_amount" id="distance_amount"></p>
+
+        <input type="checkbox" class="sort-range-toggle" name="recent_toggle" id="recent_toggle" />
+        <label for="recent_toggle">Maximum tijd sinds plaatsing</label>
+        <input type="range" class="sort-range" name="recent" id="recent" min="1" max="56" onchange="recent_amount.value=recent.value" disabled />
+        <p class="sort-range-display" name="recent_amount" id="recent_amount"></p>
+
+        <input type="checkbox" class="sort-range-toggle" name="distance_toggle" id="distance_toggle" />
+        <label for="distance_toggle">Minimum beoordeling</label>
+        <input type="range" class="sort-range" name="rating" id="rating" min="2" max="5" onchange="rating_amount.value=rating.value" disabled />
+        <p class="sort-range-display" name="rating_amount" id="rating_amount"></p>
+
+        <button id="apply_sort">Criteria toepassen</button>
     </form>
 </div>
 <div class="" id="search"></div>
