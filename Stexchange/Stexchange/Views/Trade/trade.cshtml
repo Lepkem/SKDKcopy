@@ -133,18 +133,18 @@
 
         <input type="checkbox" class="sort-range-toggle" name="distance_toggle" id="distance_toggle" />
         <label for="distance_toggle">Afstand begrenzen</label>
-        <input type="range" class="sort-range" name="distance" id="distance" min="5" max="30" onchange="distance_amount.value=distance.value" disabled />
-        <p class="sort-range-display" name="distance_amount" id="distance_amount"></p>
+        <input type="range" class="sort-range" name="distance" id="distance" min="5" max="30" value="5" step="5" disabled />
+        <p class="sort-range-display" name="distance_amount" id="distance_amount" hidden><span>5</span> km</p>
 
         <input type="checkbox" class="sort-range-toggle" name="recent_toggle" id="recent_toggle" />
         <label for="recent_toggle">Maximum tijd sinds plaatsing</label>
-        <input type="range" class="sort-range" name="recent" id="recent" min="1" max="56" onchange="recent_amount.value=recent.value" disabled />
-        <p class="sort-range-display" name="recent_amount" id="recent_amount"></p>
+        <input type="range" class="sort-range" name="recent" id="recent" min="1" max="56" value="1" disabled />
+        <p class="sort-range-display" name="recent_amount" id="recent_amount" hidden><span>1</span> dagen</p>
 
-        <input type="checkbox" class="sort-range-toggle" name="distance_toggle" id="distance_toggle" />
-        <label for="distance_toggle">Minimum beoordeling</label>
-        <input type="range" class="sort-range" name="rating" id="rating" min="2" max="5" onchange="rating_amount.value=rating.value" disabled />
-        <p class="sort-range-display" name="rating_amount" id="rating_amount"></p>
+        <input type="checkbox" class="sort-range-toggle" name="rating_toggle" id="rating_toggle" />
+        <label for="rating_toggle">Minimum beoordeling</label>
+        <input type="range" class="sort-range" name="rating" id="rating" min="2" max="5" value="2" disabled />
+        <p class="sort-range-display" name="rating_amount" id="rating_amount" hidden><span>2</span> sterren</p>
 
         <button type="submit" id="apply_sort">Criteria toepassen</button>
     </form>
