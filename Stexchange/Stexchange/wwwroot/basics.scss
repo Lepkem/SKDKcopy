@@ -1,0 +1,89 @@
+﻿$color-darkgreen: #015e54;
+$color-lightgreen: #3eaf91;
+
+
+
+html {
+    body {
+        //background-image: url("./background.png");
+        //background-size: 100% 100%;
+    }
+
+   // margin: 10px;
+    // margin-left: 20px;
+    font-family: Bahnschrift;
+    //overflow:scroll;
+}
+
+
+
+h1, h2, h3 {
+    color: $color-darkgreen;
+    font-size: 35pt;
+
+}
+.titleright, .titleleft {
+    display: inline;
+    position:relative;
+}
+
+.titleright, .secondtitle {
+    color: $color-lightgreen
+}
+.secondtitle{
+    position:relative;
+    bottom:15px;
+    font-size:28px;
+}
+
+
+
+p {
+    color: $color-lightgreen;
+    font-size: 15pt;
+    width:60%;
+    position:relative;
+    bottom:15px;
+    //position: 
+}
+
+a {
+    font-size: 14pt;
+}
+
+
+.header {
+}
+
+/*.container {
+    text-align: left;
+    margin-top: 20px;*/
+
+
+button {
+    //display: inline;
+    border: 1px solid;
+    background: $color-darkgreen;
+    padding: 1% 2%;
+    font-size: 15pt;
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+.footer {
+    font-size: 14pt;
+}
+
+form {
+    font-size: 10px;
+    width: 500px;
+    height: 500px;
+    //margin-bottom: 0px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    
+
+}
