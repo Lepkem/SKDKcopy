@@ -22,13 +22,10 @@ h1, h2 {
 
 p {
   color: #3eaf91;
-  font-size: 15pt;
-  width: 60%;
-  position: relative;
-  bottom: 15px; }
+  font-size: 15pt; }
 
-a {
-  font-size: 14pt; }
+.textabout, .textlogin, information {
+  width: 50%; }
 
 /*.container {
     text-align: left;
@@ -38,7 +35,6 @@ button {
   background: #015e54;
   padding: 1% 2%;
   font-size: 15pt;
-  cursor: pointer;
   color: white;
   border-radius: 10px; }
 
@@ -46,8 +42,8 @@ button {
   font-size: 14pt; }
 
 .accountform {
-  width: 30%;
-  height: 700px;
+  width: 25%;
+  height: 600px;
   border: 1px solid black;
   box-sizing: border-box;
   padding-left: 2%;
@@ -60,6 +56,23 @@ button {
   background: #015e54;
   padding: 2% 10%;
   font-size: 15pt;
-  cursor: pointer;
   color: white;
   border-radius: 10px; }
+
+.labelinfo {
+  font-size: 10px;
+  position: relative;
+  bottom: 12px; }
+
+.labeltext {
+  font-size: 15pt;
+  position: relative;
+  top: 10px;
+  width: 100%; }
+
+.labelinput {
+  font-size: 15pt; }
+
+.termstext, termlink {
+  font-size: 10pt;
+  width: 100%; }

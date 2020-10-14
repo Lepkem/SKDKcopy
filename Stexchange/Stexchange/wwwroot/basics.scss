@@ -48,15 +48,12 @@ h1,h2 {
 p {
     color: $color-lightgreen;
     font-size: 15pt;
-    width:60%;
-    position:relative;
-    bottom:15px;
-    //position: 
+
+}
+.textabout, .textlogin, information {
+    width: 50%;
 }
 
-a {
-    font-size: 14pt;
-}
 
 
 .header {
@@ -73,7 +70,6 @@ button {
     background: $color-darkgreen;
     padding: 1% 2%;
     font-size: 15pt;
-    cursor: pointer;
     color: white;
     border-radius: 10px;
 }
@@ -85,14 +81,14 @@ button {
 }
 
 .accountform {
-    width: 30%;
-    height: 700px;
+    width: 25%;
+    height: 600px;
     border: 1px solid black;
     box-sizing: border-box;
     padding-left: 2%;
     padding-top: 2%;
-    float:left;
-    margin-right:5%
+    float: left;
+    margin-right: 5%;
 }
 
 .submit {
@@ -100,8 +96,33 @@ button {
     background: $color-darkgreen;
     padding: 2% 10%;
     font-size: 15pt;
-    cursor: pointer;
     color: white;
     border-radius: 10px;
     
 }
+
+.labelinfo {
+    font-size: 10px;
+    position: relative;
+    bottom: 12px;
+}
+
+.labeltext {
+    font-size: 15pt;
+    position: relative;
+    top: 10px;
+    width: 100%;
+}
+
+.labelinput {
+    font-size: 15pt;
+}
+
+.termstext,termlink {
+    font-size: 10pt;
+        width: 100%;
+}
+
+
+
+
