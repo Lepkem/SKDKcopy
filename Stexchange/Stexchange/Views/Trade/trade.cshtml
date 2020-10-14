@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Ruiloverzicht";
 }
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/trade.css" />
 <div class="" id="forms">
     <form id="filer_form">
         <strong>Filters</strong>
@@ -117,7 +118,7 @@
                 </ul>
             </li>
         </ul>
-        <button id="apply_filter">Filters toepassen</button>
+        <button type="submit" id="apply_filter">Filters toepassen</button>
     </form>
     <form id="sort_form">
         <strong>Sorteren</strong>
@@ -145,10 +146,15 @@
         <input type="range" class="sort-range" name="rating" id="rating" min="2" max="5" onchange="rating_amount.value=rating.value" disabled />
         <p class="sort-range-display" name="rating_amount" id="rating_amount"></p>
 
-        <button id="apply_sort">Criteria toepassen</button>
+        <button type="submit" id="apply_sort">Criteria toepassen</button>
     </form>
 </div>
-<div class="" id="search"></div>
+<div class="" id="search">
+    <input type="text" placeholder="Zoek op trefwoord..." name="search" />
+    <button id="searchquery"><i class="fa fa-search"></i></button>
+    <input type="checkbox" name="search_description" id="search_description" value="search_description" />
+    <label for="search_description">Doorzoek ook de beschrijving</label>
+</div>
 <div class="" id="listings"></div>
 
 <script type="text/javascript" src="~/js/trade.js" asp-append-version="true"></script>
