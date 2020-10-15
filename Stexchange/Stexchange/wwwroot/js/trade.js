@@ -14,9 +14,27 @@ var displays = document.getElementsByClassName("sort-range-display");
 for (var i = 0; i < sortRange.length; i++) {
     sortRangeTogglers[i].addEventListener("click", togglerDecorator(i));
     sortRange[i].addEventListener("input", (event) => {
-        let paragraph = document.getElementById(event.target.getAttribute("id") + "_amount");
-        let span = paragraph.childNodes[0];
-        span.innerText = event.target.value;
+        let outerspan = document.getElementById(event.target.getAttribute("id") + "_amount");
+        let innerspan = outerspan.childNodes[0];
+        if (event.target.getAttribute("id") == "recent") {
+            if (event.target.value > 7) {
+                console.log("bigger " + event.target.value);
+                event.target.step = 7;
+                innerspan.innerText = Math.floor(event.target.value / 7);
+                outerspan.innerHTML = " weken";
+                outerspan.prepend(innerspan);
+            } else {
+                console.log("smaller" + event.target.value);
+                console.log(event.target);
+                console.log(innerspan);
+                event.target.step = 1;
+                innerspan.innerText = event.target.value;
+                outerspan.innerText = " dagen";
+                outerspan.prepend(innerspan);
+            }
+        } else {
+            innerspan.innerText = event.target.value;
+        }
     });
 }
 
