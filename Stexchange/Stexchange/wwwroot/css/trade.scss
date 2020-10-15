@@ -1,0 +1,74 @@
+﻿body {
+    /* Remove bulletpoints */
+    ul, #filter_list {
+        list-style-type: none !important;
+        /* Add pointer cursor to the caret and prevent text selection*/
+        .caret {
+            cursor: pointer;
+            user-select: none;
+            color: black;
+            display: inline;
+            transition: all 0.5s ease;
+        }
+        /* Rotate element by 90 deg*/
+        .rotated {
+            transition: all 0.5s ease;
+            transform: rotate(90deg);
+        }
+        /* Hide nested elements default*/
+        .nested {
+            display: none;
+        }
+        /* Show nested elements when expanded*/
+        .expanded {
+            display: block;
+        }
+        .span{
+            vertical-align: middle;
+        }
+    }
+    #filter_list {
+        margin: 0px;
+        padding: 0px;
+    }
+    #forms {
+        width: 24%;
+        height: 100%;
+        /*position: fixed;*/
+        border-right: 1px solid black;
+        float: left;
+        margin-right: 8px;
+        padding-right: 16px;
+        .sort-range-display {
+            margin-left: 5px;
+        }
+    }
+    #search, #listings {
+        width: 74%;
+        float: right;
+    }
+    #search {
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        margin-left: 8px;
+        label{
+            margin-bottom: 0px;
+            float : right;
+            white-space: nowrap;
+        }
+        #searchquery, #search_description {
+            float : right;
+        }
+        #searchbar {
+            width: 100%;
+        }
+    }
+    #search > * {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+    }
+}

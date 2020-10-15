@@ -1,0 +1,58 @@
+﻿body {
+  /* Remove bulletpoints */ }
+  body ul, body #filter_list {
+    list-style-type: none !important;
+    /* Add pointer cursor to the caret and prevent text selection*/
+    /* Rotate element by 90 deg*/
+    /* Hide nested elements default*/
+    /* Show nested elements when expanded*/ }
+    body ul .caret, body #filter_list .caret {
+      cursor: pointer;
+      user-select: none;
+      color: black;
+      display: inline;
+      transition: all 0.5s ease; }
+    body ul .rotated, body #filter_list .rotated {
+      transition: all 0.5s ease;
+      transform: rotate(90deg); }
+    body ul .nested, body #filter_list .nested {
+      display: none; }
+    body ul .expanded, body #filter_list .expanded {
+      display: block; }
+    body ul .span, body #filter_list .span {
+      vertical-align: middle; }
+  body #filter_list {
+    margin: 0px;
+    padding: 0px; }
+  body #forms {
+    width: 24%;
+    height: 100%;
+    /*position: fixed;*/
+    border-right: 1px solid black;
+    float: left;
+    margin-right: 8px;
+    padding-right: 16px; }
+    body #forms .sort-range-display {
+      margin-left: 5px; }
+  body #search, body #listings {
+    width: 74%;
+    float: right; }
+  body #search {
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    margin-left: 8px; }
+    body #search label {
+      margin-bottom: 0px;
+      float: right;
+      white-space: nowrap; }
+    body #search #searchquery, body #search #search_description {
+      float: right; }
+    body #search #searchbar {
+      width: 100%; }
+  body #search > * {
+    margin-left: 2.5px;
+    margin-right: 2.5px; }
