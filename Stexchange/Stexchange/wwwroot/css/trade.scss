@@ -31,4 +31,44 @@
         margin: 0px;
         padding: 0px;
     }
+    #forms {
+        width: 24%;
+        height: 100%;
+        /*position: fixed;*/
+        border-right: 1px solid black;
+        float: left;
+        margin-right: 8px;
+        padding-right: 16px;
+        .sort-range-display {
+            margin-left: 5px;
+        }
+    }
+    #search, #listings {
+        width: 74%;
+        float: right;
+    }
+    #search {
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        margin-left: 8px;
+        label{
+            margin-bottom: 0px;
+            float : right;
+            white-space: nowrap;
+        }
+        #searchquery, #search_description {
+            float : right;
+        }
+        #searchbar {
+            width: 100%;
+        }
+    }
+    #search > * {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+    }
 }
