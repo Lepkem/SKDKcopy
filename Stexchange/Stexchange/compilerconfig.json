@@ -4,7 +4,7 @@
     "inputFile": "wwwroot/StyleSheet.scss"
   },
   {
-    "outputFile": "wwwroot/basics.css",
-    "inputFile": "wwwroot/basics.scss"
+    "outputFile": "wwwroot/Basics.css",
+    "inputFile": "wwwroot/Basics.scss"
   }
 ]
