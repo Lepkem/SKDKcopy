@@ -8,31 +8,33 @@ html {
     body {
         background: url(../img/background.png) fixed no-repeat;
         background-size: 100%, auto;
+
         .navbar-nav {
             list-style-type: none;
-            display: flex;
+            display: inline-flex;
             flex-direction: row;
-            justify-content: flex-start;
-            align-items: stretch;
-            width: 100%;
+            justify-content: center;
+            width: 40%;
             /*padding-left: 20%;*/
-            padding-right: 40px;
+            /*padding-right: 40px;*/
             .nav-link {
                 color: $color-lightgreen;
                 text-decoration: none;
                 font-size: 20pt;
             }
-            .nav-link:active, .nav-link:hover { 
+
+            .nav-link:active, .nav-link:hover {
                 color: $color-white;
                 background: $color-lightgreen;
             }
+
             #login, #login_link {
-                align-self: flex-end;
+                /*align-self: flex-end;*/
+                margin-left: auto;
             }
         }
     }
-
-   // margin: 10px;
+    // margin: 10px;
     // margin-left: 20px;
     font-family: Bahnschrift;
     //overflow:scroll;
