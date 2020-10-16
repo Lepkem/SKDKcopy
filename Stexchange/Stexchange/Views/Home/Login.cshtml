@@ -36,7 +36,8 @@
                 <input class="labelinput" name="Email" type="text" value="Fill in your email">
             </p>
             <p>
-                <label for="Email" class="labeltext">Verify Email</label>
+                <label for="vEmail" class="labeltext">Verify Email</label>
+                <input class="labelinput" name="vEmail" type="text" value="Fill in your email">
             </p>
             <p>
                 <label for="password" class="labeltext">Password</label>
@@ -48,12 +49,13 @@
                 <input class="labelinput" name="confirm_password" type="password">
                 <span class="labelinfo">Your passwords do not match</span>
             </p>
-            <p class="termstext">By creating an account, you agree to the <a class="termlink" href="www.link.here">Terms of Use</a> and <a class="termlink" href="www.link.here">Privacy Policy</a>
-                <input class="labelinput" name="Email" type="text">
+            <p class="termstext">
+                <input class="labelinput" name="terms" type="checkbox" value="agree" /> By creating an account, you agree to the <a class="termlink" href="www.link.here">Terms of Use</a> and <a class="termlink" href="www.link.here">Privacy Policy</a>
+                
 
             <p>
-                <input type="submit" value="Create My Account" class="submit">
-            </p>
+                <button type="submit" class="submit" id="registersubmit">Create My Account</button>
+</p>
         </form>
     </div>
 </div>
