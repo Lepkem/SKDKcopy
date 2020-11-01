@@ -53,15 +53,10 @@ namespace Stexchange.Services
 
 				// send email
 				using var smtp = new SmtpClient();
-				Log.LogInformation($"after smtpclient {DateTime.Now}");
 				await smtp.ConnectAsync(Config["Host"], Config.GetValue<int>("Port"), SecureSocketOptions.StartTls);
-				Log.LogInformation($"after connect {DateTime.Now}");
 				await smtp.AuthenticateAsync(Config["Email"], Config["Password"]);
-				Log.LogInformation($"after authenticate {DateTime.Now}");
 				await smtp.SendAsync(message);
-				Log.LogInformation($"after send {DateTime.Now}");
 				await smtp.DisconnectAsync(true);
-				Log.LogInformation($"after disconnect {DateTime.Now}");
 
 				Log.LogInformation($"Send email message {message.Subject} at {DateTime.Now}");
 			}
