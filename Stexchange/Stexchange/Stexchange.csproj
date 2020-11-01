@@ -28,4 +28,7 @@
     <Content Include="favicon.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="compilerconfig.json" />
+  </ItemGroup>
 </Project>

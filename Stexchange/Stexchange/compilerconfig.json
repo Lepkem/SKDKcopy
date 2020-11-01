@@ -1,5 +1,15 @@
 ﻿[
   {
+    "outputFile": "wwwroot/StyleSheet.css",
+    "inputFile": "wwwroot/StyleSheet.scss"
+  },
+  {
+    "outputFile": "wwwroot/Basics.css",
+    "inputFile": "wwwroot/Basics.scss"
+  }
+]
+﻿[
+  {
     "outputFile": "wwwroot/css/trade.css",
     "inputFile": "wwwroot/css/trade.scss"
   }
