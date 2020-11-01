@@ -15,9 +15,11 @@
   <ItemGroup>
     <None Remove="android-chrome-192x192.png" />
     <None Remove="apple-touch-icon.png" />
+    <None Remove="Data\NewFile.txt" />
     <None Remove="favicon-16x16.png" />
     <None Remove="favicon.ico" />
     <None Remove="favicon.png" />
+    <None Remove="Services\NewFile.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,5 +32,21 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.9.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="MimeKit" Version="2.9.2" />
+    <PackageReference Include="MySql.Data" Version="8.0.22" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 </Project>

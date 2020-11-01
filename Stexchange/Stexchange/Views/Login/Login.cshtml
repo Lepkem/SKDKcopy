@@ -11,7 +11,7 @@
 
     <div class="item2">
         <form action="#" method="post" class="accountform">
-            <h2 class="logintitle">Hey!</br>Welcome back.</h2>
+            <h2 class="logintitle">Hey!<br>Welcome back.</h2>
             <p>
                 <label for="Email" class="labeltext">Email</label>
                 <input class="labelinput" name="Email" type="text">
@@ -29,15 +29,21 @@
     </div>
 
     <div class="item3">
-        <form action="#" method="post" class="accountform">
-            <h2 class="logintitle">Not a member?</br>Join us!</h2>
+        <form action="Register" method="post" class="accountform">
+            <h2 class="logintitle">Not a member?<br>Join us!</h2>
             <p>
                 <label for="Email" class="labeltext">Email</label>
-                <input class="labelinput" name="Email" type="text" value="Fill in your email">
+                <input class="labelinput" name="Email" type="email" placeholder="Fill in your email">
             </p>
+            @if (TempData["Message"] != null)
+            {
+                <div>
+                    <span>@TempData["Message"]</span>
+                </div>
+            }
             <p>
                 <label for="vEmail" class="labeltext">Verify Email</label>
-                <input class="labelinput" name="vEmail" type="text" value="Fill in your email">
+                <input class="labelinput" name="vEmail" type="email" placeholder="Fill in your email">
             </p>
             <p>
                 <label for="password" class="labeltext">Password</label>
@@ -51,11 +57,11 @@
             </p>
             <p class="termstext">
                 <input class="labelinput" name="terms" type="checkbox" value="agree" /> By creating an account, you agree to the <a class="termlink" href="www.link.here">Terms of Use</a> and <a class="termlink" href="www.link.here">Privacy Policy</a>
-                
+
 
             <p>
                 <button type="submit" class="submit" id="registersubmit">Create My Account</button>
-</p>
+            </p>
         </form>
     </div>
 </div>
