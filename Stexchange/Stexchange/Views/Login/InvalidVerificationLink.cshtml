@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Verify";
+    ViewData["Title"] = "Invalid varification link";
 }
 
 @{
@@ -10,8 +10,6 @@
 <form action="Verification/@(verificationId)" method="get">
     <h2>Je e-mailadress verifiëren</h2>
     <div>
-        <p>@TempData["Message"]</p>
+        <p>Ongeldige verificatielink</p>
     </div>
-    <a href="@($"/Login/SendNewCode/{TempData["Email"]}")">Stuur een nieuwe verificatielink</a>
 </form>
-

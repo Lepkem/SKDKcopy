@@ -57,8 +57,7 @@ namespace Stexchange.Controllers
             // Checks if guid exists
             if (!guids.Contains(guid))
             {
-                TempData["Message"] = "Ongeldige Link";
-                return View("Verify");
+                return View("InvalidVerificationLink");
             }
 
             var verification = (from code in Database.UserVerifications
@@ -72,8 +71,7 @@ namespace Stexchange.Controllers
             // Checks if verificationlink has already been activated
             if (user.IsVerified == true)
             {
-                TempData["Message"] = "E-mailverificatie Voltooid";
-                return View("Verify");
+                return View("Verified");
             }
             else
             {
@@ -81,10 +79,8 @@ namespace Stexchange.Controllers
                 {
                     user.IsVerified = true;
                     await Database.SaveChangesAsync();
-
-                    TempData["Message"] = "E-mailverificatie Voltooid";
                 }
-                return View("Verify");
+                return View("Verified");
             }
         }
 
