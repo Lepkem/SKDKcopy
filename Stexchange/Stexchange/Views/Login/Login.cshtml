@@ -75,7 +75,6 @@
             <p>
                 <label for="username" class="labeltext">Gebruikersnaam</label>
                 <input class="labelinput" name="username" type="text" maxlength="15" required>
-                <span class="labelinfo">Username has already been taken</span>
             </p>
             <p>
                 <label for="postalcode" class="labeltext">Postcode</label>
@@ -83,13 +82,11 @@
             </p>
             <p>
                 <label for="password" class="labeltext">Wachtwoord</label>
-                <input class="labelinput" name="password" type="password" minLength="8" required>
-                <span class="labelinfo">Enter a password longer than 8 characters</span>
+                <input class="labelinput" name="password" type="password" pattern=".{8,}" required title="Wachtwoord moet uit minimaal 8 tekens bestaan">
             </p>
             <p>
                 <label for="confirm_password" class="labeltext">Bevestig wachtwoord</label>
-                <input class="labelinput" name="confirm_password" type="password" minLength="8" required>
-                <span class="labelinfo">Your passwords do not match</span>
+                <input class="labelinput" name="confirm_password" type="password" pattern=".{8,}" required title="Wachtwoord moet uit minimaal 8 tekens bestaan">
             </p>
             <p class="termstext">
                 <input class="labelinput" name="terms" type="checkbox" value="agree" /> Ik ga akkoord met de <a class="termlink" href="www.link.here">gebruiksvoorwaarden</a> en de <a class="termlink" href="www.link.here">privacyverklaring</a>
