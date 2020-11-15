@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Post Advertisement";
+}
+<h2>Advertentie plaatsen</h2>
+<h3>Vul de volgende gegevens in om een advertentie te plaatsen.</h3>
+<h3>Aangeboden planten mogen geen pesticiden bevatten!</h3>
+<form action="#" method="post" class="advertisementform">
+    <p>
+        <label for="img" class="labeltext">Foto</label>
+        <input type="file" id="img" name="img" accept="image/*">
+    </p>
+    <p>
+        <label for="title" class="labeltext">Titel</label>
+        <input class="labelinput" name="title" type="text" maxlength="80" />
+    </p>
+    <p>
+        <label for="description" class="labeltext">Beschrijving</label>
+        <input class="labelinput" name="description" type="text" maxlength="500" />
+    </p>
+    <p>
+        <label for="name_lt" class="labeltext">Latijnse naam</label>
+        <input class="labelinput" name="name_lt" type="text" maxlength="50" />
+    </p>
+    <p>
+        <label for="name_nl" class="labeltext">Nederlandse naam</label>
+        <input class="labelinput" name="name_nl" type="text" maxlength="50" required />
+    </p>
+    <p>
+        <label for="quantity" class="labeltext">Kwantiteit</label>
+        <input class="labelinput" name="quantity" type="number" min="0" />
+    </p>
+    <p>
+        <label for="plant_type">Wat voor soort plant is het?</label>
+        <select name="plant_type" id="plant_type">
+            <option value="plant">Plant</option>
+            <option value="zaad">Zaad</option>
+            <option value="stek">Stek</option>
+        </select>
+    </p>
+    <p>
+        <label for="water">Hoeveel water heeft de plant nodig</label>
+        <select name="water" id="water">
+            <option value="veel">Veel</option>
+            <option value="gemiddeld">Gemiddeld</option>
+            <option value="weinig">Weinig</option>
+        </select>
+    </p>
+    <p>
+        <label for="light">Hoeveel licht heeft de plant nodig</label>
+        <select name="light" id="light">
+            <option value="veel">Veel</option>
+            <option value="gemiddeld">Gemiddeld</option>
+            <option value="weinig">Weinig</option>
+        </select>
+    </p>
+    <p>
+        <label for="nutrients">Hoeveel voeding heeft de plant nodig</label>
+        <select name="nutrients" id="nutrients">
+            <option value="veel">Veel</option>
+            <option value="gemiddeld">Gemiddeld</option>
+            <option value="weinig">Weinig</option>
+        </select>
+    </p>
+    <p>
+        <label for="nutrients">Wat is de pH-waarde van de plant</label>
+        <select name="nutrients" id="nutrients">
+            <option value="zuur">Zuur</option>
+            <option value="gemiddeld">Gemiddeld</option>
+            <option value="basisch">Basisch</option>
+        </select>
+    </p>
+    <p>
+        <label for="indigenous">De plant is inheems</label>
+        <input class="labelinput" name="indigenous" type="checkbox" />
+    </p>
+    <p>
+        <label for="with_pot">De plant is voorzien van een pot</label>
+        <input class="labelinput" name="with_pot" type="checkbox" />
+    </p>
+    <p>
+        <label for="give_away">De plant is gratis weg te geven</label>
+        <input class="labelinput" name="give_away" type="checkbox" />
+    </p>
+    <p>
+        <label for="invisible">De advertentie is te bekijken door andere gebruikers</label>
+        <input class="labelinput" name="invisible" type="checkbox" checked />
+    </p>
+    <p>
+        <button type="submit" class="submit" id="advertisementsubmit">Advertentie plaatsen</button>
+    </p>
+</form>
+
+
