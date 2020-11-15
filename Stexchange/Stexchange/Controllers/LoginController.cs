@@ -71,7 +71,7 @@ namespace Stexchange.Controllers
             // Checks if verificationlink has already been activated
             if (user.IsVerified == true)
             {
-                return View("Verified");
+                return View("InvalidVerificationLink");
             }
             else
             {
