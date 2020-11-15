@@ -11,56 +11,90 @@
 
     <div class="item2">
         <form action="#" method="post" class="accountform">
-            <h2 class="logintitle">Hey!<br>Welcome back.</h2>
+            <h2 class="logintitle">Hey!<br>Welkom terug</h2>
             <p>
                 <label for="Email" class="labeltext">Email</label>
                 <input class="labelinput" name="Email" type="text">
             </p>
             <p>
-                <label for="password" class="labeltext">Password</label>
+                <label for="password" class="labeltext">Wachtwoord</label>
                 <input class="labelinput" name="password" type="password">
                 <span class="labelinfo">Enter a password longer than 8 characters</span>
             </p>
-            <a href="www.link.here"><span class="forgetpasslink">Forgot your password?</span></a>
+            <a href="www.link.here"><span class="forgetpasslink">Wachtwoord vergeten?</span></a>
             <p>
-                <input type="submit" value="Login" class="submit">
+                <input type="submit" value="Inloggen" class="submit">
             </p>
         </form>
     </div>
 
     <div class="item3">
         <form action="Register" method="post" class="accountform">
-            <h2 class="logintitle">Not a member?<br>Join us!</h2>
-            <p>
-                <label for="Email" class="labeltext">Email</label>
-                <input class="labelinput" name="Email" type="email" placeholder="Fill in your email">
-            </p>
-            @if (TempData["Message"] != null)
+            <h2 class="logintitle">Word lid<br>Join us!</h2>
+            @switch (TempData["Message"])
             {
-                <div>
-                    <span>@TempData["Message"]</span>
-                </div>
-            }
+                case "InvalidEmail":
+                    <div>
+                        <span>Ongeldige Email</span>
+                    </div>
+                    break;
+                case "EmailExists":
+                    <div>
+                        <span>Email is al gebruikt</span>
+                    </div>
+                    break;
+                case "InvalidPostalCode":
+                    <div>
+                        <span>Ongeldige Postcode</span>
+                    </div>
+                        break;
+                case "UsernameTaken":
+                    <div>
+                        <span>Gebruikersnaam is al bezet</span>
+                    </div>
+                        break;
+                case "IncorrectPasswords":
+                    <div>
+                        <span>Wachtwoorden komen niet overeen</span>
+                    </div>
+                        break;
+                case "IncorrectEmails":
+                    <div>
+                        <span>E-mails komen niet met overeen</span>
+                    </div>
+                    break;
+                }
+        <p>
+            <label for="Email" class="labeltext">Email</label>
+            <input class="labelinput" name="Email" type="email" required>
+        </p>
             <p>
-                <label for="vEmail" class="labeltext">Verify Email</label>
-                <input class="labelinput" name="vEmail" type="email" placeholder="Fill in your email">
+                <label for="vEmail" class="labeltext">Bevestig email</label>
+                <input class="labelinput" name="vEmail" type="email" required>
             </p>
             <p>
-                <label for="password" class="labeltext">Password</label>
-                <input class="labelinput" name="password" type="password" value="">
+                <label for="username" class="labeltext">Gebruikersnaam</label>
+                <input class="labelinput" name="username" type="text" maxlength="15" required>
+                <span class="labelinfo">Username has already been taken</span>
+            </p>
+            <p>
+                <label for="postalcode" class="labeltext">Postcode</label>
+                <input class="labelinput" name="postalcode" type="text" required>
+            </p>
+            <p>
+                <label for="password" class="labeltext">Wachtwoord</label>
+                <input class="labelinput" name="password" type="password" minLength="8" required>
                 <span class="labelinfo">Enter a password longer than 8 characters</span>
             </p>
             <p>
-                <label for="confirm_password" class="labeltext">Confirm Password</label>
-                <input class="labelinput" name="confirm_password" type="password">
+                <label for="confirm_password" class="labeltext">Bevestig wachtwoord</label>
+                <input class="labelinput" name="confirm_password" type="password" minLength="8" required>
                 <span class="labelinfo">Your passwords do not match</span>
             </p>
             <p class="termstext">
-                <input class="labelinput" name="terms" type="checkbox" value="agree" /> By creating an account, you agree to the <a class="termlink" href="www.link.here">Terms of Use</a> and <a class="termlink" href="www.link.here">Privacy Policy</a>
-
-
+                <input class="labelinput" name="terms" type="checkbox" value="agree" /> Ik ga akkoord met de <a class="termlink" href="www.link.here">gebruiksvoorwaarden</a> en de <a class="termlink" href="www.link.here">privacyverklaring</a>
             <p>
-                <button type="submit" class="submit" id="registersubmit">Create My Account</button>
+                <button type="submit" class="submit" id="registersubmit">Registreren</button>
             </p>
         </form>
     </div>

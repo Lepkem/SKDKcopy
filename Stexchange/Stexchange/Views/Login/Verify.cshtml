@@ -15,6 +15,13 @@
             <p>@TempData["Message"]</p>
         </div>
     }
+    else if (TempData["Message"].ToString() == "Ongeldige Link")
+    {
+        <h2>Je e-mailadress verifiëren</h2>
+        <div>
+            <p>Ongeldige verificatielink</p>
+        </div>
+    }
     else if (TempData["Message"] != null)
     {
         <h2>Je e-mailadress verifiëren</h2>
