@@ -38,9 +38,11 @@ namespace Stexchange.Controllers
         /// Creates a key, value pair for the session in the session dictionary.
         /// </summary>
         /// <param name="user">The value of the session (user data)</param>
-        public void CreateSession(Tuple<int, char[]> user)
+        public long CreateSession(Tuple<int, char[]> user)
         {
-            sessions.Add(generateToken(user), user);
+            long token = generateToken(user);
+            sessions.Add(token, user);
+            return token;
         }
 
         /// <summary>
