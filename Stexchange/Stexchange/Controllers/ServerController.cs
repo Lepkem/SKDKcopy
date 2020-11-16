@@ -18,7 +18,7 @@ namespace Stexchange.Controllers
         /// </summary>
         /// <param name="token">Session token</param>
         /// <returns>True iff the session token exists in the session dictionary</returns>
-        public bool SessionExists(long token)
+        public static bool SessionExists(long token)
         {
             return sessions.Keys.Contains(token);
         }
@@ -29,7 +29,7 @@ namespace Stexchange.Controllers
         /// <param name="token">session token</param>
         /// <param name="data">variable to store retrieved data in</param>
         /// <returns>True iff a key, value pair exists for the session token.</returns>
-        public bool GetSessionData(long token, out Tuple<int, string> data)
+        public static bool GetSessionData(long token, out Tuple<int, string> data)
         {
             return sessions.TryGetValue(token, out data);
         }
@@ -38,7 +38,7 @@ namespace Stexchange.Controllers
         /// Creates a key, value pair for the session in the session dictionary.
         /// </summary>
         /// <param name="user">The value of the session (user data)</param>
-        public long CreateSession(Tuple<int, string> user)
+        public static long CreateSession(Tuple<int, string> user)
         {
             long token = generateToken(user);
             sessions.Add(token, user);
@@ -50,7 +50,7 @@ namespace Stexchange.Controllers
         /// </summary>
         /// <param name="token">session token</param>
         /// <returns>True iff the key was found and removed.</returns>
-        public bool TerminateSession(long token)
+        public static bool TerminateSession(long token)
         {
             return sessions.Remove(token);
         }
@@ -60,7 +60,7 @@ namespace Stexchange.Controllers
         /// </summary>
         /// <param name="data">user data</param>
         /// <returns>64 bit unique token</returns>
-        private long generateToken(Tuple<int, string> data)
+        private static long generateToken(Tuple<int, string> data)
         {
             return data.GetHashCode() * DateTime.Now.Ticks;
         }
