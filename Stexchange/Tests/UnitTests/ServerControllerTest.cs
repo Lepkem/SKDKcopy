@@ -18,7 +18,7 @@ namespace Tests
         public void SessionExists_True()
         {
             //Arrange
-            var testData = new Tuple<int, char[]>(29, "2846DF".ToCharArray());
+            var testData = new Tuple<int, string>(29, "2846DF");
             long token = testObject.CreateSession(testData);
             //Act
             bool outcome = testObject.SessionExists(token);
@@ -36,10 +36,10 @@ namespace Tests
         public void GetSessionData_True()
         {
             //Arrange
-            var expected = new Tuple<int, char[]>(34, "7519YY".ToCharArray());
+            var expected = new Tuple<int, string>(34, "7519YY");
             long token = testObject.CreateSession(expected);
             //Act
-            bool outcome = testObject.GetSessionData(token, out Tuple<int, char[]> actual);
+            bool outcome = testObject.GetSessionData(token, out Tuple<int, string> actual);
             //Assert
             Assert.IsTrue(outcome);
             Assert.AreEqual(expected, actual);
@@ -50,7 +50,7 @@ namespace Tests
         public void GetSessionData_False()
         {
             //Act
-            bool outcome = testObject.GetSessionData(42, out Tuple<int, char[]> output);
+            bool outcome = testObject.GetSessionData(42, out Tuple<int, string> output);
             //Assert
             Assert.IsFalse(outcome);
             Assert.IsNull(output);
@@ -59,7 +59,7 @@ namespace Tests
         public void TerminateSession_True()
         {
             //Arrange
-            var testData = new Tuple<int, char[]>(17, "1145BV".ToCharArray());
+            var testData = new Tuple<int, string>(17, "1145BV");
             long token = testObject.CreateSession(testData);
             //Act
             bool outcome = testObject.TerminateSession(token);
