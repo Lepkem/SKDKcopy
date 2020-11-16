@@ -11,7 +11,7 @@ namespace Stexchange.Controllers
         /// <summary>
         /// Dictionary that contains all currently active session tokens.
         /// </summary>
-        private static readonly Dictionary<long, Tuple<int, char[]>> sessions = new Dictionary<long, Tuple<int, char[]>>();
+        private static readonly Dictionary<long, Tuple<int, string>> sessions = new Dictionary<long, Tuple<int, string>>();
 
         /// <summary>
         /// Checks if the session exists (and is active).
@@ -29,7 +29,7 @@ namespace Stexchange.Controllers
         /// <param name="token">session token</param>
         /// <param name="data">variable to store retrieved data in</param>
         /// <returns>True iff a key, value pair exists for the session token.</returns>
-        public bool GetSessionData(long token, out Tuple<int, char[]> data)
+        public bool GetSessionData(long token, out Tuple<int, string> data)
         {
             return sessions.TryGetValue(token, out data);
         }
@@ -38,7 +38,7 @@ namespace Stexchange.Controllers
         /// Creates a key, value pair for the session in the session dictionary.
         /// </summary>
         /// <param name="user">The value of the session (user data)</param>
-        public long CreateSession(Tuple<int, char[]> user)
+        public long CreateSession(Tuple<int, string> user)
         {
             long token = generateToken(user);
             sessions.Add(token, user);
@@ -60,7 +60,7 @@ namespace Stexchange.Controllers
         /// </summary>
         /// <param name="data">user data</param>
         /// <returns>64 bit unique token</returns>
-        private long generateToken(Tuple<int, char[]> data)
+        private long generateToken(Tuple<int, string> data)
         {
             return data.GetHashCode() * DateTime.Now.Ticks;
         }
