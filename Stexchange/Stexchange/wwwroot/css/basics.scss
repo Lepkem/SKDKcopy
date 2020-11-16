@@ -1,186 +1,384 @@
-﻿$color-darkgreen: #015e54;
-$color-lightgreen: #3eaf91;
-$color-white: #ffffff;
+﻿$lightgreen: #b2e8d4;
+$green: #4ecd92;
+$darkgreen: #015e54;
+$lightshadow: rgba(0,0,0,0.1);
+$shadow: #b2e8d4;
+$darkshadow: rgba(0,0,0,0.8);
+$lightshadowwhite: rgba(255,255,255,0.1);
+$shadowwhite: rgba(255,255,255,0.3);
+$darkshadowwhite: rgba(255,255,255,0.8);
 
-
+* {
+	margin: 0;
+	padding: 0;
+}
 
 html {
-    body {
-        background: url(../img/background.png) fixed no-repeat;
-        background-size: 100%, auto;
+	height: 100%;
 
-        .navbar-nav {
-            list-style-type: none;
-            display: inline-flex;
-            flex-direction: row;
-            justify-content: center;
-            width: 40%;
-            /*padding-left: 20%;*/
-            /*padding-right: 40px;*/
-            .nav-link {
-                color: $color-lightgreen;
-                text-decoration: none;
-                font-size: 20pt;
-            }
+	body {
+		overflow: auto; /* Fallback */
+		overflow: overlay;
+		background-color: #212121;
+		width: 100%;
+		height: 100%;
+		font-family: Bahnschrift;
+		font-size: 150%;
+		background-image: url("../img/background.png");
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
 
-            .nav-link:active, .nav-link:hover {
-                color: $color-white;
-                background: $color-lightgreen;
-            }
+		header {
+			height: 10%;
 
-            #login, #login_link {
-                /*align-self: flex-end;*/
-                margin-left: auto;
-            }
-        }
-    }
-    // margin: 10px;
-    // margin-left: 20px;
-    font-family: Bahnschrift;
-    //overflow:scroll;
+			.navbar-default {
+				padding-top: 2%;
+				padding-left: 5%;
+				height: 7%;
+				width: 100%;
+				z-index: 3;
+				position: fixed;
+				font-size: 2.3vh;
+				transition: 500ms ease;
+				background: transparent;
+
+				ul {
+					list-style-type: none;
+					overflow: hidden;
+				}
+
+				li {
+					float: left;
+					margin-right: 6%;
+					transition: 500ms ease;
+				}
+
+				li.login {
+					transition: 500ms ease;
+				}
+
+				li a {
+					width: 100%;
+					padding-top: 0.3vh;
+					padding-bottom: 0.2vh;
+					padding-left: 0.8vh;
+					padding-right: 0.8vh;
+					border-radius: 10px;
+					display: block;
+					color: $green;
+					text-align: center;
+					text-decoration: none;
+					transition: 0.5s;
+				}
+				/* Change the link color to #111 (black) on hover */
+				li a:hover {
+					background-color: $green;
+					color: white;
+				}
+
+				.active {
+					background-color: $green;
+					color: white;
+				}
+			}
+
+			.navbar-default.scrolled {
+				padding-top: 0.7%;
+				padding-left: 5%;
+				height: 4%;
+				width: 100%;
+				z-index: 3;
+				position: fixed;
+				font-size: 2.3vh;
+				transition: 500ms ease;
+				background: white;
+				border-bottom-style: solid;
+				border-color: $shadow;
+
+				ul {
+					list-style-type: none;
+					overflow: hidden;
+				}
+
+				li {
+					float: left;
+					margin-right: 3%;
+					transition: 500ms ease;
+				}
+
+				li.login {
+					margin-left: 65%;
+					transition: 500ms ease;
+				}
+
+				li a {
+					font-size: 2vh;
+					width: 100%;
+					padding-top: 0.3vh;
+					padding-bottom: 0.2vh;
+					padding-left: 0.8vh;
+					padding-right: 0.8vh;
+					border-radius: 10px;
+					display: block;
+					color: $green;
+					text-align: center;
+					text-decoration: none;
+					transition: 0.5s;
+				}
+
+				li a.login {
+					font-size: 2vh;
+					width: 100%;
+					padding-top: 0.3vh;
+					padding-bottom: 0.2vh;
+					padding-left: 0.8vh;
+					padding-right: 0.8vh;
+					border-radius: 10px;
+					display: block;
+					color: $green;
+					text-align: center;
+					text-decoration: none;
+					transition: 0.5s;
+				}
+				/* Change the link color to #111 (black) on hover */
+				li a:hover {
+					background-color: $green;
+					color: white;
+				}
+
+				.active {
+					background-color: $green;
+					color: white;
+				}
+			}
+		}
+
+		main {
+			z-index: 1;
+			position: relative;
+			line-height: 5vh;
+
+			article {
+				position: relative;
+				font-size: 2.3vh;
+				margin: 5%;
+				margin-top: 8%;
+				font-weight: 30;
+
+				.titleleft {
+					font-size: 7vh;
+					font-weight: 100;
+					position: relative;
+					float: left;
+					color: $darkgreen;
+				}
+
+				.titleright {
+					font-size: 7vh;
+					font-weight: 100;
+					position: relative;
+					float: left;
+					color: $green;
+				}
+
+				h2 {
+					font-size: 5vh;
+					font-weight: 100;
+					width: 100%;
+					position: relative;
+					float: left;
+					color: $green;
+				}
+
+				p {
+					line-height: 3vh;
+					margin-top: 2%;
+					font-size: 2.5vh;
+					width: 50%;
+					position: relative;
+					float: left;
+					color: $darkgreen;
+				}
+
+				.buttonfix {
+					width: 100%;
+					position: relative;
+					float: left;
+					margin-top: 12%;
+
+					button {
+						font-size: 2vh;
+						position: relative;
+						float: left;
+						border: none;
+						background: $darkgreen;
+						color: white;
+						padding-left: 2vh;
+						padding-right: 2vh;
+						padding-top: 1vh;
+						padding-bottom: 1vh;
+						text-transform: uppercase;
+						border-radius: 100vh;
+						transition: all 0.3s ease 0s;
+					}
+
+					button:hover {
+						color: $darkgreen;
+						background-color: $lightgreen;
+						transition: all 0.3s ease 0s;
+					}
+				}
+			}
+
+			.about {
+				padding: 2%;
+				position: relative;
+				float: left;
+				font-size: 2.3vh;
+				font-weight: 30;
+				background-color: $darkshadowwhite;
+				margin-top: 2%;
+				margin-bottom: 3%;
+				border-radius: 2vh;
+
+				img {
+					padding-left: 5%;
+				}
+
+				.titleleft {
+					font-size: 7vh;
+					font-weight: 100;
+					position: relative;
+					float: left;
+					color: $darkgreen;
+				}
+
+				.titleright {
+					font-size: 7vh;
+					font-weight: 100;
+					position: relative;
+					float: left;
+					color: $green;
+				}
+
+				h2 {
+					font-size: 5vh;
+					font-weight: 100;
+					width: 100%;
+					position: relative;
+					float: left;
+					color: $green;
+				}
+
+				p {
+					line-height: 3vh;
+					margin-top: 2%;
+					font-size: 2.5vh;
+					width: 100%;
+					position: relative;
+					float: left;
+					color: $darkgreen;
+				}
+
+				p.img {
+					line-height: 3vh;
+					margin-top: 2%;
+					font-size: 2.5vh;
+					width: 50%;
+					position: relative;
+					float: left;
+					color: $darkgreen;
+				}
+
+				h2.right {
+					font-size: 5vh;
+					font-weight: 100;
+					width: 100%;
+					position: relative;
+					float: right;
+					text-align: right;
+					color: $green;
+				}
+
+				p.right {
+					line-height: 3vh;
+					margin-top: 2%;
+					font-size: 2.5vh;
+					width: 100%;
+					position: relative;
+					float: right;
+					text-align: left;
+					color: $darkgreen;
+				}
+
+				p.right.img {
+					line-height: 3vh;
+					margin-top: 2%;
+					font-size: 2.5vh;
+					width: 50%;
+					position: relative;
+					float: right;
+					text-align: right;
+					color: $darkgreen;
+				}
+
+				.buttonfix {
+					width: 100%;
+					position: relative;
+					float: left;
+					margin-top: 12%;
+
+					button {
+						font-size: 2vh;
+						position: relative;
+						float: left;
+						border: none;
+						background: $darkgreen;
+						color: white;
+						padding-left: 2vh;
+						padding-right: 2vh;
+						padding-top: 1vh;
+						padding-bottom: 1vh;
+						text-transform: uppercase;
+						border-radius: 100vh;
+						transition: all 0.3s ease 0s;
+					}
+
+					button:hover {
+						color: $darkgreen;
+						background-color: $lightgreen;
+						transition: all 0.3s ease 0s;
+					}
+				}
+			}
+		}
+
+		footer {
+			opacity: 0;
+			z-index: 3;
+			position: fixed;
+			bottom: 0%;
+		}
+	}
+}
+/* width */
+::-webkit-scrollbar-track {
+	opacity: 0;
 }
 
-
-
-h1, h2 {
-    color: $color-darkgreen;
-    font-size: 35pt;
-    
+::-webkit-scrollbar {
+	opacity: 0;
+	width: 0.5vh;
 }
 
-
-.logintitle{
-    font-size:20pt;
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px $shadow;
+	background-color: $lightgreen
 }
 
-
-.titleright, .titleleft {
-    display: inline;
-    position: relative;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: $green;
 }
-
-.titleright, .secondtitle {
-    color: $color-lightgreen
-}
-.secondtitle{
-    position:relative;
-    bottom:15px;
-    font-size:28px;
-}
-
-
-
-p {
-    color: $color-lightgreen;
-    font-size: 15pt;
-
-}
-.textabout, .textlogin, information {
-    width: 100%;
-}
-
-
-
-.header {
-}
-
-/*.container {
-    text-align: left;
-    margin-top: 20px;*/
-
-
-button {
-    //display: inline;
-    border: 1px solid;
-    background: $color-lightgreen;
-    padding: 1% 2%;
-    font-size: 15pt;
-    color: white;
-    border-radius: 10px;
-}
-
-
-
-.footer {
-    font-size: 14pt;
-}
-
-.accountform {
-    width: 80%;
-    height: 600px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    padding-left: 4%;
-    padding-top: 2%;
-    margin-left: 5%;
-}
-
-.submit {
-    border: 1px solid;
-    background: $color-darkgreen;
-    padding: 2% 10%;
-    font-size: 15pt;
-    color: white;
-    border-radius: 10px;
-    margin-top:10%;
-    
-}
-
-.labelinfo {
-    font-size: 10px;
-    //position: relative;
-    bottom: 12px;
-    visibility:hidden;
-    position:absolute;
-}
-
-.labeltext {
-    font-size: 15pt;
-    position: relative;
-    top: 10px;
-    width: 100%;
-}
-
-.labelinput {
-    font-size: 15pt;
-}
-
-.termstext, termlink,  {
-    font-size: 10pt;
-    width: 100%;
-    position:relative;
-    top:5%;
-
-}
-
-.forgetpasslink {
-    position: relative;
-    top: 3%;
-}
-
-
-.logincontainer{
-    display:flex;
-}
-
-.item1 {
-    flex: 2;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 50%;
-}
-.item2 {
-    flex: 1;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 30%;
-}
-.item3 {
-    flex: 1;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 30%;
-}
-
-
-

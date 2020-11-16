@@ -1,58 +1,57 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Stexchange</title>
-    <link rel="stylesheet" href="~/css/basics.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Stexchange</title>
+	<link rel="stylesheet" href="~/css/basics.css" />
+	<link runat="server" rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link runat="server" rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link runat="server" rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link runat="server" rel="manifest" href="/site.webmanifest">
+	<link runat="server" rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta runat="server" name="msapplication-TileColor" content="#da532c">
+	<meta runat="server" name="theme-color" content="#ffffff">
 
-    <link runat="server" rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link runat="server" rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link runat="server" rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link runat="server" rel="manifest" href="/site.webmanifest">
-    <link runat="server" rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta runat="server" name="msapplication-TileColor" content="#da532c">
-    <meta runat="server" name="theme-color" content="#ffffff">
+	
 </head>
 <body>
-    <header>
+	<header>
+		<nav class="navbar-default">
+			<ul>
+				<li class="nav-item">
+					<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">OVER</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-dark" asp-area="" asp-controller="Trade" asp-action="Trade">RUILEN</a>
+				</li>
+				<li class="nav-item login">
+					<a class="nav-link text-dark login" asp-area="" asp-controller="Home" asp-action="Login" id="login_link">INLOGGEN</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main role="main" class="pb-3" id="startchange">
+		@RenderBody()
+	</main>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <div class="navbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">OVER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Trade" asp-action="Trade">RUILEN</a>
-                        </li>
-                        <li class="nav-item" id="login">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login" id="login_link">INLOGGEN</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2020 - Stexchange - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Stexchange - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-        
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script>
+		$(window).scroll(function () {
+			$('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
+		});
+	</script>
+	@RenderSection("Scripts", required: false)
 </body>
 </html>
