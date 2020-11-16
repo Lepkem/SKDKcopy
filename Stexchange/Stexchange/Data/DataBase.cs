@@ -44,11 +44,29 @@ namespace Stexchange.Data
 				// Put a unique constraint on the Email column
 				entity.HasIndex(u => u.Email)
 					.IsUnique();
-
+				// Put a unique constraint on the Username column
+				entity.HasIndex(u => u.Username)
+					.IsUnique();
 			});
+
+			modelBuilder.Entity<Listing>(entity =>
+            {
+				entity.Property(l => l.Title).IsRequired();
+				entity.Property(l => l.Description).IsRequired();
+				entity.Property(l => l.NameNl).IsRequired();
+				entity.Property(l => l.NameLatin).IsRequired();
+				entity.Property(l => l.Visible).HasDefaultValue(1);
+				entity.Property(l => l.Renewed).HasDefaultValue(0);
+			});
+
+			modelBuilder.Entity<Listing>()
+				.HasOne(l => l.Owner)
+				.WithMany(u => u.Listings)
+				.HasForeignKey(l => l.UserId);
 		}
 
 		public DbSet<User> Users { get; set; }
 		public DbSet<UserVerification> UserVerifications { get; set; }
+		public DbSet<Listing> Listings { get; set; }
 	}
 }

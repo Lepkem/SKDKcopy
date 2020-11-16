@@ -12,7 +12,7 @@ namespace Stexchange.Data.Models
         public int Id { get; set; }
         [EmailAddress, StringLength(254)]
         public string Email { get; set; }
-        [StringLength(15), Key]
+        [StringLength(15)]
         public string Username { get; set; }
         [StringLength(6)]
         public string Postal_Code { get; set; }
@@ -21,5 +21,6 @@ namespace Stexchange.Data.Models
         public DateTime Created_At { get; set; }
         public bool IsVerified { get; set; }
         public UserVerification Verification { get; set; }
+        public List<Listing> Listings { get; set; }
 	}
 }
