@@ -80,7 +80,7 @@ namespace Stexchange.Controllers
                 {
                     user.IsVerified = true;
                     await Database.SaveChangesAsync();
-                    long sessionToken = ServerController.CreateSession((user.Id, user.Postal_Code));
+                    long sessionToken = ServerController.CreateSession(new Tuple<int, char[]>(user.Id, user.Postal_Code));
                     var cookieOptions = new CookieOptions
                     {
                         // Set the cookie to HTTP only, meaning it can only be accessed on the server.
