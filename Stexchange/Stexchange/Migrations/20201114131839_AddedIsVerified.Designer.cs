@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stexchange.Data;
 
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20201114131839_AddedIsVerified")]
+    partial class AddedIsVerified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,22 +29,22 @@ namespace Stexchange.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(254)")
+                        .HasColumnType("VARCHAR(254)")
                         .HasMaxLength(254);
 
                     b.Property<bool>("IsVerified")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<byte[]>("Password")
-                        .HasColumnType("varbinary(64)")
+                    b.Property<string>("Password")
+                        .HasColumnType("VARCHAR(64)")
                         .HasMaxLength(64);
 
                     b.Property<string>("Postal_Code")
-                        .HasColumnType("varchar(6)")
+                        .HasColumnType("CHAR(6)")
                         .HasMaxLength(6);
 
                     b.Property<string>("Username")
-                        .HasColumnType("varchar(15)")
+                        .HasColumnType("VARCHAR(15)")
                         .HasMaxLength(15);
 
                     b.Property<int?>("VerificationId")
@@ -67,6 +69,9 @@ namespace Stexchange.Migrations
                     b.Property<byte[]>("Guid")
                         .IsRequired()
                         .HasColumnType("varbinary(16)");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

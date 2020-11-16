@@ -6,6 +6,5 @@ namespace Stexchange.Data.Models
 	{
         public int Id { get; set; }
         public Guid Guid { get; set; }
-        public bool IsVerified { get; set; }
 	}
 }
