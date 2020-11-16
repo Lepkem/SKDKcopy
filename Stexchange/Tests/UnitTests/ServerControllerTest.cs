@@ -7,50 +7,43 @@ namespace Tests
     [TestClass]
     public class ServerControllerTest
     {
-        private static ServerController testObject;
-
-        [ClassInitialize]
-        public static void TestFixtureSetup(TestContext context)
-        {
-            testObject = new ServerController();
-        }
         [TestMethod]
         public void SessionExists_True()
         {
             //Arrange
             var testData = new Tuple<int, string>(29, "2846DF");
-            long token = testObject.CreateSession(testData);
+            long token = ServerController.CreateSession(testData);
             //Act
-            bool outcome = testObject.SessionExists(token);
+            bool outcome = ServerController.SessionExists(token);
             //Assert
             Assert.IsTrue(outcome);
             //Cleanup
-            testObject.TerminateSession(token);
+            ServerController.TerminateSession(token);
         }
         [TestMethod]
         public void SessionExists_False()
         {
-            Assert.IsFalse(testObject.SessionExists(57));
+            Assert.IsFalse(ServerController.SessionExists(57));
         }
         [TestMethod]
         public void GetSessionData_True()
         {
             //Arrange
             var expected = new Tuple<int, string>(34, "7519YY");
-            long token = testObject.CreateSession(expected);
+            long token = ServerController.CreateSession(expected);
             //Act
-            bool outcome = testObject.GetSessionData(token, out Tuple<int, string> actual);
+            bool outcome = ServerController.GetSessionData(token, out Tuple<int, string> actual);
             //Assert
             Assert.IsTrue(outcome);
             Assert.AreEqual(expected, actual);
             //Cleanup
-            testObject.TerminateSession(token);
+            ServerController.TerminateSession(token);
         }
         [TestMethod]
         public void GetSessionData_False()
         {
             //Act
-            bool outcome = testObject.GetSessionData(42, out Tuple<int, string> output);
+            bool outcome = ServerController.GetSessionData(42, out Tuple<int, string> output);
             //Assert
             Assert.IsFalse(outcome);
             Assert.IsNull(output);
@@ -60,10 +53,10 @@ namespace Tests
         {
             //Arrange
             var testData = new Tuple<int, string>(17, "1145BV");
-            long token = testObject.CreateSession(testData);
+            long token = ServerController.CreateSession(testData);
             //Act
-            bool outcome = testObject.TerminateSession(token);
-            bool checkRemoved = !testObject.SessionExists(token);
+            bool outcome = ServerController.TerminateSession(token);
+            bool checkRemoved = !ServerController.SessionExists(token);
             //Assert
             Assert.IsTrue(outcome);
             Assert.IsTrue(checkRemoved);
@@ -71,7 +64,7 @@ namespace Tests
         [TestMethod]
         public void TerminateSession_False()
         {
-            Assert.IsFalse(testObject.TerminateSession(98));
+            Assert.IsFalse(ServerController.TerminateSession(98));
         }
     }
 }
