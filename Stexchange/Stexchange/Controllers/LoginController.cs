@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace Stexchange.Controllers
 {
@@ -79,6 +80,17 @@ namespace Stexchange.Controllers
                 {
                     user.IsVerified = true;
                     await Database.SaveChangesAsync();
+                    long sessionToken = ServerController.CreateSession((user.Id, user.Postal_Code));
+                    var cookieOptions = new CookieOptions
+                    {
+                        // Set the cookie to HTTP only, meaning it can only be accessed on the server.
+                        HttpOnly = true,
+                        // Use Lax to include stored cookie on initial requests,
+                        // i.e. when user closes the site then opens it and the cookie still exists,
+                        // the user will remain logged in unless the session is expired.
+                        SameSite = SameSiteMode.Lax
+                    };
+                    Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
                 }
                 return View("Verified");
             }
