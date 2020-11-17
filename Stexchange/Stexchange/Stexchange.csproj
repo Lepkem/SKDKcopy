@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="compilerconfig.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\postadvertisement.min.css" />
   </ItemGroup>
 
   <ItemGroup>

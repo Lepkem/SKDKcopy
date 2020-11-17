@@ -10,7 +10,7 @@ namespace Stexchange.Controllers
     {
         public IActionResult PostAdvertisement()
         {
-            return View("PostAdvertisement");
+            return View();
         }
     }
 }

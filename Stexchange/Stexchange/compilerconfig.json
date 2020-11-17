@@ -6,11 +6,13 @@
   {
     "outputFile": "wwwroot/Basics.css",
     "inputFile": "wwwroot/Basics.scss"
-  }
-]
-﻿[
+  },
   {
     "outputFile": "wwwroot/css/trade.css",
     "inputFile": "wwwroot/css/trade.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/postadvertisement.css",
+    "inputFile": "wwwroot/css/postadvertisement.scss"
   }
 ]
