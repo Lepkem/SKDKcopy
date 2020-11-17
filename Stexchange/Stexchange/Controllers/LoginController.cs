@@ -81,17 +81,8 @@ namespace Stexchange.Controllers
 				{
 					user.IsVerified = true;
 					await Database.SaveChangesAsync();
-					long sessionToken = ServerController.CreateSession(new Tuple<int, string>(user.Id, user.Postal_Code));
-					var cookieOptions = new CookieOptions
-					{
-						// Set the cookie to HTTP only, meaning it can only be accessed on the server.
-						HttpOnly = true,
-						// Use Lax to include stored cookie on initial requests,
-						// i.e. when user closes the site then opens it and the cookie still exists,
-						// the user will remain logged in unless the session is expired.
-						SameSite = SameSiteMode.Lax
-					};
-					Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
+					AddCookie(user.Id, user.Postal_Code);
+
 				}
 				return View("Verified");
 			}
@@ -246,34 +237,46 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verific
 		[HttpPost]
 		public IActionResult Inloggen(string email, string password)
 		{
-
-			var useremail = (from code in Database.Users
-						 select code.Email).ToArray();
-
-			// Checks if email exists
-			if (!useremail.Contains(email))
+			if (ModelState.IsValid)
 			{
-				TempData["message"] = "e-mail error";
-				return View("Login");
-			}
+				// Checks if email exists
+				if (!(Database.Users.Any(u => u.Email == email)))
+				{
+					TempData["message"] = "e-mail error";
+					return View("Login");
+				}
 
-			var username = (from u in Database.Users
-						where u.Email == email 
-						select u.Username).FirstOrDefault();
+				var username = (from u in Database.Users
+								where u.Email == email
+								select u.Username).FirstOrDefault();
 
-			var  user = (from u in Database.Users
-						where u.Username == username &&
-						u.Password == CreatePasswordHash(password, username)
-						select u.Username).FirstOrDefault();
-			// Checks if the combination exists
-			if ( user is null)
-			{
-				TempData["message"] = "e-mail of wachtwoord error";
-				return View("Login");
+				var user = (from u in Database.Users
+							where u.Username == username &&
+							u.Password == CreatePasswordHash(password, username)
+							select u).FirstOrDefault();
+				// Checks if the combination exists
+				if (user is null)
+				{
+					TempData["message"] = "email of wachtwoord error";
+					return View("Login");
+				}
+				AddCookie(user.Id, user.Postal_Code);
 			}
 			return View("../Trade/trade"); 
-
 		}
-
+		private void AddCookie(int Id, string Postal_Code)
+		{
+			long sessionToken = ServerController.CreateSession(new Tuple<int, string>(Id, Postal_Code));
+			var cookieOptions = new CookieOptions
+			{
+				// Set the cookie to HTTP only, meaning it can only be accessed on the server.
+				HttpOnly = true,
+				// Use Lax to include stored cookie on initial requests,
+				// i.e. when user closes the site then opens it and the cookie still exists,
+				// the user will remain logged in unless the session is expired.
+				SameSite = SameSiteMode.Lax
+			};
+			Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
+		}
 	}
 }
