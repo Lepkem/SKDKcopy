@@ -184,17 +184,9 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 				 
 					await Database.AddAsync(new_User);
 					await Database.SaveChangesAsync();
-
-					string body = $@"STEXCHANGE
-Verifieer je e-mailadres door op de onderstaande link te klikken
-https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verification.Guid}";
-
-					// Send the verification email
-					SendEmail(email, body);
-
-					//Pass data from controller to view
-					TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {new_User.Email}";
-					TempData["Email"] = new_User.Email;
+					
+					//sends an email to verify the new account and return view("verify") page
+					VerifyEmail(new_User);
 					return View("Verify");
 				}
 			}
@@ -205,12 +197,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verific
 			return View("Login");
 		}
 
-		/// <summary>
-		/// Adds message to queue
-		/// </summary>
-		/// <param name="address">The mail address of the user</param>
-		/// <param name="body">The mail message</param>
-		private void SendEmail(string address, string body) => EmailService.QueueMessage(address, body);
+
 
 		/// <summary>
 		/// Given a password and salt, returns a salted SHA512 hash.
@@ -235,7 +222,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verific
 		}
 
 		[HttpPost]
-		public IActionResult Inloggen(string email, string password)
+		public async Task<IActionResult> Inloggen(string email, string password)
 		{
 			if (ModelState.IsValid)
 			{
@@ -260,6 +247,15 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verific
 					TempData["message"] = "email of wachtwoord error";
 					return View("Login");
 				}
+				// Checks if the user is verified
+				if (user.IsVerified==false)
+				{
+					await Database.Entry(user).Reference(u => u.Verification).LoadAsync();
+					user.Verification.Guid = Guid.NewGuid();
+					VerifyEmail(user);
+					await Database.SaveChangesAsync();
+					return View("Verify");
+				}
 				AddCookie(user.Id, user.Postal_Code);
 			}
 			return View("../Trade/trade"); 
@@ -278,5 +274,22 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verific
 			};
 			Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
 		}
+
+		private void VerifyEmail (User user)
+		{
+			string body = $@"STEXCHANGE
+Verifieer je e-mailadres door op de onderstaande link te klikken
+https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Verification.Guid}";
+			SendEmail(user.Email, body);
+			//Pass data from controller to view
+			TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {user.Email}";
+			TempData["Email"] = user.Email;
+		}
+		/// <summary>
+		/// Adds message to queue
+		/// </summary>
+		/// <param name="address">The mail address of the user</param>
+		/// <param name="body">The mail message</param>
+		private void SendEmail(string address, string body) => EmailService.QueueMessage(address, body);
 	}
 }
