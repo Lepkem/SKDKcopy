@@ -79,11 +79,27 @@ namespace Stexchange.Data
 				.HasOne(id => id.Listing)
 				.WithMany(l => l.Pictures)
 				.HasForeignKey(id => id.ListingId);
+
+			modelBuilder.Entity<FilterListing>()
+				.HasKey(fl => new { fl.ListingId, fl.Value });
+
+			modelBuilder.Entity<FilterListing>()
+				.HasOne(fl => fl.Listing)
+				.WithMany(l => l.Categories)
+				.HasForeignKey(fl => fl.ListingId);
+
+			modelBuilder.Entity<FilterListing>()
+				.HasOne(fl => fl.Filter)
+				.WithMany()
+				.HasForeignKey(fl => fl.Value)
+				.HasPrincipalKey(f => f.Value);
 		}
 
 		public DbSet<User> Users { get; set; }
 		public DbSet<UserVerification> UserVerifications { get; set; }
 		public DbSet<Listing> Listings { get; set; }
 		public DbSet<ImageData> Images { get; set; }
+		public DbSet<Filter> Filters { get; set; }
+		public DbSet<FilterListing> FilterListings { get; set; }
 	}
 }
