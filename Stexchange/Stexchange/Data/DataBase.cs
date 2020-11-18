@@ -74,10 +74,16 @@ namespace Stexchange.Data
 				.HasOne(l => l.Owner)
 				.WithMany(u => u.Listings)
 				.HasForeignKey(l => l.UserId);
+
+			modelBuilder.Entity<ImageData>()
+				.HasOne(id => id.Listing)
+				.WithMany(l => l.Pictures)
+				.HasForeignKey(id => id.ListingId);
 		}
 
 		public DbSet<User> Users { get; set; }
 		public DbSet<UserVerification> UserVerifications { get; set; }
 		public DbSet<Listing> Listings { get; set; }
+		public DbSet<ImageData> Images { get; set; }
 	}
 }

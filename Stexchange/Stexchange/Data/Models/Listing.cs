@@ -25,7 +25,7 @@ namespace Stexchange.Data.Models
         [Column("quantity", TypeName = "int"), Range(1, int.MaxValue)]
         public int Quantity { get; set; }
         [NotMapped]
-        public List<Object> Pictures { get; set; }
+        public List<ImageData> Pictures { get; set; }
         [Column("user_id", TypeName = "bigint(20) unsigned")]
         public int UserId { get; set; }
         public User Owner { get; set; }

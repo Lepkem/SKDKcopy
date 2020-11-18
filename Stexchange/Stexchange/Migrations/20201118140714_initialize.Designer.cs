@@ -9,7 +9,7 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201118125734_initialize")]
+    [Migration("20201118140714_initialize")]
     partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,6 +18,29 @@ namespace Stexchange.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("serial");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnName("image")
+                        .HasColumnType("LONGBLOB");
+
+                    b.Property<long>("ListingId")
+                        .HasColumnName("listing_id")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ListingId");
+
+                    b.ToTable("Images");
+                });
 
             modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>
                 {
@@ -141,6 +164,15 @@ namespace Stexchange.Migrations
                     b.HasAlternateKey("Guid");
 
                     b.ToTable("UserVerifications");
+                });
+
+            modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
+                {
+                    b.HasOne("Stexchange.Data.Models.Listing", "Listing")
+                        .WithMany("Pictures")
+                        .HasForeignKey("ListingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>

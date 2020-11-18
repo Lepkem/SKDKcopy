@@ -76,6 +76,31 @@ namespace Stexchange.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    listing_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    image = table.Column<byte[]>(type: "LONGBLOB", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Images_Listings_listing_id",
+                        column: x => x.listing_id,
+                        principalTable: "Listings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_listing_id",
+                table: "Images",
+                column: "listing_id");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Listings_user_id",
                 table: "Listings",
@@ -85,10 +110,13 @@ namespace Stexchange.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Listings");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "UserVerifications");
+
+            migrationBuilder.DropTable(
+                name: "Listings");
 
             migrationBuilder.DropTable(
                 name: "Users");
