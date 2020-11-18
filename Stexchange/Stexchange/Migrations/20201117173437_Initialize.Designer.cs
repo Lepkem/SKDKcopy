@@ -9,8 +9,8 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201114145951_ChangedPasswordTypeToBlob")]
-    partial class ChangedPasswordTypeToBlob
+    [Migration("20201117173437_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,65 @@ namespace Stexchange.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("serial");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnName("description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameLatin")
+                        .IsRequired()
+                        .HasColumnName("name_lt")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("NameNl")
+                        .IsRequired()
+                        .HasColumnName("name_nl")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnName("quantity")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Renewed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("renewed")
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("title")
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnName("user_id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Visible")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("visible")
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Listings");
+                });
 
             modelBuilder.Entity("Stexchange.Data.Models.User", b =>
                 {
@@ -55,6 +114,9 @@ namespace Stexchange.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.HasIndex("VerificationId");
 
                     b.ToTable("Users");
@@ -76,6 +138,15 @@ namespace Stexchange.Migrations
                         .IsUnique();
 
                     b.ToTable("UserVerifications");
+                });
+
+            modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>
+                {
+                    b.HasOne("Stexchange.Data.Models.User", "Owner")
+                        .WithMany("Listings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stexchange.Data.Models.User", b =>
