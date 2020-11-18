@@ -62,6 +62,11 @@ button {
   border-radius: 10px;
   margin-top: 10%; }
 
+.submit.advertisement {
+  margin-top: 5%;
+  position: relative;
+  float: right; }
+
 .labelinfo {
   font-size: 10px;
   bottom: 12px;

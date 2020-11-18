@@ -101,12 +101,18 @@ button {
     
 }
 
+.submit.advertisement {
+    margin-top: 5%;
+    position: relative;
+    float: right;
+}
+
 .labelinfo {
     font-size: 10px;
     //position: relative;
     bottom: 12px;
-    visibility:hidden;
-    position:absolute;
+    visibility: hidden;
+    position: absolute;
 }
 
 .labeltext {

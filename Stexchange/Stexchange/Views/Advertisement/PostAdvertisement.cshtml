@@ -5,12 +5,17 @@
 
 <h2>Advertentie plaatsen</h2>
 <h3>Vul de volgende gegevens in om een advertentie te plaatsen.</h3>
-<h3><strong>Aangeboden planten mogen geen pesticiden bevatten!</strong></h3>
+<h3><strong>Aangeboden planten mogen geen pesticiden bevatten!</strong></h3><br>
 <form action="#" method="post" class="advertisementform">
-    <div>
-        <label for="imgoutput">Foto</label>
+    <p>
+        <span id="messagepicture">Klik op "Bestand selecteren" om foto's toe te voegen</span>
         <img id="imgoutput" />
-    </div>
+        <div class="imageslides">
+            <a class="previous" onclick="previousImg(1)">&#10094;</a>
+            <span id="imagecounter"></span>
+            <a class="next" onclick="nextImg(1)">&#10095;</a>
+        </div>
+    </p>
     <p>
         <input type="file" id="imginput" name="img" onchange="loadFile(event)" accept="image/*" multiple required>
     </p>
@@ -20,7 +25,7 @@
     </p>
     <p>
         <label for="description" class="labeltext">Beschrijving</label>
-        <input class="labelinput" name="description" type="text" maxlength="500" required />
+        <textarea class="descriptionInput" name="description" maxlength="500" required></textarea>
     </p>
     <p>
         <label for="name_lt" class="labeltext">Latijnse naam</label>
@@ -90,15 +95,23 @@
         </p>
         <p>
             <label for="with_pot">De plant is voorzien van een pot</label>
-            <input class="labelinput" name="with_pot" type="checkbox" />
+            <select name="with_pot" id="with_pot">
+                <option value="null">Geen idee</option>
+                <option value="ja">Ja</option>
+                <option value="nee">Nee</option>
+            </select>
         </p>
         <p>
             <label for="give_away">De plant is gratis weg te geven</label>
-            <input class="labelinput" name="give_away" type="checkbox" />
+            <select name="give_away" id="give_away">
+                <option value="null">Geen idee</option>
+                <option value="ja">Ja</option>
+                <option value="nee">Nee</option>
+            </select>
         </p>
     </div>
     <p>
-        <button type="submit" class="submit" id="advertisementsubmit">Advertentie plaatsen</button>
+        <button type="submit" class="submit advertisement" id="advertisementsubmit">Advertentie plaatsen</button>
     </p>
 </form>
 
