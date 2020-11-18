@@ -25,14 +25,14 @@ namespace Stexchange.Data.Models
         [Column("quantity", TypeName = "int"), Range(1, int.MaxValue)]
         public int Quantity { get; set; }
         [NotMapped]
-        public List<Object> Pictures { get; set; }
-        [Column("user_id", TypeName = "int")]
+        public List<ImageData> Pictures { get; set; }
+        [Column("user_id", TypeName = "bigint(20) unsigned")]
         public int UserId { get; set; }
         public User Owner { get; set; }
         [NotMapped]
         public string OwningUserName { get; set; }
         [NotMapped]
-        public List<string> Categories { get; set; }
+        public List<FilterListing> Categories { get; set; }
         [Column("created_at", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
         [NotMapped]

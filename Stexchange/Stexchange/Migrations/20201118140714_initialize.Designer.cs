@@ -2,48 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stexchange.Data;
 
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20201118140714_initialize")]
+    partial class initialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("Stexchange.Data.Models.Filter", b =>
-                {
-                    b.Property<string>("Value")
-                        .HasColumnName("value")
-                        .HasColumnType("varchar(20)");
-
-                    b.HasKey("Value");
-
-                    b.ToTable("Filters");
-                });
-
-            modelBuilder.Entity("Stexchange.Data.Models.FilterListing", b =>
-                {
-                    b.Property<long>("ListingId")
-                        .HasColumnName("listing_id")
-                        .HasColumnType("bigint(20) unsigned");
-
-                    b.Property<string>("Value")
-                        .HasColumnName("filter_value")
-                        .HasColumnType("varchar(20)");
-
-                    b.HasKey("ListingId", "Value");
-
-                    b.HasIndex("Value");
-
-                    b.ToTable("FilterListings");
-                });
 
             modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
                 {
@@ -190,21 +164,6 @@ namespace Stexchange.Migrations
                     b.HasAlternateKey("Guid");
 
                     b.ToTable("UserVerifications");
-                });
-
-            modelBuilder.Entity("Stexchange.Data.Models.FilterListing", b =>
-                {
-                    b.HasOne("Stexchange.Data.Models.Listing", "Listing")
-                        .WithMany("Categories")
-                        .HasForeignKey("ListingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Stexchange.Data.Models.Filter", "Filter")
-                        .WithMany()
-                        .HasForeignKey("Value")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
