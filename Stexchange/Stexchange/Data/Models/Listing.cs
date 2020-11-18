@@ -26,7 +26,7 @@ namespace Stexchange.Data.Models
         public int Quantity { get; set; }
         [NotMapped]
         public List<Object> Pictures { get; set; }
-        [Column("user_id", TypeName = "int")]
+        [Column("user_id", TypeName = "bigint(20) unsigned")]
         public int UserId { get; set; }
         public User Owner { get; set; }
         [NotMapped]

@@ -59,9 +59,9 @@ namespace Stexchange.Migrations
                         .HasColumnName("title")
                         .HasColumnType("varchar(80)");
 
-                    b.Property<int>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnName("user_id")
-                        .HasColumnType("int");
+                        .HasColumnType("bigint(20) unsigned");
 
                     b.Property<bool>("Visible")
                         .ValueGeneratedOnAdd()
@@ -80,60 +80,63 @@ namespace Stexchange.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnName("id")
+                        .HasColumnType("serial");
 
                     b.Property<DateTime>("Created_At")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("created_at")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .HasColumnType("varchar(254)")
-                        .HasMaxLength(254);
+                        .IsRequired()
+                        .HasColumnName("email")
+                        .HasColumnType("varchar(254)");
 
                     b.Property<bool>("IsVerified")
-                        .HasColumnType("tinyint(1)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("verified")
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
 
                     b.Property<byte[]>("Password")
-                        .HasColumnType("varbinary(64)")
-                        .HasMaxLength(64);
+                        .IsRequired()
+                        .HasColumnName("password")
+                        .HasColumnType("varbinary(64)");
 
                     b.Property<string>("Postal_Code")
-                        .HasColumnType("varchar(6)")
-                        .HasMaxLength(6);
+                        .IsRequired()
+                        .HasColumnName("postal_code")
+                        .HasColumnType("char(6)");
 
                     b.Property<string>("Username")
-                        .HasColumnType("varchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<int?>("VerificationId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasColumnName("username")
+                        .HasColumnType("varchar(15)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
+                    b.HasAlternateKey("Email");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
-
-                    b.HasIndex("VerificationId");
+                    b.HasAlternateKey("Username");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Stexchange.Data.Models.UserVerification", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<long>("Id")
+                        .HasColumnName("user_id")
+                        .HasColumnType("bigint(20) unsigned");
 
                     b.Property<byte[]>("Guid")
                         .IsRequired()
+                        .HasColumnName("verification_code")
                         .HasColumnType("varbinary(16)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Guid")
-                        .IsUnique();
+                    b.HasAlternateKey("Guid");
 
                     b.ToTable("UserVerifications");
                 });
@@ -147,11 +150,13 @@ namespace Stexchange.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Stexchange.Data.Models.User", b =>
+            modelBuilder.Entity("Stexchange.Data.Models.UserVerification", b =>
                 {
-                    b.HasOne("Stexchange.Data.Models.UserVerification", "Verification")
-                        .WithMany()
-                        .HasForeignKey("VerificationId");
+                    b.HasOne("Stexchange.Data.Models.User", "User")
+                        .WithOne("Verification")
+                        .HasForeignKey("Stexchange.Data.Models.UserVerification", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

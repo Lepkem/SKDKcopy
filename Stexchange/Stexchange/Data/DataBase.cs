@@ -35,19 +35,30 @@ namespace Stexchange.Data
 			modelBuilder.Entity<UserVerification>(entity =>
 			{
 				// Put a unique constraint on the Guid column
-				entity.HasIndex(uv => uv.Guid)
-					.IsUnique();
+				entity.HasAlternateKey(uv => uv.Guid);
 			});
+
+			modelBuilder.Entity<UserVerification>()
+				.HasOne(uv => uv.User)
+				.WithOne(u => u.Verification)
+				.HasForeignKey<UserVerification>(uv => uv.Id);
 
 			modelBuilder.Entity<User>(entity =>
 			{
 				// Put a unique constraint on the Email column
-				entity.HasIndex(u => u.Email)
-					.IsUnique();
+				entity.HasAlternateKey(u => u.Email);
 				// Put a unique constraint on the Username column
-				entity.HasIndex(u => u.Username)
-					.IsUnique();
+				entity.HasAlternateKey(u => u.Username);
+
+				entity.Property(u => u.Postal_Code).IsRequired();
+				entity.Property(u => u.Password).IsRequired();
+				entity.Property(u => u.IsVerified).HasDefaultValue(0);
 			});
+
+			modelBuilder.Entity<User>()
+				.HasOne(u => u.Verification)
+				.WithOne(uv => uv.User)
+				.HasForeignKey<UserVerification>(uv => uv.Id);
 
 			modelBuilder.Entity<Listing>(entity =>
             {

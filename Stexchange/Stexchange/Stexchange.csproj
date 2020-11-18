@@ -7,6 +7,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201116165817_listing_table.cs" />
     <Compile Remove="Migrations\20201116165817_listing_table.Designer.cs" />
+    <Compile Remove="Migrations\20201118123233_refactored_u_uv.cs" />
+    <Compile Remove="Migrations\20201118123233_refactored_u_uv.Designer.cs" />
+    <Compile Remove="Migrations\20201118124202_initialize.cs" />
+    <Compile Remove="Migrations\20201118124202_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118125354_initialize.cs" />
+    <Compile Remove="Migrations\20201118125354_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118125526_initialize.cs" />
+    <Compile Remove="Migrations\20201118125526_initialize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 </Project>

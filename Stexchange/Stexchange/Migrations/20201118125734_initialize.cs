@@ -4,46 +4,29 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace Stexchange.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "UserVerifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Guid = table.Column<byte[]>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserVerifications", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    id = table.Column<int>(type: "serial", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 254, nullable: true),
-                    Username = table.Column<string>(maxLength: 15, nullable: true),
-                    Postal_Code = table.Column<string>(maxLength: 6, nullable: true),
-                    Password = table.Column<byte[]>(maxLength: 64, nullable: true),
-                    Created_At = table.Column<DateTime>(nullable: false),
-                    IsVerified = table.Column<bool>(nullable: false),
-                    VerificationId = table.Column<int>(nullable: true)
+                    email = table.Column<string>(type: "varchar(254)", nullable: false),
+                    username = table.Column<string>(type: "varchar(15)", nullable: false),
+                    postal_code = table.Column<string>(type: "char(6)", nullable: false),
+                    password = table.Column<byte[]>(type: "varbinary(64)", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    verified = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_UserVerifications_VerificationId",
-                        column: x => x.VerificationId,
-                        principalTable: "UserVerifications",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.UniqueConstraint("AK_Users_email", x => x.email);
+                    table.UniqueConstraint("AK_Users_username", x => x.username);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,7 +40,7 @@ namespace Stexchange.Migrations
                     name_nl = table.Column<string>(type: "varchar(30)", nullable: false),
                     name_lt = table.Column<string>(type: "varchar(30)", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
-                    user_id = table.Column<int>(type: "int", nullable: false),
+                    user_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     visible = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
@@ -70,7 +53,26 @@ namespace Stexchange.Migrations
                         name: "FK_Listings_Users_user_id",
                         column: x => x.user_id,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserVerifications",
+                columns: table => new
+                {
+                    user_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    verification_code = table.Column<byte[]>(type: "varbinary(16)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserVerifications", x => x.user_id);
+                    table.UniqueConstraint("AK_UserVerifications_verification_code", x => x.verification_code);
+                    table.ForeignKey(
+                        name: "FK_UserVerifications_Users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "Users",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -78,29 +80,6 @@ namespace Stexchange.Migrations
                 name: "IX_Listings_user_id",
                 table: "Listings",
                 column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Username",
-                table: "Users",
-                column: "Username",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_VerificationId",
-                table: "Users",
-                column: "VerificationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserVerifications_Guid",
-                table: "UserVerifications",
-                column: "Guid",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -109,10 +88,10 @@ namespace Stexchange.Migrations
                 name: "Listings");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "UserVerifications");
 
             migrationBuilder.DropTable(
-                name: "UserVerifications");
+                name: "Users");
         }
     }
 }
