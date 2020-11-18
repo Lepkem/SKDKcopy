@@ -16,6 +16,11 @@ namespace Stexchange.Data.Builders
             Reset();
         }
 
+        public ListingBuilder(Listing existing)
+        {
+            construct = existing;
+        }
+
         public void Reset()
         {
             construct = new Listing();

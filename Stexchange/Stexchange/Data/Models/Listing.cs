@@ -36,8 +36,6 @@ namespace Stexchange.Data.Models
         [Column("created_at", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
         [NotMapped]
-        public Object Rating { get; set; }
-        [NotMapped]
         public double Distance { get; set; }
         [Column("visible", TypeName = "tinyint(1)")]
         public bool Visible { get; set; }
