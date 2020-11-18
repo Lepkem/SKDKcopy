@@ -11,6 +11,8 @@ namespace Stexchange.Data.Models
     {
         [NotMapped]
         private string zipCode;
+        [NotMapped]
+        private double distance = -1;
 
         [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -32,11 +34,11 @@ namespace Stexchange.Data.Models
         [NotMapped]
         public string OwningUserName { get; set; }
         [NotMapped]
-        public List<FilterListing> Categories { get; set; }
+        public List<string> Categories { get; set; }
         [Column("created_at", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
         [NotMapped]
-        public double Distance { get; set; }
+        public double Distance { get => distance; set => distance = value; }
         [Column("visible", TypeName = "tinyint(1)")]
         public bool Visible { get; set; }
         [Column("renewed", TypeName = "tinyint(1)")]

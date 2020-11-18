@@ -46,7 +46,13 @@ namespace Stexchange.Models
 
         public List<Listing> RetrieveListings(long token)
         {
-            throw new NotImplementedException();
+            if(ServerController.GetSessionData(token, out Tuple<int, string> sessionData)) {
+                listingCache.ForEach(listing => listing.SetDistance(sessionData.Item2));
+            } else
+            {
+                listingCache.ForEach(listing => listing.Distance = -1);
+            }
+            return listingCache;
         }
     }
 }
