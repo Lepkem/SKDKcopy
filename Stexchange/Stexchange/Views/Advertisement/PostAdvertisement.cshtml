@@ -6,7 +6,7 @@
 <h2>Advertentie plaatsen</h2>
 <h3>Vul de volgende gegevens in om een advertentie te plaatsen.</h3>
 <h3><strong>Aangeboden planten mogen geen pesticiden bevatten!</strong></h3><br>
-<form action="#" method="post" class="advertisementform">
+<form action="PostAdvertisement" method="post" class="advertisementform">
     <p>
         <span id="messagepicture">Klik op "Bestand selecteren" om foto's toe te voegen</span>
         <img id="imgoutput" />
@@ -29,27 +29,27 @@
     </p>
     <p>
         <label for="name_lt" class="labeltext">Latijnse naam</label>
-        <input class="labelinput" name="name_lt" type="text" maxlength="50" required />
+        <input class="labelinput" name="name_lt" type="text" maxlength="50" />
     </p>
     <p>
         <label for="name_nl" class="labeltext">Nederlandse naam</label>
         <input class="labelinput" name="name_nl" type="text" maxlength="50" required />
     </p>
     <p>
-        <label for="quantity" class="labeltext">Kwantiteit</label>
+        <label for="quantity" class="labeltext">Aantal</label>
         <input class="labelinput" name="quantity" type="number" min="0" required />
     </p>
     <p>
         <label for="light">Hoeveel licht heeft de plant nodig</label>
-        <select name="light" id="light" required>
+        <select name="light" id="light" >
             <option value="zonlicht">Zonlicht</option>
             <option value="halfschaduw">Halfschaduw</option>
             <option value="schaduw">Schaduw</option>
         </select>
     </p>
     <p>
-        <label for="water">Hoeveel vocht heeft de plant nodig</label>
-        <select name="water" id="water" required>
+        <label for="water">Hoeveel vocht heeft de plant nodig</label>          
+        <select name="water" id="water" >
             <option value="null">Geen idee</option>
             <option value="wisselnat">Wisselnat</option>
             <option value="vochtig">Vochtig</option>
@@ -61,7 +61,7 @@
     <div id="extrafilters">
         <p>
             <label for="plant_type">Wat voor soort plant is het?</label>
-            <select name="plant_type" id="plant_type">
+            <select name="plant_type" id="plant_type" required>
                 <option value="plant">Plant</option>
                 <option value="zaad">Zaad</option>
                 <option value="stek">Stek</option>
@@ -78,7 +78,7 @@
         </p>
         <p>
             <label for="nutrients">Wat is de pH-waarde van de plant</label>
-            <select name="nutrients" id="nutrients">
+            <select name="ph" id="ph">
                 <option value="null">Geen idee</option>
                 <option value="zuur">Zuur</option>
                 <option value="neutraal">Neutraal</option>
@@ -103,7 +103,7 @@
         </p>
         <p>
             <label for="give_away">De plant is gratis weg te geven</label>
-            <select name="give_away" id="give_away">
+            <select name="give_away" id="give_away" >
                 <option value="null">Geen idee</option>
                 <option value="ja">Ja</option>
                 <option value="nee">Nee</option>
