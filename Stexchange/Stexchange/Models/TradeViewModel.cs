@@ -17,8 +17,8 @@ namespace Stexchange.Models
         private Database db;
         private ILogger log;
         private Thread cacheWorker;
-        private bool blocked = true;
 
+        private bool blocked = true;
         private ConcurrentDictionary<int, Listing> listingCache;
         private ConcurrentDictionary<int, User> userCache;
 
