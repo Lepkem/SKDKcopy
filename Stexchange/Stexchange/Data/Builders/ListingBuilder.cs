@@ -19,8 +19,6 @@ namespace Stexchange.Data.Builders
             Reset();
         }
 
-<<<<<<< HEAD
-=======
         /// <summary>
         /// Initializes a ListingBuilder with an existing construct.
         /// </summary>
@@ -33,7 +31,7 @@ namespace Stexchange.Data.Builders
         /// <summary>
         /// Resets this ListingBuilder to a clean construct.
         /// </summary>
->>>>>>> 38ca5e2... Documented ListingBuilder, removed redundant null check
+
         public void Reset()
         {
             construct = new Listing();
