@@ -23,6 +23,12 @@
     <Compile Remove="Migrations\20201118135318_image_test.Designer.cs" />
     <Compile Remove="Migrations\20201118135753_image_test.cs" />
     <Compile Remove="Migrations\20201118135753_image_test.Designer.cs" />
+    <Compile Remove="Migrations\20201118140714_initialize.cs" />
+    <Compile Remove="Migrations\20201118140714_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118150147_filters.cs" />
+    <Compile Remove="Migrations\20201118150147_filters.Designer.cs" />
+    <Compile Remove="Migrations\20201119114021_mutable_guid.cs" />
+    <Compile Remove="Migrations\20201119114021_mutable_guid.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

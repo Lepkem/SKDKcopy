@@ -9,6 +9,17 @@ namespace Stexchange.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Filters",
+                columns: table => new
+                {
+                    value = table.Column<string>(type: "varchar(20)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Filters", x => x.value);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -67,12 +78,35 @@ namespace Stexchange.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserVerifications", x => x.user_id);
-                    table.UniqueConstraint("AK_UserVerifications_verification_code", x => x.verification_code);
                     table.ForeignKey(
                         name: "FK_UserVerifications_Users_user_id",
                         column: x => x.user_id,
                         principalTable: "Users",
                         principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FilterListings",
+                columns: table => new
+                {
+                    listing_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    filter_value = table.Column<string>(type: "varchar(20)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FilterListings", x => new { x.listing_id, x.filter_value });
+                    table.ForeignKey(
+                        name: "FK_FilterListings_Listings_listing_id",
+                        column: x => x.listing_id,
+                        principalTable: "Listings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FilterListings_Filters_filter_value",
+                        column: x => x.filter_value,
+                        principalTable: "Filters",
+                        principalColumn: "value",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -97,6 +131,11 @@ namespace Stexchange.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_FilterListings_filter_value",
+                table: "FilterListings",
+                column: "filter_value");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_listing_id",
                 table: "Images",
                 column: "listing_id");
@@ -105,15 +144,27 @@ namespace Stexchange.Migrations
                 name: "IX_Listings_user_id",
                 table: "Listings",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserVerifications_verification_code",
+                table: "UserVerifications",
+                column: "verification_code",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "FilterListings");
+
+            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
                 name: "UserVerifications");
+
+            migrationBuilder.DropTable(
+                name: "Filters");
 
             migrationBuilder.DropTable(
                 name: "Listings");

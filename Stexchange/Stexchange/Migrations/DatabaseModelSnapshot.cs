@@ -187,7 +187,8 @@ namespace Stexchange.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Guid");
+                    b.HasIndex("Guid")
+                        .IsUnique();
 
                     b.ToTable("UserVerifications");
                 });
