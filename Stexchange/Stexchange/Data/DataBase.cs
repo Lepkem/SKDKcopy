@@ -35,7 +35,8 @@ namespace Stexchange.Data
 			modelBuilder.Entity<UserVerification>(entity =>
 			{
 				// Put a unique constraint on the Guid column
-				entity.HasAlternateKey(uv => uv.Guid);
+				entity.HasIndex(uv => uv.Guid)
+					.IsUnique();
 			});
 
 			modelBuilder.Entity<UserVerification>()
