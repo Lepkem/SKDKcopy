@@ -51,12 +51,12 @@ namespace Stexchange.Models
         /// Updates the state of Users in the database that is stored in private field of this object.
         /// </summary>
         /// <param name="cache">Reference to the private field.</param>
-        private void renewUserCache(ref List<User> cache)
+        private void renewUserCache(ref Dictionary<int, User> cache)
         {
             var start = DateTime.Now;
             cache = (from user in db.Users
-                     join listing in db.Listings on user.Id equals listing.UserId
-                     select user).ToList();
+                    join listing in db.Listings on user.Id equals listing.UserId
+                    select user).ToDictionary((User user) => user.Id);
             var elapsed = DateTime.Now - start;
             log.LogTrace($"Finished renewing Listing cache.\nTime elapsed: {elapsed}");
         }
