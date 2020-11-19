@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Stexchange.Controllers;
 using Stexchange.Data;
 using Stexchange.Data.Builders;
@@ -40,6 +40,7 @@ namespace Stexchange.Models
         {
             var start = DateTime.Now;
             cache = (from listing in db.Listings
+                     where listing.LastModified >= start
                      select new ListingBuilder(listing)
                         .SetProperty("Pictures",
                             (from img in db.Images
