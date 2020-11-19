@@ -122,6 +122,12 @@ namespace Stexchange.Models
             return listings;
         }
 
+        /// <summary>
+        /// Calculates the distance between two postal codes
+        /// </summary>
+        /// <param name="ownerPostalCode"></param>
+        /// <param name="myPostalCode"></param>
+        /// <returns>distance in km as double</returns>
         private double calculateDistance(string ownerPostalCode, string myPostalCode)
         {
             throw new NotImplementedException();
