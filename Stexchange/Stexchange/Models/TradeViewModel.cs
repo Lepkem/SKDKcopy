@@ -103,5 +103,10 @@ namespace Stexchange.Models
                 await Task.Delay(60000);
             } while (true);
         }
+
+        public void Dispose()
+        {
+            cacheWorker = null;
+        }
     }
 }
