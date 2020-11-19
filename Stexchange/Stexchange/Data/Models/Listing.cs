@@ -10,9 +10,6 @@ namespace Stexchange.Data.Models
     public class Listing
     {
         [NotMapped]
-        private string zipCode;
-
-        [NotMapped]
         private double distance = -1;
 
         [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -61,14 +58,5 @@ namespace Stexchange.Data.Models
 
         [Column("last_modified", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastModified { get; set; }
-
-        /// <summary>
-        /// Calculate the distance between the users zipCode and the posters zipCode.
-        /// </summary>
-        /// <param name="myZipCode">The users zipCode</param>
-        public void SetDistance(string myZipCode)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
