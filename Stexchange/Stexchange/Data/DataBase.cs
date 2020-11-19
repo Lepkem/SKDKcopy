@@ -85,7 +85,7 @@ namespace Stexchange.Data
 
 			modelBuilder.Entity<FilterListing>()
 				.HasOne(fl => fl.Listing)
-				.WithMany(l => l.Categories)
+				.WithMany()
 				.HasForeignKey(fl => fl.ListingId);
 
 			modelBuilder.Entity<FilterListing>()
