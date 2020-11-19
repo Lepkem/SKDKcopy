@@ -9,8 +9,8 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201118150147_filters")]
-    partial class filters
+    [Migration("20201119114556_initialize")]
+    partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,8 @@ namespace Stexchange.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Guid");
+                    b.HasIndex("Guid")
+                        .IsUnique();
 
                     b.ToTable("UserVerifications");
                 });
