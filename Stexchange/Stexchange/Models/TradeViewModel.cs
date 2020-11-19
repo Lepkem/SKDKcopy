@@ -6,14 +6,17 @@ using Stexchange.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stexchange.Models
 {
-    public class TradeViewModel
+    public sealed class TradeViewModel : IDisposable
     {
         private Database db;
         private ILogger log;
+        private Thread cacheWorker;
+
         private List<Listing> listingCache;
         private Dictionary<int, User> userCache;
 
@@ -21,6 +24,12 @@ namespace Stexchange.Models
         {
             this.db = db;
             log = logger;
+            cacheWorker = new Thread(() =>
+            {
+                var task = Run();
+                task.Wait();
+            });
+            cacheWorker.Start();
         }
 
         /// <summary>
@@ -76,6 +85,23 @@ namespace Stexchange.Models
                 listingCache.ForEach(listing => listing.Distance = -1);
             }
             return listingCache;
+        }
+
+        /// <summary>
+        /// Task that renews the cache every minute.
+        /// </summary>
+        /// <returns>Task</returns>
+        private async Task Run()
+        {
+            do
+            {
+                await Task.Run(() =>
+                {
+                    renewListingCache(ref listingCache);
+                    renewUserCache(ref userCache);
+                });
+                await Task.Delay(60000);
+            } while (true);
         }
     }
 }
