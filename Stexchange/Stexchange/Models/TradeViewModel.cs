@@ -1,4 +1,5 @@
-﻿using Stexchange.Controllers;
+﻿using Microsoft.Extensions.Logging;
+using Stexchange.Controllers;
 using Stexchange.Data;
 using Stexchange.Data.Builders;
 using Stexchange.Data.Models;
@@ -12,16 +13,23 @@ namespace Stexchange.Models
     public class TradeViewModel
     {
         private Database db;
+        private ILogger log;
         private List<Listing> listingCache;
         private Dictionary<int, User> userCache;
 
-        public TradeViewModel(Database db)
+        public TradeViewModel(Database db, ILogger<TradeViewModel> logger)
         {
             this.db = db;
+            log = logger;
         }
 
-        public void renewListingCache(ref List<Listing> cache)
+        /// <summary>
+        /// Updates the state of Listings in the database that is stored in private field of this object.
+        /// </summary>
+        /// <param name="cache">Reference to the private field.</param>
+        private void renewListingCache(ref List<Listing> cache)
         {
+            var start = DateTime.Now;
             cache = (from listing in db.Listings
                      select new ListingBuilder(listing)
                         .SetProperty("Pictures",
@@ -35,18 +43,33 @@ namespace Stexchange.Models
                         .SetProperty("Owner", userCache[listing.Id])
                         .Complete()
                         ).ToList();
+            var elapsed = DateTime.Now - start;
+            log.LogTrace($"Finished renewing Listing cache.\nTime elapsed: {elapsed}");
         }
 
-        public void renewUserCache(ref List<User> cache)
+        /// <summary>
+        /// Updates the state of Users in the database that is stored in private field of this object.
+        /// </summary>
+        /// <param name="cache">Reference to the private field.</param>
+        private void renewUserCache(ref List<User> cache)
         {
+            var start = DateTime.Now;
             cache = (from user in db.Users
                      join listing in db.Listings on user.Id equals listing.UserId
                      select user).ToList();
+            var elapsed = DateTime.Now - start;
+            log.LogTrace($"Finished renewing Listing cache.\nTime elapsed: {elapsed}");
         }
 
-        public List<Listing> RetrieveListings(long token)
+        /// <summary>
+        /// Retrieves all listings from the cache.
+        /// </summary>
+        /// <param name="token">Users session token. Used to calculate distance.
+        /// If null is passed, the distance will be a default value.</param>
+        /// <returns></returns>
+        public List<Listing> RetrieveListings(long? token)
         {
-            if(ServerController.GetSessionData(token, out Tuple<int, string> sessionData)) {
+            if(token is object && ServerController.GetSessionData((long) token, out Tuple<int, string> sessionData)) {
                 listingCache.ForEach(listing => listing.SetDistance(sessionData.Item2));
             } else
             {
