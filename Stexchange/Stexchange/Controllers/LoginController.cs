@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace Stexchange.Controllers
 {
@@ -192,7 +193,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 					
 					//sends an email to verify the new account and return view("verify") page
 					VerifyEmail(new_User);
-					return RedirectToAction("RedirectToView", new PrgHelper { View = "Verify" }) ;
+					return RedirectToAction("Verify") ;
 				}
 			}
 			catch (Exception ex)
@@ -263,7 +264,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 				}
 				AddCookie(user.Id, user.Postal_Code);
 			}
-			return RedirectToAction("RedirectToView", new PrgHelper { View = "../Trade/trade" });
+			return RedirectToAction("Trade", "Trade");
 		}
 		private void AddCookie(int Id, string Postal_Code)
 		{
@@ -290,6 +291,12 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 			TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {user.Email}";
 			TempData["Email"] = user.Email;
 		}
+
+		public IActionResult Verify()
+        {
+			return View("Verify");
+        }
+
 		/// <summary>
 		/// Adds message to queue
 		/// </summary>
@@ -302,14 +309,5 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 			Response.Cookies.Delete("SessionToken");
 
 		}
-
-		/// <summary>
-		/// Action used for the PRG design pattern of post requests.
-		/// </summary>
-		/// <returns>The trade view</returns>
-		public IActionResult RedirectToView(PrgHelper view)
-        {
-			return View(view.View);
-        }
 	}
 }
