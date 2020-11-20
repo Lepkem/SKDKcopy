@@ -7,7 +7,5 @@ namespace Stexchange.Models
 {
     public class LoginViewModel
     {
-        public string ID { get; set; }  //from user
-        public string Cookie { get; set; } //from addcookie function 
     }
 }

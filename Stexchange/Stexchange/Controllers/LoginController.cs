@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Stexchange.Data;
 using Stexchange.Data.Models;
@@ -13,10 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using System.Net;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 
 namespace Stexchange.Controllers
 {
@@ -36,11 +32,14 @@ namespace Stexchange.Controllers
 		{
 			return View();
 		}
-
-		public class PrgHelper
-        {
-			public string View;
-        }
+		public IActionResult Verify()
+		{
+			return View("Verify");
+		}
+		public IActionResult Verified()
+		{
+			return View("Verified");
+		}
 
 
 
@@ -88,9 +87,8 @@ namespace Stexchange.Controllers
 					user.IsVerified = true;
 					await Database.SaveChangesAsync();
 					AddCookie(user.Id, user.Postal_Code);
-
 				}
-				return View("Verified");
+				return RedirectToAction("Verified");
 			}
 		}
 
@@ -260,7 +258,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 					user.Verification.Guid = Guid.NewGuid();
 					VerifyEmail(user);
 					await Database.SaveChangesAsync();
-					return View("Verify");
+					return RedirectToAction("Verify");
 				}
 				AddCookie(user.Id, user.Postal_Code);
 			}
@@ -292,10 +290,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 			TempData["Email"] = user.Email;
 		}
 
-		public IActionResult Verify()
-        {
-			return View("Verify");
-        }
+
 
 		/// <summary>
 		/// Adds message to queue
@@ -304,10 +299,10 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 		/// <param name="body">The mail message</param>
 		private void SendEmail(string address, string body) => EmailService.QueueMessage(address, body);
 
-		public void Logout()
-        {
+		public IActionResult Logout()
+		{
 			Response.Cookies.Delete("SessionToken");
-
+			return RedirectToAction("Login");
 		}
 	}
 }
