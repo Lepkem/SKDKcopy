@@ -52,7 +52,7 @@ namespace Stexchange.Data.Builders
         {
             if(value.GetType().Equals(propertyInfo.PropertyType))
             {
-                propertyInfo.SetValue(this, value);
+                propertyInfo.SetValue(construct, value);
             }
             return this;
         }

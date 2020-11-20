@@ -26,6 +26,7 @@ namespace Stexchange.Models
         {
             this.db = db;
             log = logger;
+            listingCache = new ConcurrentDictionary<int, Listing>();
             cacheWorker = new Thread(() =>
             {
                 var task = Run();
@@ -42,7 +43,7 @@ namespace Stexchange.Models
         {
             var start = DateTime.Now;
             var newOrModified = (from listing in db.Listings
-                     where listing.LastModified >= start
+                     where (blocked || listing.LastModified >= start)
                      select new ListingBuilder(listing)
                         .SetProperty("Pictures",
                             (from img in db.Images
