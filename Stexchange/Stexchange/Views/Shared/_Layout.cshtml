@@ -43,7 +43,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Trade" asp-action="Trade">Ruilen</a>
                         </li>
-                        @if (ViewBag.)
+                        @if (!(Context.Request.Cookies.ContainsKey("SessionToken")))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>

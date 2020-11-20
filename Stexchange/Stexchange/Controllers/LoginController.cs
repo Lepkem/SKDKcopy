@@ -33,9 +33,7 @@ namespace Stexchange.Controllers
 		private IConfiguration Config { get; }
 		public IActionResult Login()
 		{
-			LoginViewModel cookie = new LoginViewModel();
-			cookie.Cookie = Request.Cookies["SessionToken"];
-			return View(cookie);
+			return View();
 		}
 
 
