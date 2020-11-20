@@ -42,5 +42,9 @@ namespace Stexchange.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public string GetCookie()
+        {
+            return Request.Cookies["SessionToken"];
+        }
     }
 }

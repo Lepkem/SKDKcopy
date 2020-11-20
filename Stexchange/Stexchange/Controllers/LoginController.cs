@@ -33,7 +33,9 @@ namespace Stexchange.Controllers
 		private IConfiguration Config { get; }
 		public IActionResult Login()
 		{
-			return View();
+			LoginViewModel cookie = new LoginViewModel();
+			cookie.Cookie = Request.Cookies["SessionToken"];
+			return View(cookie);
 		}
 
 
@@ -291,5 +293,11 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 		/// <param name="address">The mail address of the user</param>
 		/// <param name="body">The mail message</param>
 		private void SendEmail(string address, string body) => EmailService.QueueMessage(address, body);
+
+		public void Logout()
+        {
+			Response.Cookies.Delete("SessionToken");
+
+		}
 	}
 }
