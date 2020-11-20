@@ -36,6 +36,11 @@ namespace Stexchange.Controllers
 			return View();
 		}
 
+		public class PrgHelper
+        {
+			public string View;
+        }
+
 
 
 		/// <summary>
@@ -187,7 +192,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 					
 					//sends an email to verify the new account and return view("verify") page
 					VerifyEmail(new_User);
-					return View("Verify");
+					return RedirectToAction("RedirectToView", new PrgHelper { View = "Verify" }) ;
 				}
 			}
 			catch (Exception ex)
@@ -258,7 +263,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 				}
 				AddCookie(user.Id, user.Postal_Code);
 			}
-			return View("../Trade/trade"); 
+			return RedirectToAction("RedirectToView", new PrgHelper { View = "../Trade/trade" });
 		}
 		private void AddCookie(int Id, string Postal_Code)
 		{
@@ -297,5 +302,14 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 			Response.Cookies.Delete("SessionToken");
 
 		}
+
+		/// <summary>
+		/// Action used for the PRG design pattern of post requests.
+		/// </summary>
+		/// <returns>The trade view</returns>
+		public IActionResult RedirectToView(PrgHelper view)
+        {
+			return View(view.View);
+        }
 	}
 }
