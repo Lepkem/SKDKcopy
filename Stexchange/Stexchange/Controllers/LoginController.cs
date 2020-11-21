@@ -254,10 +254,8 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 				// Checks if the user is verified
 				if (user.IsVerified==false)
 				{
-					await Database.Entry(user).Reference(u => u.Verification).LoadAsync();
-					user.Verification.Guid = Guid.NewGuid();
-					VerifyEmail(user);
-					await Database.SaveChangesAsync();
+					TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {user.Email}";
+					TempData["Email"] = user.Email;
 					return RedirectToAction("Verify");
 				}
 				AddCookie(user.Id, user.Postal_Code);
