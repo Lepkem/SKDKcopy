@@ -53,7 +53,7 @@ namespace Stexchange.Models
                             (from filter in db.FilterListings
                              where filter.ListingId == listing.Id
                              select filter.Value).ToList())
-                        .SetProperty("Owner", userCache[listing.Id])
+                        .SetProperty("Owner", userCache[listing.UserId])
                         .Complete()
                         ).GetEnumerator();
             while (newOrModified.MoveNext())
