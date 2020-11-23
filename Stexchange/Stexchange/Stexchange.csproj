@@ -5,6 +5,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201116165817_listing_table.cs" />
+    <Compile Remove="Migrations\20201116165817_listing_table.Designer.cs" />
+    <Compile Remove="Migrations\20201118123233_refactored_u_uv.cs" />
+    <Compile Remove="Migrations\20201118123233_refactored_u_uv.Designer.cs" />
+    <Compile Remove="Migrations\20201118124202_initialize.cs" />
+    <Compile Remove="Migrations\20201118124202_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118125354_initialize.cs" />
+    <Compile Remove="Migrations\20201118125354_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118125526_initialize.cs" />
+    <Compile Remove="Migrations\20201118125526_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118125734_initialize.cs" />
+    <Compile Remove="Migrations\20201118125734_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118134110_image_test.cs" />
+    <Compile Remove="Migrations\20201118134110_image_test.Designer.cs" />
+    <Compile Remove="Migrations\20201118135318_image_test.cs" />
+    <Compile Remove="Migrations\20201118135318_image_test.Designer.cs" />
+    <Compile Remove="Migrations\20201118135753_image_test.cs" />
+    <Compile Remove="Migrations\20201118135753_image_test.Designer.cs" />
+    <Compile Remove="Migrations\20201118140714_initialize.cs" />
+    <Compile Remove="Migrations\20201118140714_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20201118150147_filters.cs" />
+    <Compile Remove="Migrations\20201118150147_filters.Designer.cs" />
+    <Compile Remove="Migrations\20201119114021_mutable_guid.cs" />
+    <Compile Remove="Migrations\20201119114021_mutable_guid.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -45,5 +72,6 @@
     <PackageReference Include="MimeKit" Version="2.9.2" />
     <PackageReference Include="MySql.Data" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 </Project>
