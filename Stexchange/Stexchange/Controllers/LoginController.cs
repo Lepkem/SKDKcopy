@@ -226,29 +226,22 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Inloggen(string email, string password)
+		public async Task<IActionResult> Inloggen(string emailOrUname, string password)
 		{
 			if (ModelState.IsValid)
 			{
-				// Checks if email exists
-				if (!(Database.Users.Any(u => u.Email == email)))
-				{
-					TempData["message"] = "e-mail error";
-					return View("Login");
-				}
-
-				var username = (from u in Database.Users
-								where u.Email == email
+				string username = (from u in Database.Users
+								where u.Email == emailOrUname
 								select u.Username).FirstOrDefault();
 
 				var user = (from u in Database.Users
-							where u.Username == username &&
-							u.Password == CreatePasswordHash(password, username)
+							where u.Username == (username ?? emailOrUname) &&
+							u.Password == CreatePasswordHash(password, username ?? emailOrUname)
 							select u).FirstOrDefault();
 				// Checks if the combination exists
 				if (user is null)
 				{
-					TempData["message"] = "email of wachtwoord error";
+					TempData["message"] = (username is object) ? "wachtwoord error" : "username of email error";
 					return View("Login");
 				}
 				// Checks if the user is verified

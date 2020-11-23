@@ -13,8 +13,8 @@
         <form action="Inloggen" method="post" class="accountform">
             <h2 class="logintitle">Hey!<br>Welkom terug</h2>
             <p>
-                <label for="Email" class="labeltext">Email</label>
-                <input class="labelinput" name="Email" type="email" required>
+                <label for="Email" class="labeltext">Email of gebruikersnaam</label>
+                <input class="labelinput" name="emailOrUname" type="text" required>
             </p>
             <p>
                 <label for="password" class="labeltext">Wachtwoord</label>
@@ -23,14 +23,14 @@
             </p>
             @switch (TempData["message"])
             {
-                case "e-mail error":
+                case "username of email error":
                     <div>
-                        <span>Het e-mailadres is niet juist</span>
+                        <span>Het e-mailadres of de gebruikersnaam is niet juist</span>
                     </div>
                     break;
-                case "email of wachtwoord error":
+                case "wachtwoord error":
                     <div>
-                        <span>Het e-mailadres of wachtwoord is niet juist.</span>
+                        <span>Het wachtwoord is niet juist.</span>
                     </div>
                     break;
                     
