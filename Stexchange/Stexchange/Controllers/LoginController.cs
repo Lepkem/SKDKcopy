@@ -237,13 +237,9 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 					return View("Login");
 				}
 
-				var username = (from u in Database.Users
-								where u.Email == email
-								select u.Username).FirstOrDefault();
-
 				var user = (from u in Database.Users
-							where u.Username == username &&
-							u.Password == CreatePasswordHash(password, username)
+							where u.Email == email &&
+							u.Password == CreatePasswordHash(password, u.Username)
 							select u).FirstOrDefault();
 				// Checks if the combination exists
 				if (user is null)
