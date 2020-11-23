@@ -10,20 +10,34 @@
     </div>
 
     <div class="item2">
-        <form action="#" method="post" class="accountform">
+        <form action="Inloggen" method="post" class="accountform">
             <h2 class="logintitle">Hey!<br>Welkom terug</h2>
             <p>
-                <label for="Email" class="labeltext">Email</label>
-                <input class="labelinput" name="Email" type="text">
+                <label for="Email" class="labeltext">Email of gebruikersnaam</label>
+                <input class="labelinput" name="emailOrUname" type="text" required>
             </p>
             <p>
                 <label for="password" class="labeltext">Wachtwoord</label>
-                <input class="labelinput" name="password" type="password">
+                <input class="labelinput" name="password" type="password" required>
                 <span class="labelinfo">Enter a password longer than 8 characters</span>
             </p>
+            @switch (TempData["message"])
+            {
+                case "username of email error":
+                    <div>
+                        <span>Het e-mailadres of de gebruikersnaam is niet juist</span>
+                    </div>
+                    break;
+                case "wachtwoord error":
+                    <div>
+                        <span>Het wachtwoord is niet juist.</span>
+                    </div>
+                    break;
+                    
+                }
             <a href="www.link.here"><span class="forgetpasslink">Wachtwoord vergeten?</span></a>
             <p>
-                <input type="submit" value="Inloggen" class="submit">
+                <button type="submit" class="submit" id="loginsubmit">Inloggen</button>
             </p>
         </form>
     </div>
