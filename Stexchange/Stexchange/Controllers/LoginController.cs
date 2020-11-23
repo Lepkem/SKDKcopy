@@ -182,7 +182,14 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 					await Database.SaveChangesAsync();
 					
 					//sends an email to verify the new account and return view("verify") page
-					VerifyEmail(new_User);
+					string body = $@"STEXCHANGE
+Verifieer je e-mailadres door op de onderstaande link te klikken
+https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{new_User.Verification.Guid}";
+					SendEmail(new_User.Email, body);
+
+					//Pass data from controller to view
+					TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {new_User.Email}";
+					TempData["Email"] = new_User.Email;
 					return RedirectToAction("Verify") ;
 				}
 			}
@@ -261,19 +268,6 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
 			};
 			Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
 		}
-
-		private void VerifyEmail (User user)
-		{
-			string body = $@"STEXCHANGE
-Verifieer je e-mailadres door op de onderstaande link te klikken
-https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Verification.Guid}";
-			SendEmail(user.Email, body);
-			//Pass data from controller to view
-			TempData["Message"] = $"we hebben een verificatielink verstuurd naar: {user.Email}";
-			TempData["Email"] = user.Email;
-		}
-
-
 
 		/// <summary>
 		/// Adds message to queue
