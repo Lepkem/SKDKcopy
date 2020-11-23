@@ -58,15 +58,6 @@ namespace Stexchange.Controllers
 				return BadRequest();
 			}
 
-			var guids = (from code in Database.UserVerifications
-						 select code.Guid).ToArray();
-
-			// Checks if guid exists
-			if (!guids.Contains(guid))
-			{
-				return View("InvalidVerificationLink");
-			}
-
 			var verification = (from code in Database.UserVerifications
 								where code.Guid == guid
 								select code).FirstOrDefault();
@@ -87,8 +78,9 @@ namespace Stexchange.Controllers
 					user.IsVerified = true;
 					await Database.SaveChangesAsync();
 					AddCookie(user.Id, user.Postal_Code);
+					return RedirectToAction("Verified");
 				}
-				return RedirectToAction("Verified");
+				return View("InvalidVerificationLink");
 			}
 		}
 
