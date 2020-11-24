@@ -14,7 +14,6 @@ namespace Stexchange.Data.Models
             Value = val;
         }
 
-        public Filter(){}
 
         [Column("value", TypeName = "varchar(20)"), Key]
         public string Value { get; set; }
