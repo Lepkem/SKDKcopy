@@ -194,8 +194,8 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Ve
                     await Database.SaveChangesAsync();
 
                     string body = $@"STEXCHANGE
-Verifieer je e-mailadres door op de onderstaande link te klikken
-https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verification.Guid}";
+                    Verifieer je e-mailadres door op de onderstaande link te klikken
+                    https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{verification.Guid}";
 
                     // Send the verification email
                     SendEmail(email, body);
