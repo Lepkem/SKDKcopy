@@ -1,74 +1,160 @@
-﻿body {
-    /* Remove bulletpoints */
-    ul, #filter_list {
-        list-style-type: none !important;
-        /* Add pointer cursor to the caret and prevent text selection*/
-        .caret {
+﻿$lightgreen: #b2e8d4;
+$green: #4ecd92;
+$darkgreen: #015e54;
+$lightshadow: rgba(0,0,0,0.1);
+$shadow: #b2e8d4;
+$darkshadow: rgba(0,0,0,0.8);
+$lightshadowwhite: rgba(255,255,255,0.1);
+$shadowwhite: rgba(255,255,255,0.3);
+$darkshadowwhite: rgba(255,255,255,0.8);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    height: 100%;
+    width: 100%;
+
+    body {
+
+        input[type=checkbox] + label {
             cursor: pointer;
-            user-select: none;
-            color: black;
-            display: inline;
-            transition: all 0.5s ease;
         }
-        /* Rotate element by 90 deg*/
-        .rotated {
-            transition: all 0.5s ease;
-            transform: rotate(90deg);
-        }
-        /* Hide nested elements default*/
-        .nested {
+
+        input[type=checkbox] {
             display: none;
         }
-        /* Show nested elements when expanded*/
-        .expanded {
-            display: block;
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1vh solid $darkgreen;
+            border-radius: 0.2em;
+            color: transparent;
+            transition: .2s;
+            padding-top: 0.1vh;
+            padding-right: 0.2vh;
+            padding-left: 0.2vh;
+            margin-right: 1vh;
         }
-        .span{
-            vertical-align: middle;
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
         }
-    }
-    #filter_list {
-        margin: 0px;
-        padding: 0px;
-    }
-    #forms {
-        width: 24%;
-        height: 100%;
-        /*position: fixed;*/
-        border-right: 1px solid black;
-        float: left;
-        margin-right: 8px;
-        padding-right: 16px;
-        .sort-range-display {
-            margin-left: 5px;
+
+        input[type=checkbox]:checked + label:before {
+            background-color: MediumSeaGreen;
+            border-color: MediumSeaGreen;
+            color: #fff;
         }
-    }
-    #search, #listings {
-        width: 74%;
-        float: right;
-    }
-    #search {
-        border-bottom: 1px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 16px;
-        margin-bottom: 16px;
-        margin-left: 8px;
-        label{
-            margin-bottom: 0px;
-            float : right;
-            white-space: nowrap;
+        /* Remove bulletpoints */
+        ul, #filter_list {
+            list-style-type: none !important;
+            /* Add pointer cursor to the caret and prevent text selection*/
+            .caret {
+                margin-right: 1vh;
+                cursor: pointer;
+                user-select: none;
+                color: black;
+                display: inline;
+                transition: all 0.5s ease;
+            }
+            /* Rotate element by 90 deg*/
+            .rotated {
+                transition: all 0.5s ease;
+                transform: rotate(90deg);
+            }
+            /* Hide nested elements default*/
+            .nested {
+                display: none;
+            }
+            /* Show nested elements when expanded*/
+            .expanded {
+                display: block;
+            }
+
+            .span {
+                vertical-align: middle;
+            }
         }
-        #searchquery, #search_description {
-            float : right;
+
+        #filter_list {
+            margin: 0px;
+            padding: 0px;
         }
-        #searchbar {
-            width: 100%;
+
+        #forms {
+            background-color: #e8e8e8;
+            color: $green;
+            padding-left: 3vh;
+            width: 15%;
+            height: 100%;
+            /*position: fixed;*/
+            border-right: 0.3vh solid $lightshadow;
+            float: left;
+            margin-right: 8px;
+            padding-right: 16px;
+            font-size: 1.5vh;
+
+            li {
+                border-top: 0.1vh solid $green;
+            }
+
+            #apply_filter {
+                font-size: 1vh;
+                position: relative;
+                border: none;
+                background: #015e54;
+                color: white;
+                padding-left: 2vh;
+                padding-right: 2vh;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+                text-transform: uppercase;
+                border-radius: 100vh;
+                transition: all 0.3s ease 0s;
+            }
+
+            #apply_filter:hover {
+                color: $darkgreen;
+                background-color: $lightgreen;
+                transition: all 0.3s ease 0s;
+            }
+
+            #apply_sort {
+                font-size: 1vh;
+                position: relative;
+                border: none;
+                background: #015e54;
+                color: white;
+                padding-left: 2vh;
+                padding-right: 2vh;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+                text-transform: uppercase;
+                border-radius: 100vh;
+                transition: all 0.3s ease 0s;
+            }
+
+            #apply_sort:hover {
+                color: $darkgreen;
+                background-color: $lightgreen;
+                transition: all 0.3s ease 0s;
+            }
+
+            .nested {
+                margin-left: 3vh;
+            }
+
+            input[type=range] {
+                width: 100%;
+                float:left;
+                color: $darkgreen;
+                background: $green;
+            }
+
         }
-    }
-    #search > * {
-        margin-left: 2.5px;
-        margin-right: 2.5px;
     }
 }

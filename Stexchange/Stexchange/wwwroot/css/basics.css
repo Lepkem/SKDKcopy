@@ -35,7 +35,7 @@ html {
           overflow: hidden; }
         html body header .navbar-default li {
           float: left;
-          margin-right: 6%;
+          margin-right: 3%;
           transition: 500ms ease; }
         html body header .navbar-default li.login {
           transition: 500ms ease; }
@@ -78,8 +78,9 @@ html {
           margin-right: 3%;
           transition: 500ms ease; }
         html body header .navbar-default.scrolled li.login {
-          margin-left: 65%;
-          transition: 500ms ease; }
+          transition: 500ms ease;
+          float: right;
+          margin-right: 8%; }
         html body header .navbar-default.scrolled li a {
           font-size: 2vh;
           width: 100%;
@@ -173,7 +174,7 @@ html {
             background-color: #b2e8d4;
             transition: all 0.3s ease 0s; }
       html body main .about {
-        padding: 2%;
+        padding: 1%;
         position: relative;
         float: left;
         font-size: 2.3vh;
@@ -181,7 +182,8 @@ html {
         background-color: rgba(255, 255, 255, 0.8);
         margin-top: 2%;
         margin-bottom: 3%;
-        border-radius: 2vh; }
+        border-radius: 1vh;
+        box-shadow: 5px 10px rgba(0, 0, 0, 0.1); }
         html body main .about img {
           padding-left: 5%; }
         html body main .about .titleleft {
@@ -268,6 +270,125 @@ html {
             color: #015e54;
             background-color: #b2e8d4;
             transition: all 0.3s ease 0s; }
+      html body main .logincontainer {
+        font-size: 2.3vh;
+        display: flex;
+        justify-content: center; }
+        html body main .logincontainer .item1 {
+          width: 40%; }
+          html body main .logincontainer .item1 .loginarticle {
+            margin-top: 25%;
+            padding-left: 5%; }
+            html body main .logincontainer .item1 .loginarticle p {
+              margin-top: 7%;
+              width: 100%; }
+        html body main .logincontainer .item2 {
+          width: 30%; }
+          html body main .logincontainer .item2 form {
+            margin-top: 10%;
+            margin-right: 10%;
+            float: right;
+            background-image: url("../img/login.png");
+            background-size: 110% auto;
+            width: 60%;
+            border-radius: 1vh; }
+            html body main .logincontainer .item2 form h2 {
+              margin-left: 10%;
+              margin-top: 30%;
+              color: white;
+              font-weight: 100; }
+            html body main .logincontainer .item2 form p {
+              margin-left: 10%; }
+            html body main .logincontainer .item2 form a {
+              margin-top: 46%;
+              font-size: 1.2vh;
+              text-align: center;
+              display: block;
+              color: white; }
+            html body main .logincontainer .item2 form .nonsubmit {
+              padding-top: 2%;
+              display: block;
+              margin: 0;
+              width: 90%;
+              border: none;
+              border-bottom: 2px solid white;
+              background-color: transparent;
+              color: white;
+              text-overflow: ellipsis;
+              font-size: 1em;
+              border-radius: 0; }
+            html body main .logincontainer .item2 form .submit {
+              display: block;
+              padding: 2% 7% 2%;
+              border: none;
+              background-color: #015e54;
+              margin: 0 auto;
+              color: white;
+              text-overflow: ellipsis;
+              font-size: 1.9vh;
+              border-radius: 0.5vh;
+              transition: 0.3s;
+              margin-top: 8%;
+              margin-bottom: 25%; }
+            html body main .logincontainer .item2 form .submit:hover {
+              background-color: #b2e8d4;
+              color: #015e54; }
+        html body main .logincontainer .item3 {
+          width: 30%; }
+          html body main .logincontainer .item3 form {
+            margin-top: 10%;
+            margin-right: 30%;
+            float: right;
+            background-color: #2b2b2b;
+            background-image: url("../img/register.png");
+            background-size: 103% auto;
+            width: 60%;
+            border-radius: 1vh; }
+            html body main .logincontainer .item3 form h2 {
+              margin-left: 10%;
+              margin-top: 30%;
+              color: white;
+              font-weight: 100; }
+            html body main .logincontainer .item3 form p {
+              margin-left: 10%; }
+            html body main .logincontainer .item3 form a {
+              font-size: 1.2vh;
+              color: white; }
+            html body main .logincontainer .item3 form .nonsubmit {
+              padding-top: 2%;
+              display: block;
+              margin: 0;
+              width: 90%;
+              border: none;
+              border-bottom: 2px solid white;
+              background-color: transparent;
+              color: white;
+              text-overflow: ellipsis;
+              font-size: 1em;
+              border-radius: 0; }
+            html body main .logincontainer .item3 form .submit {
+              display: block;
+              padding: 2% 7% 2%;
+              border: none;
+              background-color: #015e54;
+              margin: 0 auto;
+              color: white;
+              text-overflow: ellipsis;
+              font-size: 1.9vh;
+              border-radius: 0.5vh;
+              transition: 0.3s;
+              margin-top: 8%;
+              margin-bottom: 25%; }
+            html body main .logincontainer .item3 form .submit:hover {
+              background-color: #b2e8d4;
+              color: #015e54; }
+            html body main .logincontainer .item3 form .terms {
+              padding-top: 30%;
+              font-size: 1.2vh;
+              color: white;
+              text-align: center;
+              margin: 0;
+              line-height: 1.8vh; }
     html body footer {
       opacity: 0;
       z-index: 3;
@@ -290,3 +411,14 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #4ecd92; }
+
+::placeholder {
+  color: white;
+  font-family: Bahnschrift;
+  font-weight: 100;
+  font-size: 2.1vh;
+  opacity: 1;
+  /* Firefox */ }
+
+*:focus {
+  outline: none; }

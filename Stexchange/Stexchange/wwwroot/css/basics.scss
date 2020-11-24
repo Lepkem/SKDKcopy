@@ -50,7 +50,7 @@ html {
 
 				li {
 					float: left;
-					margin-right: 6%;
+					margin-right: 3%;
 					transition: 500ms ease;
 				}
 
@@ -108,8 +108,9 @@ html {
 				}
 
 				li.login {
-					margin-left: 65%;
 					transition: 500ms ease;
+					float: right;
+					margin-right: 8%;
 				}
 
 				li a {
@@ -232,7 +233,7 @@ html {
 			}
 
 			.about {
-				padding: 2%;
+				padding: 1%;
 				position: relative;
 				float: left;
 				font-size: 2.3vh;
@@ -240,7 +241,8 @@ html {
 				background-color: $darkshadowwhite;
 				margin-top: 2%;
 				margin-bottom: 3%;
-				border-radius: 2vh;
+				border-radius: 1vh;
+				box-shadow: 5px 10px $lightshadow;
 
 				img {
 					padding-left: 5%;
@@ -352,6 +354,168 @@ html {
 					}
 				}
 			}
+
+			.logincontainer {
+				font-size: 2.3vh;
+				display: flex;
+				justify-content: center;
+
+				.item1 {
+					width: 40%;
+
+					.loginarticle {
+						margin-top: 25%;
+						padding-left: 5%;
+
+						p {
+							margin-top: 7%;
+							width: 100%;
+						}
+					}
+				}
+
+				.item2 {
+					width: 30%;
+
+					form {
+						margin-top: 10%;
+						margin-right: 10%;
+						float: right;
+						//background-color: #2b2b2b;
+						background-image: url("../img/login.png");
+						background-size: 110% auto;
+						width: 60%;
+						border-radius: 1vh;
+
+						h2 {
+							margin-left: 10%;
+							margin-top: 30%;
+							color: white;
+							font-weight: 100;
+						}
+
+						p {
+							margin-left: 10%;
+						}
+
+						a {
+							margin-top: 46%;
+							font-size: 1.2vh;
+							text-align: center;
+							display: block;
+							color: white;
+						}
+
+						.nonsubmit {
+							padding-top: 2%;
+							display: block;
+							margin: 0;
+							width: 90%;
+							border: none;
+							border-bottom: 2px solid white;
+							background-color: transparent;
+							color: white;
+							text-overflow: ellipsis;
+							font-size: 1em;
+							border-radius: 0;
+						}
+
+						.submit {
+							display: block;
+							padding: 2% 7% 2%;
+							border: none;
+							background-color: $darkgreen;
+							margin: 0 auto;
+							color: white;
+							text-overflow: ellipsis;
+							font-size: 1.9vh;
+							border-radius: 0.5vh;
+							transition: 0.3s;
+							margin-top: 8%;
+							margin-bottom: 25%;
+						}
+
+						.submit:hover {
+							background-color: $lightgreen;
+							color: $darkgreen;
+						}
+					}
+				}
+
+				.item3 {
+					width: 30%;
+
+					form {
+						margin-top: 10%;
+						margin-right: 30%;
+						float: right;
+						background-color: #2b2b2b;
+						background-image: url("../img/register.png");
+						background-size: 103% auto;
+						width: 60%;
+						border-radius: 1vh;
+
+						h2 {
+							margin-left: 10%;
+							margin-top: 30%;
+							color: white;
+							font-weight: 100;
+						}
+
+						p {
+							margin-left: 10%;
+						}
+
+						a {
+							font-size: 1.2vh;
+							color: white;
+						}
+
+						.nonsubmit {
+							padding-top: 2%;
+							display: block;
+							margin: 0;
+							width: 90%;
+							border: none;
+							border-bottom: 2px solid white;
+							background-color: transparent;
+							color: white;
+							text-overflow: ellipsis;
+							font-size: 1em;
+							border-radius: 0;
+						}
+
+						.submit {
+							display: block;
+							padding: 2% 7% 2%;
+							border: none;
+							background-color: $darkgreen;
+							margin: 0 auto;
+							color: white;
+							text-overflow: ellipsis;
+							font-size: 1.9vh;
+							border-radius: 0.5vh;
+							transition: 0.3s;
+							margin-top: 8%;
+							margin-bottom: 25%;
+						}
+
+						.submit:hover {
+							background-color: $lightgreen;
+							color: $darkgreen;
+						}
+
+						.terms {
+							padding-top: 30%;
+							font-size: 1.2vh;
+							color: white;
+							text-align: center;
+							margin: 0;
+							line-height: 1.8vh;
+						}
+					}
+				}
+			}
 		}
 
 		footer {
@@ -381,4 +545,16 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: $green;
+}
+
+::placeholder {
+	color: white;
+	font-family: Bahnschrift;
+	font-weight: 100;
+	font-size: 2.1vh;
+	opacity: 1; /* Firefox */
+}
+
+*:focus {
+	outline: none;
 }
