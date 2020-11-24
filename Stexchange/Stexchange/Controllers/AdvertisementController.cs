@@ -22,7 +22,10 @@ namespace Stexchange.Controllers
         private Database _database { get; }
         private IConfiguration _config { get; }
 
-        
+        public IActionResult PostAdvertisement()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult PostAdvertisement(ImageData img, string title, string description, 
