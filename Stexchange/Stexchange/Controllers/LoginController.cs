@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Stexchange.Data;
 using Stexchange.Data.Models;
@@ -13,38 +12,45 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using System.Net;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
 namespace Stexchange.Controllers
 {
-    public class LoginController : Controller
-    {
-        public LoginController(Database db, IConfiguration config, EmailService emailService)
-        {
-            Database = db;
-            EmailService = emailService;
-            Config = config.GetSection("MailSettings");
-        }
+	public class LoginController : Controller
+	{
+		public LoginController(Database db, IConfiguration config, EmailService emailService)
+		{
+			Database = db;
+			EmailService = emailService;
+			Config = config.GetSection("MailSettings");
+		}
 
-        private Database Database { get; }
-        private EmailService EmailService { get; }
-        private IConfiguration Config { get; }
+		private Database Database { get; }
+		private EmailService EmailService { get; }
+		private IConfiguration Config { get; }
+		public IActionResult Login()
+		{
+			return View();
+		}
+		public IActionResult Verify()
+		{
+			return View("Verify");
+		}
+		public IActionResult Verified()
+		{
+			return View("Verified");
+		}
 
-        public IActionResult Login()
-        {
-            return View();
-        }
 
-        /// <summary>
-        /// Compares verificationlink to user's verificationcode.
-        /// </summary>
-        /// <param name="id">Verificationcode of user</param>
-        /// <returns></returns>
-        [HttpGet("[controller]/[action]/{id}")]
-        public async Task<IActionResult> Verification(string id)
-        {
+
+		/// <summary>
+		/// Compares verificationlink to user's verificationcode.
+		/// </summary>
+		/// <param name="id">Verificationcode of user</param>
+		/// <returns></returns>
+		[HttpGet("[controller]/[action]/{id}")]
+		public async Task<IActionResult> Verification(string id)
+		{
 			Guid guid;
 			if (!Guid.TryParse(id, out guid))
 			{
@@ -52,70 +58,52 @@ namespace Stexchange.Controllers
 				return BadRequest();
 			}
 
-            var guids = (from code in Database.UserVerifications
-                         select code.Guid).ToArray();
+			var verification = (from code in Database.UserVerifications
+								where code.Guid == guid
+								select code).FirstOrDefault();
 
-            // Checks if guid exists
-            if (!guids.Contains(guid))
-            {
-                return View("InvalidVerificationLink");
-            }
+			var user = (from u in Database.Users
+						where u.Verification.Guid == guid
+						select u).FirstOrDefault();
 
-            var verification = (from code in Database.UserVerifications
-                                where code.Guid == guid
-                                select code).FirstOrDefault();
+			// Checks if verificationlink has already been activated
+			if (user.IsVerified == true)
+			{
+				return View("InvalidVerificationLink");
+			}
+			else
+			{
+				if (!(verification is null))
+				{
+					user.IsVerified = true;
+					await Database.SaveChangesAsync();
+					AddCookie(user.Id, user.Postal_Code);
+					return RedirectToAction("Verified");
+				}
+				return View("InvalidVerificationLink");
+			}
+		}
 
-            var user = (from u in Database.Users
-                        where u.Verification.Guid == guid
-                        select u).FirstOrDefault();
+		/// <summary>
+		/// Send new verificationlink to user if he isn't verified.
+		/// </summary>
+		/// <param name="vEmail">Emailaddress of user</param>
+		[HttpGet("[controller]/[action]/{vEmail}")]
+		public async Task<IActionResult> SendNewCode(string vEmail)
+		{
+			var user = (from u in Database.Users
+						where !u.IsVerified
+							&& u.Email == vEmail
+						select u).FirstOrDefault();
+			
+			if (!(user is null))
+			{
+				// Let entity framework find the UserVerification object for this user
+				await Database.Entry(user).Reference(u => u.Verification).LoadAsync();
 
-            // Checks if verificationlink has already been activated
-            if (user.IsVerified == true)
-            {
-                return View("InvalidVerificationLink");
-            }
-            else
-            {
-                if (!(verification is null))
-                {
-                    user.IsVerified = true;
-                    await Database.SaveChangesAsync();
-                    long sessionToken = ServerController.CreateSession(new Tuple<int, string>(user.Id, user.Postal_Code));
-                    var cookieOptions = new CookieOptions
-                    {
-                        // Set the cookie to HTTP only, meaning it can only be accessed on the server.
-                        HttpOnly = true,
-                        // Use Lax to include stored cookie on initial requests,
-                        // i.e. when user closes the site then opens it and the cookie still exists,
-                        // the user will remain logged in unless the session is expired.
-                        SameSite = SameSiteMode.Lax
-                    };
-                    Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
-                }
-                return View("Verified");
-            }
-        }
-
-        /// <summary>
-        /// Send new verificationlink to user if he isn't verified.
-        /// </summary>
-        /// <param name="vEmail">Emailaddress of user</param>
-        [HttpGet("[controller]/[action]/{vEmail}")]
-        public async Task<IActionResult> SendNewCode(string vEmail)
-        {
-            var user = (from u in Database.Users
-                        where !u.IsVerified
-                            && u.Email == vEmail
-                        select u).FirstOrDefault();
-            
-            if (!(user is null))
-            {
-                // Let entity framework find the UserVerification object for this user
-                await Database.Entry(user).Reference(u => u.Verification).LoadAsync();
-
-                user.Verification.Guid = Guid.NewGuid();
-                
-                string body = $@"STEXCHANGE
+				user.Verification.Guid = Guid.NewGuid();
+				
+				string body = $@"STEXCHANGE
 Verifieer je e-mailadres door op de onderstaande link te klikken
 https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{user.Verification.Guid}";
 
