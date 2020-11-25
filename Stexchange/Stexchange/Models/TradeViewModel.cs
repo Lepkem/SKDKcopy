@@ -93,34 +93,65 @@ namespace Stexchange.Models
         /// <returns></returns>
         public List<Listing> RetrieveListings(long? token)
         {
-            /*When the first request to retrieve the listings is made,
-             *a TradeViewModel is initialized and starts retrieving the data
-             *from the database in a separate thread. To prevent the user
-             *from receiving incomplete data, this method will wait
-             *for the cacheWorker thread to un-block the instance,
-             *by polling every 100 ms (10 times per second).
-             */
-            while (blocked)
-            {
-                Thread.Sleep(100);
-            }
+            BlockedPoller();
 
             //Shallow copy, this was accounted for in the design of this method.
             var listings = listingCache.Values.ToList();
             //Each listing is temporarily assigned it's owner.
-            listings.ForEach(listing => listing.Owner = userCache[listing.UserId]);
-            if(token is object && ServerController.GetSessionData((long) token, out Tuple<int, string> sessionData)) {
-                listings.ForEach(listing => listing.Distance = calculateDistance(listing.Owner.Postal_Code, sessionData.Item2));
-            } else
-            {
-                listings.ForEach(listing => listing.Distance = -1);
-            }
-            listings.ForEach((listing) =>
-            {
-                listing.OwningUserName = listing.Owner.Username;
-                listing.Owner = null;
-            });
+            listings.ForEach(listing => PrepareListing(token, ref listing));
             return listings;
+        }
+
+        /// <summary>
+        /// Retrieves the listing with the specified id from the cache.
+        /// </summary>
+        /// <param name="token">Users session token. Used to calculate distance.
+        /// If null is passed, the distance will be a default value.</param>
+        /// <param name="listingId">The Id of the Listing</param>
+        /// <returns>The requested Listing</returns>
+        public Listing RetrieveListing(long? token, int listingId)
+        {
+            BlockedPoller();
+
+            var listing = listingCache[listingId];
+            PrepareListing(token, ref listing);
+            return listing;
+        }
+
+        /// <summary>
+        /// Combines the known data in the given listing object.
+        /// </summary>
+        /// <param name="token">The user whose data to use, if logged in.</param>
+        /// <param name="listing">The given listing</param>
+        private void PrepareListing(long? token, ref Listing listing)
+        {
+            listing.Owner = userCache[listing.UserId];
+            if (token is object && ServerController.GetSessionData((long)token, out Tuple<int, string> sessionData))
+            {
+                listing.Distance = calculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
+            }
+            else
+            {
+                listing.Distance = -1;
+            }
+            listing.OwningUserName = listing.Owner.Username;
+            listing.Owner = null;
+        }
+
+        /// <summary>
+        /// When the first request to retrieve the listings is made,
+        /// a TradeViewModel is initialized and starts retrieving the data
+        /// from the database in a separate thread.To prevent the user
+        /// from receiving incomplete data, this method will wait
+        /// for the cacheWorker thread to un-block the instance,
+        /// by polling every 100 ms(10 times per second).
+        /// </summary>
+        private void BlockedPoller()
+        {
+            while (blocked)
+            {
+                Thread.Sleep(100);
+            }
         }
 
         /// <summary>
