@@ -1,4 +1,5 @@
 ﻿@model TradeViewModel
+@using Stexchange.Data.Models
 @{
     ViewData["Title"] = "Ruiloverzicht";
 }
@@ -155,6 +156,15 @@
     <input type="checkbox" name="search_description" id="search_description" value="search_description" />
     <label for="search_description">Doorzoek ook de beschrijving</label>
 </div>
-<div class="" id="listings"></div>
+<div class="" id="listings">
+    @foreach(Listing listing in Model.RetrieveListings(-1))
+    {
+        <p>
+            <strong>Title: </strong> <code>@listing.Title</code>
+            <strong>Description: </strong> <code>@listing.Description</code>
+            <strong>Owner: </strong> <code>@listing.OwningUserName</code>
+        </p>
+    }
+</div>
 
 <script type="text/javascript" src="~/js/trade.js" asp-append-version="true"></script>

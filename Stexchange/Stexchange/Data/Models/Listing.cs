@@ -10,9 +10,6 @@ namespace Stexchange.Data.Models
     public class Listing
     {
         [NotMapped]
-        private string zipCode;
-
-        [NotMapped]
         private double distance = -1;
 
         [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]

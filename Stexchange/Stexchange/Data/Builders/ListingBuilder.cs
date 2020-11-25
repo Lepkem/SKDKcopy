@@ -31,7 +31,6 @@ namespace Stexchange.Data.Builders
         /// <summary>
         /// Resets this ListingBuilder to a clean construct.
         /// </summary>
-
         public void Reset()
         {
             construct = new Listing();
@@ -53,7 +52,7 @@ namespace Stexchange.Data.Builders
         {
             if(value.GetType().Equals(propertyInfo.PropertyType))
             {
-                propertyInfo.SetValue(this, value);
+                propertyInfo.SetValue(construct, value);
             }
             return this;
         }
