@@ -12,16 +12,16 @@ namespace Stexchange.Controllers
 {
     public class TradeController : Controller
     {
-        private Database db;
-        private ILogger<TradeViewModel> logger;
-        public TradeController(Database db, ILogger<TradeViewModel> logger)
-        {
-            this.db = db;
-            this.logger = logger;
-        }
-        public IActionResult Trade()
-        {
-            return View(model: new TradeViewModel(db, logger));
-        }
+        //private Database db;
+        //private ILogger<TradeViewModel> logger;
+        //public TradeController(Database db, ILogger<TradeViewModel> logger)
+        //{
+        //    this.db = db;
+        //    this.logger = logger;
+        //}
+        //public IActionResult Trade()
+        //{
+        //    return View(model: new TradeViewModel(db, logger));
+        //}
     }
 }
