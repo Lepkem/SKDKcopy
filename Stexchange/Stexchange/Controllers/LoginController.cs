@@ -34,6 +34,8 @@ namespace Stexchange.Controllers
 		}
 		public IActionResult Verify()
 		{
+			TempData.Keep("Message");
+			TempData.Keep("Email");
 			return View("Verify");
 		}
 		public IActionResult Verified()
