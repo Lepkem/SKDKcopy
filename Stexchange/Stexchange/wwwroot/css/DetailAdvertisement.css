@@ -1,0 +1,94 @@
+﻿body input[type=button] {
+  background-color: #015e54;
+  border: solid;
+  border-radius: 30px;
+  border-color: #3eaf91;
+  padding: 8px 16px;
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  margin-top: 3%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: white;
+  float: right;
+  margin-right: 10%;
+  width: 405px;
+  height: 55px; }
+
+body input[type=button]:hover {
+  background-color: #3eaf91; }
+
+body #imgoutput {
+  border: 0.5px solid #3eaf91;
+  width: 70%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 2%;
+  object-fit: cover;
+  float: left;
+  display: block; }
+
+body h4 {
+  font-size: 30px;
+  margin-left: 10%; }
+
+body .section {
+  display: block;
+  margin-left: 10%;
+  margin-right: 10%; }
+
+body .tabsection {
+  margin-top: 1%;
+  display: block;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-bottom: 3px solid #015e54;
+  float: left;
+  width: 80%;
+  font-size: 20px; }
+
+body .basic_tab {
+  padding: 8px 16px;
+  border: solid;
+  cursor: pointer;
+  background-color: #015e54;
+  color: white;
+  border: 2px solid #015e54;
+  float: left;
+  width: 200px;
+  height: 3%;
+  text-align: center; }
+
+body .filters_tab {
+  padding: 8px 16px;
+  border: solid;
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid #015e54;
+  float: left;
+  width: 200px;
+  height: 3%;
+  text-align: center; }
+
+body .plant_information {
+  padding: 8px 16px;
+  margin-left: 10%;
+  border: 0.5px solid #015e54;
+  margin-right: 10%;
+  background-color: white;
+  float: left;
+  display: block;
+  width: 80%;
+  margin-bottom: 3%; }
+
+body p {
+  font-size: 19px; }
+
+body .user_information {
+  position: relative;
+  background-color: #015e54;
+  color: white;
+  padding: 8px 16px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  float: right; }

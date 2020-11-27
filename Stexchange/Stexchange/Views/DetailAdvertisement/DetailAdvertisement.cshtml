@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Advertisement";
+}
+@model TradeViewModel
+@{
+    var advertisement = Model.RetrieveListing(null, int.Parse(TempData["id"].ToString()));
+}
+<link rel="stylesheet" href="~/css/DetailAdvertisement.css" />
+<h4>@advertisement.Title</h4>
+<div class="section">
+    <div class="section-img">
+        <img id="imgoutput" src="~/img/background.png" />
+    </div>
+    <div class="user_information">
+        <p>gebruikersnaam: @advertisement.OwningUserName</p>
+        <p>afstand: @advertisement.Distance</p>
+        <p>gemiddelde beoordeling op communicatie</p>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <p>gemiddelde beoordeling op kwaliteit</p>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <span style='font-size:30px;'>&#9734;</span>
+        <p>gebaseerd op ... beoordelingen</p>
+    </div>
+</div>
+
+<div class="contactbutton">
+    <input type="button" value="Chat" name="chatbutton" action="#" />
+</div>
+
+<div class="tabsection">
+    <div class="basic_tab tabs" onclick="switchtab('basic_information', 'basic_tab')">Algemene Informatie</div>
+    <div class="filters_tab tabs" onclick="switchtab('filters_information', 'filters_tab')">Verzorging</div>
+</div>
+
+<div class="plant_information">
+    <div class="basic_information infoblock">
+        <p>nederlandse naam: @advertisement.NameNl</p>
+        <p>latijnse naam: @advertisement.NameLatin</p>
+        <p>hoeveelheid: @advertisement.Quantity</p>
+        <p>beschrijving: @advertisement.Description</p>
+        <p>geplaatst op @advertisement.CreatedAt</p>
+    </div>
+    <div class="filters_information infoblock">
+        <p>Standplaats: </p>
+        <p>Vocht: </p>
+        <p>Plantsoort: </p>
+        <p>Voeding: </p>
+        <p>pH-waarde: </p>
+        <p>Inheems: </p>
+        <p>Voorzien van pot: </p>
+        <p>Gratis: </p>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/DetailAdvertisement.js" asp-append-version="true"></script>
