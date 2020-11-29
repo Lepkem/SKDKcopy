@@ -1,16 +1,14 @@
 ﻿[
-  {
-    "outputFile": "wwwroot/StyleSheet.css",
-    "inputFile": "wwwroot/StyleSheet.scss"
-  },
-  {
-    "outputFile": "wwwroot/Basics.css",
-    "inputFile": "wwwroot/Basics.scss"
-  }
-]
-﻿[
-  {
-    "outputFile": "wwwroot/css/trade.css",
-    "inputFile": "wwwroot/css/trade.scss"
-  }
+    {
+        "outputFile": "wwwroot/StyleSheet.css",
+        "inputFile": "wwwroot/StyleSheet.scss"
+    },
+    {
+        "outputFile": "wwwroot/Basics.css",
+        "inputFile": "wwwroot/Basics.scss"
+    },
+    {
+        "inputFile": "wwwroot/css/trade.scss",
+        "outputFile": "wwwroot/css/trade.css"
+    }
 ]
