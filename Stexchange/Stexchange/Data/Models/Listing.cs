@@ -12,6 +12,9 @@ namespace Stexchange.Data.Models
         [NotMapped]
         private double distance = -1;
 
+        [NotMapped]
+        private double distance = -1;
+
         [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
