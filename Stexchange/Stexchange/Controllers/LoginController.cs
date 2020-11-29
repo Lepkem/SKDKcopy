@@ -71,18 +71,16 @@ namespace Stexchange.Controllers
 			{
 				return View("InvalidVerificationLink");
 			}
-			else
-			{
-				if (!(verification is null))
-				{
-					user.IsVerified = true;
-					await Database.SaveChangesAsync();
-					AddCookie(user.Id, user.Postal_Code);
-					return RedirectToAction("Verified");
-				}
-				return View("InvalidVerificationLink");
-			}
-		}
+
+            if (!(verification is null))
+            {
+                user.IsVerified = true;
+                await Database.SaveChangesAsync();
+                AddCookie(user.Id, user.Postal_Code);
+                return RedirectToAction("Verified");
+            }
+            return View("InvalidVerificationLink");
+        }
 
 		/// <summary>
 		/// Send new verificationlink to user if he isn't verified.

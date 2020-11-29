@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Posted";
+}
+
+@{
+    object verificationId;
+    ViewContext.RouteData.Values.TryGetValue("id", out verificationId);
+}
+
+<form action="Verification/@(verificationId)" method="get">
+    <h2>Gelukt!</h2>
+    <div>
+        <p>Je advertentie is succesvol geplaatst.</p>
+    </div>
+</form>
+<button >
+    Nog een advertentie maken.
+</button>
