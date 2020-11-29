@@ -175,9 +175,15 @@ namespace Stexchange.Models
             {
                 await Task.Run(() =>
                 {
-                    renewUserCache(ref userCache);
-                    renewListingCache(ref listingCache);
-                    blocked = false;
+                    try
+                    {
+                        renewUserCache(ref userCache);
+                        renewListingCache(ref listingCache);
+                        blocked = false;
+                    } catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
                 });
                 await Task.Delay(60000);
             } while (true);
