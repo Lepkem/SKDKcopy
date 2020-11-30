@@ -1,0 +1,50 @@
+﻿/* *{
+    margin: 0;
+    padding: 0;
+}*/
+html body #chatcontainer {
+  display: grid;
+  grid-template-areas: "conversationslist chattitle chattitle chattitle" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist chatform chatform chatform";
+  margin: 5%;
+  margin-top: 1%;
+  width: 90%;
+  height: 85vh;
+  background: #b2e8d4;
+  border-radius: 1vh; }
+
+html body #conversationslist {
+  background: rgba(0, 0, 0, 0.8);
+  grid-area: conversationslist;
+  border-radius: 1vh 0 0 1vh; }
+
+html body #chattitle {
+  font-size: 4vh;
+  background: rgba(0, 0, 0, 0.8);
+  grid-area: chattitle;
+  border-radius: 0 1vh 0 0;
+  font-weight: bold;
+  border-bottom: 0.1vh solid rgba(0, 0, 0, 0.8);
+  color: white;
+  padding-left: 5%;
+  display: grid;
+  align-content: center; }
+
+html body #messagelist {
+  background: #4ecd92;
+  grid-area: messagelist; }
+
+html body #chatform {
+  color: black;
+  display: grid;
+  align-content: center;
+  padding-left: 2%;
+  grid-area: chatform;
+  border-radius: 0 0vh 1vh 0;
+  background: rgba(255, 255, 255, 0.8);
+  border-top: 0.1vh solid rgba(0, 0, 0, 0.8); }
+  html body #chatform #typemessage {
+    font-size: 2vh;
+    border-radius: 1vh;
+    width: 90%;
+    height: 200%;
+    padding-left: 2%; }

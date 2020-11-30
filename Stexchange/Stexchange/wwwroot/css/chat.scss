@@ -1,0 +1,77 @@
+﻿$lightgreen: #b2e8d4;
+$green: #4ecd92;
+$darkgreen: #015e54;
+$lightshadow: rgba(0,0,0,0.1);
+$shadow: #b2e8d4;
+$darkshadow: rgba(0,0,0,0.8);
+$lightshadowwhite: rgba(255,255,255,0.1);
+$shadowwhite: rgba(255,255,255,0.3);
+$darkshadowwhite: rgba(255,255,255,0.8);
+
+/* *{
+    margin: 0;
+    padding: 0;
+}*/
+
+html {
+    //height: 100%;
+    body {
+
+        #chatcontainer {
+            display: grid;
+            grid-template-areas: 'conversationslist chattitle chattitle chattitle''conversationslist messagelist messagelist messagelist''conversationslist messagelist messagelist messagelist''conversationslist messagelist messagelist messagelist' 'conversationslist messagelist messagelist messagelist''conversationslist messagelist messagelist messagelist' 'conversationslist messagelist messagelist messagelist' 'conversationslist chatform chatform chatform';
+            margin: 5%;
+            margin-top: 1%;
+            width: 90%;
+            height: 85vh;
+            background: $lightgreen;
+            border-radius: 1vh;
+        }
+
+
+        #conversationslist {
+            background: $darkshadow;
+            grid-area: conversationslist;
+            border-radius: 1vh 0 0 1vh;
+        }
+
+
+        #chattitle {
+            font-size: 4vh;
+            background: $darkshadow;
+            grid-area: chattitle;
+            border-radius: 0 1vh 0 0;
+            font-weight: bold;
+            border-bottom: .1vh solid $darkshadow;
+            color: white;
+            padding-left: 5%;
+            display: grid;
+            align-content: center;
+        }
+
+        #messagelist {
+            background: $green;
+            grid-area: messagelist;
+        }
+
+        #chatform {
+            color: black;
+            display: grid;
+            align-content: center;
+            padding-left: 2%;
+            grid-area: chatform;
+            border-radius: 0 0vh 1vh 0;
+            background: rgba(255,255,255,0.8);
+            border-top: .1vh solid $darkshadow;
+
+
+            #typemessage {
+                font-size: 2vh;
+                border-radius: 1vh;
+                width: 90%;
+                height: 200%;
+                padding-left: 2%;
+            }
+        }
+    }
+}

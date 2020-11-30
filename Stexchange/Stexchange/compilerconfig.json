@@ -1,10 +1,14 @@
 ﻿[
-    {
-        "outputFile": "wwwroot/css/basics.css",
-        "inputFile": "wwwroot/css/basics.scss"
-    },
-    {
-        "inputFile": "wwwroot/css/trade.scss",
-        "outputFile": "wwwroot/css/trade.css"
-    }
+  {
+    "outputFile": "wwwroot/css/basics.css",
+    "inputFile": "wwwroot/css/basics.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/trade.css",
+    "inputFile": "wwwroot/css/trade.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/chat.css",
+    "inputFile": "wwwroot/css/chat.scss"
+  }
 ]
