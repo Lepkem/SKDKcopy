@@ -45,12 +45,14 @@
 					<li class="nav-item">
 						<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Uitloggen</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Chat">Chatten</a>
-					</li>
 				}
 
 			</ul>
+			@if (Context.Request.Cookies.ContainsKey("SessionToken"))
+			{   <a href="@Url.Action("Chat", "Chat")">
+					<img src="~/img/MessagesIcon.png" />
+				</a>
+			}
 		</nav>
 	</header>
 	<main role="main" class="pb-3" id="startchange">

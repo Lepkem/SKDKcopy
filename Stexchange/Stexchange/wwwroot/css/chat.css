@@ -4,7 +4,9 @@
 }*/
 html body #chatcontainer {
   display: grid;
-  grid-template-areas: "conversationslist chattitle chattitle chattitle" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist messagelist messagelist messagelist" "conversationslist chatform chatform chatform";
+  grid-template-rows: 15% 70% 15%;
+  grid-template-columns: 25% 75%;
+  grid-template-areas: "conversationslist chattitle" "conversationslist messagelist" "conversationslist chatform";
   margin: 5%;
   margin-top: 1%;
   width: 90%;
