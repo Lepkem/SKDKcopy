@@ -6,7 +6,10 @@
     var advertisement = Model.RetrieveListing(null, int.Parse(TempData["id"].ToString()));
 }
 <link rel="stylesheet" href="~/css/DetailAdvertisement.css" />
+
 <h4>@advertisement.Title</h4>
+
+
 <div class="section">
     <div class="section-img">
         <img id="imgoutput" src="~/img/background.png" />
@@ -28,9 +31,6 @@
         <span style='font-size:30px;'>&#9734;</span>
         <p>gebaseerd op ... beoordelingen</p>
     </div>
-</div>
-
-<div class="contactbutton">
     <input type="button" value="Chat" name="chatbutton" action="#" />
 </div>
 
