@@ -44,6 +44,7 @@ namespace Stexchange.Models
             var start = DateTime.Now;
             var newOrModified = (from listing in db.Listings
                      where (blocked || listing.LastModified >= start)
+                     orderby listing.CreatedAt
                      select new ListingBuilder(listing)
                         .SetProperty("Pictures",
                             (from img in db.Images
