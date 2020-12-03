@@ -13,12 +13,11 @@ namespace Stexchange.Data
 	{
 		private IConfiguration Config { get; }
 
-		public Database(IConfiguration config) : base()
-		{
+		
+
+		public Database(DbContextOptions<Database> options, IConfiguration config) : base(options) {
 			Config = config.GetSection("DbSettings");
 		}
-
-		public Database(DbContextOptions<Database> options) : base(options) { }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{

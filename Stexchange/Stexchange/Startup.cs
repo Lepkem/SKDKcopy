@@ -28,7 +28,7 @@ namespace Stexchange
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
-			services.AddDbContext<Database>();
+			//services.AddDbContext<Database>();
 			services.AddSingleton<EmailService>();
 			services.AddDbContextFactory<Database>();
 		}

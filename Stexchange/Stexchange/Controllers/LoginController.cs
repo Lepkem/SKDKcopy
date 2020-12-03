@@ -13,14 +13,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Stexchange.Controllers
 {
 	public class LoginController : Controller
 	{
-		public LoginController(Database db, IConfiguration config, EmailService emailService)
+		public LoginController(IDbContextFactory<Database> factory, IConfiguration config, EmailService emailService)
 		{
-			Database = db;
+			Database = factory.CreateDbContext();
 			EmailService = emailService;
 			Config = config.GetSection("MailSettings");
 		}
