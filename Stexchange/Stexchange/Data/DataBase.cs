@@ -18,6 +18,8 @@ namespace Stexchange.Data
 			Config = config.GetSection("DbSettings");
 		}
 
+		public Database(DbContextOptions<Database> options) : base(options) { }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
 			options.UseMySQL(new MySqlConnectionStringBuilder()
