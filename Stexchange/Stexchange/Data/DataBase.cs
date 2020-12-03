@@ -18,6 +18,8 @@ namespace Stexchange.Data
 			Config = config.GetSection("DbSettings");
 		}
 
+		public Database(DbContextOptions<Database> options) : base(options) { }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
 			options.UseMySQL(new MySqlConnectionStringBuilder()
@@ -94,6 +96,38 @@ namespace Stexchange.Data
 				.WithMany()
 				.HasForeignKey(fl => fl.Value)
 				.HasPrincipalKey(f => f.Value);
+
+			modelBuilder.Entity<Chat>()
+				.HasAlternateKey(c => new { c.AdId, c.ResponderId });
+
+			modelBuilder.Entity<Chat>()
+				.HasOne(c => c.Listing)
+				.WithMany()
+				.HasForeignKey(c => c.AdId)
+				.HasPrincipalKey(l => l.Id);
+
+			modelBuilder.Entity<Chat>()
+				.HasOne(c => c.Responder)
+				.WithMany(u => u.ChatInbox)
+				.HasForeignKey(c => c.ResponderId)
+				.HasPrincipalKey(u => u.Id);
+
+			modelBuilder.Entity<Chat>()
+				.HasMany(c => c.Messages)
+				.WithOne()
+				.HasForeignKey(m => m.ChatId)
+				.HasForeignKey(c => c.Id);
+
+			modelBuilder.Entity<Message>(entity =>
+			{
+				entity.Property(m => m.Content).IsRequired();
+			});
+
+			modelBuilder.Entity<Message>()
+				.HasOne(m => m.Sender)
+				.WithMany()
+				.HasForeignKey(m => m.SenderId)
+				.HasPrincipalKey(u => u.Id);
 		}
 
 		public DbSet<User> Users { get; set; }
@@ -102,5 +136,7 @@ namespace Stexchange.Data
 		public DbSet<ImageData> Images { get; set; }
 		public DbSet<Filter> Filters { get; set; }
 		public DbSet<FilterListing> FilterListings { get; set; }
+		public DbSet<Chat> Chats { get; set; }
+		public DbSet<Message> Messages { get; set; }
 	}
 }
