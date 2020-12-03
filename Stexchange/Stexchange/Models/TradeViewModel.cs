@@ -15,17 +15,15 @@ namespace Stexchange.Models
     public sealed class TradeViewModel : IDisposable
     {
         private Database db;
-        private ILogger log;
         private Thread cacheWorker;
 
         private bool blocked = true;
         private ConcurrentDictionary<int, Listing> listingCache;
         private ConcurrentDictionary<int, User> userCache;
 
-        public TradeViewModel(Database db, ILogger<TradeViewModel> logger)
+        public TradeViewModel(Database db)
         {
             this.db = db;
-            log = logger;
             listingCache = new ConcurrentDictionary<int, Listing>();
             cacheWorker = new Thread(() =>
             {
@@ -41,7 +39,7 @@ namespace Stexchange.Models
         /// <param name="cache">Reference to the private field.</param>
         private void renewListingCache(ref ConcurrentDictionary<int, Listing> cache)
         {
-            var start = DateTime.Now;
+            DateTime start = DateTime.Now;
             var newOrModified = (from listing in db.Listings
                      where (blocked || listing.LastModified >= start)
                      select new ListingBuilder(listing)
@@ -61,8 +59,6 @@ namespace Stexchange.Models
                 cache.AddOrUpdate(newOrModified.Current.Id, newOrModified.Current,
                     (key, oldvalue) => newOrModified.Current);
             }
-            var elapsed = DateTime.Now - start;
-            log.LogTrace($"Finished renewing Listing cache.\nTime elapsed: {elapsed}");
         }
 
         /// <summary>
@@ -71,7 +67,6 @@ namespace Stexchange.Models
         /// <param name="cache">Reference to the private field.</param>
         private void renewUserCache(ref ConcurrentDictionary<int, User> cache)
         {
-            var start = DateTime.Now;
             var queryResult = (from user in db.Users
                     join listing in db.Listings on user.Id equals listing.UserId
                     select user).ToArray();
@@ -81,8 +76,6 @@ namespace Stexchange.Models
                 buffer.TryAdd(user.Id, user);
             });
             cache = buffer;
-            var elapsed = DateTime.Now - start;
-            log.LogTrace($"Finished renewing Listing cache.\nTime elapsed: {elapsed}");
         }
 
         /// <summary>
@@ -175,15 +168,9 @@ namespace Stexchange.Models
             {
                 await Task.Run(() =>
                 {
-                    try
-                    {
-                        renewUserCache(ref userCache);
-                        renewListingCache(ref listingCache);
-                        blocked = false;
-                    } catch (Exception e)
-                    {
-                        Console.WriteLine(e.ToString());
-                    }
+                    renewUserCache(ref userCache);
+                    renewListingCache(ref listingCache);
+                    blocked = false;
                 });
                 await Task.Delay(60000);
             } while (true);
@@ -192,6 +179,7 @@ namespace Stexchange.Models
         public void Dispose()
         {
             cacheWorker = null;
+            db.Dispose();
         }
     }
 }

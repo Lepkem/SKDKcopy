@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Stexchange.Data;
 using Stexchange.Data.Models;
@@ -12,16 +13,16 @@ namespace Stexchange.Controllers
 {
     public class TradeController : Controller
     {
-        private Database db;
+        private IDbContextFactory<Database> dbFactory;
         private ILogger<TradeViewModel> logger;
-        public TradeController(Database db, ILogger<TradeViewModel> logger)
+        public TradeController(IDbContextFactory<Database> factory, ILogger<TradeViewModel> logger)
         {
-            this.db = db;
+            dbFactory = factory;
             this.logger = logger;
         }
         public IActionResult Trade()
         {
-            return View(model: new TradeViewModel(db, logger));
+            return View(model: new TradeViewModel(dbFactory.CreateDbContext()));
         }
     }
 }
