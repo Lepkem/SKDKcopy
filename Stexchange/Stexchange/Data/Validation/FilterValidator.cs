@@ -55,7 +55,7 @@ namespace Stexchange.Data.Validation
 
     public class WithPotFilterValidator : AbstractValidator<Filter>
     {
-        private List<string> valueList = new List<string>() { $"null", "ja", "nee" };
+        private List<string> valueList = new List<string>() { $"ja", "nee" };
         public WithPotFilterValidator()
         {
             RuleFor(x => valueList.Contains(x.Value));

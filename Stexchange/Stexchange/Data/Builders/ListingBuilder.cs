@@ -13,7 +13,7 @@ namespace Stexchange.Data.Builders
 
         /// <summary>
         /// Initializes a ListingBuilder with a clean construct.
-        /// </summary>
+        /// </summary> 
         public ListingBuilder()
         {
             Reset();
