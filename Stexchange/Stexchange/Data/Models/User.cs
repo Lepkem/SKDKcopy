@@ -27,5 +27,7 @@ namespace Stexchange.Data.Models
         public UserVerification Verification { get; set; }
         [NotMapped]
         public List<Listing> Listings { get; set; }
-	}
+        [NotMapped]
+        public List<Chat> ChatInbox { get; set; }
+    }
 }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stexchange.Data;
 
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20201202180158_chat_tables")]
+    partial class chat_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace Stexchange.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("AdId", "ResponderId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("ResponderId");
 
