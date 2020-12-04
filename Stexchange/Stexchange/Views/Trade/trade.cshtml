@@ -159,11 +159,12 @@
 <div class="" id="listings">
     @foreach(Listing listing in Model.RetrieveListings(-1))
     {
-        <p>
-            <strong>Title: </strong> <code>@listing.Title</code>
-            <strong>Description: </strong> <code>@listing.Description</code>
-            <strong>Owner: </strong> <code>@listing.OwningUserName</code>
-        </p>
+    <div class="Advertisement">
+        <img class="picture" src="https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512__340.jpg" alt="Girl in a jacket">
+        <code class="title">@listing.Title</code>
+        <code class="description">@listing.Description</code>
+        <code class="owner">@listing.OwningUserName</code>
+    </div>
     }
 </div>
 
