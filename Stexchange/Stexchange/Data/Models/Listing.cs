@@ -15,20 +15,17 @@ namespace Stexchange.Data.Models
 
         [Column("title", TypeName = "varchar(80)")]
         public string Title { get; set; }
-        public static int MaxTitleSize = 50;
+        
 
         [Column("description", TypeName = "text")]
         public string Description { get; set; }
-        public static  int MaxDescriptionSize =500;
-        public static int MinDescriptionSize = 10;
+    
 
         [Column("name_nl", TypeName = "varchar(30)")]
         public string NameNl { get; set; }
-        public static int MaxNlNameLength = 50;
 
         [Column("name_lt", TypeName = "varchar(30)")]
         public string NameLatin { get; set; }
-        public static int MaxLtNameLength = 50;
 
         [Column("quantity", TypeName = "int"), Range(1, int.MaxValue)]
         public int Quantity { get; set; }
