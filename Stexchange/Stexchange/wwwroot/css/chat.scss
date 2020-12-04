@@ -8,18 +8,14 @@ $lightshadowwhite: rgba(255,255,255,0.1);
 $shadowwhite: rgba(255,255,255,0.3);
 $darkshadowwhite: rgba(255,255,255,0.8);
 
-/* *{
-    margin: 0;
-    padding: 0;
-}*/
 
 html {
-    //height: 100%;
     body {
 
         #chatcontainer {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             display: grid;
-            grid-template-rows: 15% 70% 15%;
+            grid-template-rows: 10% 80% 10%;
             grid-template-columns: 25% 75%;
             grid-template-areas: 'conversationslist chattitle''conversationslist messagelist''conversationslist chatform';
             margin: 5%;
@@ -28,51 +24,65 @@ html {
             height: 85vh;
             background: $lightgreen;
             border-radius: 1vh;
-        }
 
 
-        #conversationslist {
-            background: $darkshadow;
-            grid-area: conversationslist;
-            border-radius: 1vh 0 0 1vh;
-        }
+
+            #conversationslist {
+                display: grid;
+                grid-area: conversationslist;
+                background: $darkgreen;
+                border-radius: 1vh 0 0 1vh;
+
+                #chatinboxtitle {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 4vh;
+                    margin: 5%;
+                }
+            }
 
 
-        #chattitle {
-            font-size: 4vh;
-            background: $darkshadow;
-            grid-area: chattitle;
-            border-radius: 0 1vh 0 0;
-            font-weight: bold;
-            border-bottom: .1vh solid $darkshadow;
-            color: white;
-            padding-left: 5%;
-            display: grid;
-            align-content: center;
-        }
+            #chattitle {
+                grid-area: chattitle;
+                font-size: 4vh;
+                background: $darkshadowwhite;
+                border-radius: 0 1vh 0 0;
+                font-weight: bold;
+                border-bottom: .1vh solid $darkgreen;
+                padding-left: 5%;
+            }
 
-        #messagelist {
-            background: $green;
-            grid-area: messagelist;
-        }
+            #messagelist {
+                background: $darkshadowwhite;
+                display: grid;
+                grid-area: messagelist;
+            }
 
-        #chatform {
-            color: black;
-            display: grid;
-            align-content: center;
-            padding-left: 2%;
-            grid-area: chatform;
-            border-radius: 0 0vh 1vh 0;
-            background: rgba(255,255,255,0.8);
-            border-top: .1vh solid $darkshadow;
+            #chatform {
+                display: grid;
+                grid-area: chatform;
+                grid-template-rows: 20% 60% 20%;
+                grid-template-columns: 2% 75% 3% 15% 5%;
+                grid-template-areas: '. . . . .''. typemessage . sendmessage .''. . . . .';
+                border-radius: 0 0vh 1vh 0;
+                background: $lightgreen;
+                border-top: .1vh solid $darkgreen;
 
 
-            #typemessage {
-                font-size: 2vh;
-                border-radius: 1vh;
-                width: 90%;
-                height: 200%;
-                padding-left: 2%;
+                #typemessage {
+                    grid-area: typemessage;
+                    font-size: 2vh;
+                    border-radius: 1vh;
+                    padding: 2%;
+                }
+
+                #sendmessage {
+                    grid-area: sendmessage;
+                    border-radius: 1vh;
+                    background: $darkgreen;
+                    color: white;
+                    font-size: 2vh;
+                }
             }
         }
     }

@@ -60,7 +60,7 @@ html {
         html body header .navbar-default img {
           height: 100%;
           width: 3.5%;
-          padding-left: 85%; }
+          margin-left: 85%; }
       html body header .navbar-default.scrolled {
         padding-top: 0.7%;
         padding-left: 5%;
