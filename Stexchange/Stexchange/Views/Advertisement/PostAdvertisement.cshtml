@@ -42,18 +42,18 @@
     <p>
         <label for="light">Hoeveel licht heeft de plant nodig</label>
         <select name="light" id="light" >
-            <option value="zonlicht">Zonlicht</option>
-            <option value="halfschaduw">Halfschaduw</option>
-            <option value="schaduw">Schaduw</option>
+            <option value="light_vollezon">Volle zon</option>
+            <option value="light_halfschaduw">Halfschaduw</option>
+            <option value="light_schaduw">Schaduw</option>
         </select>
     </p>
     <p>
         <label for="water">Hoeveel vocht heeft de plant nodig</label>          
         <select name="water" id="water" >
-            <option value="wisselnat">Wisselnat</option>
-            <option value="vochtig">Vochtig</option>
-            <option value="matig_vochtig">Matig vochtig</option>
-            <option value="droog">Droog</option>
+            <option value="water_wisselnat">Wisselnat</option>
+            <option value="water_nat">Nat</option>
+            <option value="water_normaal">Normaal</option>
+            <option value="water_droog">Droog</option>
         </select>
     </p>
     <div class="accordion">Extra filters</div>
@@ -61,49 +61,50 @@
         <p>
             <label for="plant_type">Wat voor soort plant is het?</label>
             <select name="plant_type" id="plant_type" required>
-                <option value="plant">Plant</option>
-                <option value="zaad">Zaad</option>
-                <option value="stek">Stek</option>
+                <option value="plant_type_plant">Plant</option>
+                <option value="plant_type_zaad">Zaad</option>
+                <option value="plant_type_stek">Stek</option>
             </select>
         </p>
         <p>
             <label for="nutrients">Hoeveel voeding heeft de plant nodig</label>
             <select name="nutrients" id="nutrients">
-                <option value="null">Geen idee</option>
-                <option value="veel">Veel</option>
-                <option value="gemiddeld">Gemiddeld</option>
-                <option value="weinig">Weinig</option>
+                <option value="nutrients_null">Geen idee</option>
+                <option value="nutrients_veel">Veel</option>
+                <option value="nutrients_gemiddeld">Gemiddeld</option>
+                <option value="nutrients_weinig">Weinig</option>
+                <option value="nutrients_nooit">Nooit</option>
             </select>
         </p>
         <p>
             <label for="ph">Wat is de pH-waarde van de plant</label>
             <select name="ph" id="ph">
-                <option value="null">Geen idee</option>
-                <option value="zuur">Zuur</option>
-                <option value="neutraal">Neutraal</option>
-                <option value="kalkrijk">Kalkrijk</option>
+                <option value="ph_null">Geen idee</option>
+                <option value="ph_zuur">Zuur</option>
+                <option value="ph_neutraal">Neutraal</option>
+                <option value="ph_kalkrijk">Kalkrijk</option>
             </select>
         </p>
         <p>
             <label for="indigenous">De plant is inheems</label>
             <select name="indigenous" id="indigenous">
-                <option value="null">Geen idee</option>
-                <option value="inheems">Inheems</option>
-                <option value="niet_inheems">Niet inheems</option>
+                <option value="indigenous_null">Geen idee</option>
+                <option value="indigenous_inheems">Inheems</option>
+                <option value="indigenous_niet_inheems">Niet inheems</option>
             </select>
         </p>
         <p>
             <label for="with_pot">De plant is voorzien van een pot</label>
             <select name="with_pot" id="with_pot" required>
-                <option value="ja">Ja</option>
-                <option value="nee">Nee</option>
+                <option value="with_pot_ja">Ja</option>
+                <option value="with_pot_nee">Nee</option>
             </select>
         </p>
         <p>
             <label for="give_away">De plant is gratis weg te geven</label>
             <select name="give_away" id="give_away" value="nee" required>
-                <option value="ja">Ja</option>
-                <option value="nee">Nee</option>
+                <option value="give_away_ja">Ja</option>
+                <option value="give_away_nee">Nee</option>
             </select>
         </p>
     </div>

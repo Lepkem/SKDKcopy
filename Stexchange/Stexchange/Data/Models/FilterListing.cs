@@ -8,11 +8,11 @@ namespace Stexchange.Data.Models
 {
     public class FilterListing
     {
-        public FilterListing(Listing list, Filter filt)
-        {
-            Listing = list;
-            Filter = filt;
-        }
+        //public FilterListing(Listing list, Filter filt)
+        //{
+        //    Listing = list;
+        //    Filter = filt;
+        //}
         [Column("listing_id", TypeName = "bigint(20) unsigned")]
         public int ListingId { get; set; }
 

@@ -70,4 +70,13 @@ namespace Stexchange.Data.Validation
             RuleFor(x => valueList.Contains(x.Value));
         }
     }
+
+    public class PlantTypeFilterValidator : AbstractValidator<Filter>
+    {
+        private List<string> valueList = new List<string>() { $"plant", "zaad", "stek" };
+        public PlantTypeFilterValidator()
+        {
+            RuleFor(x => valueList.Contains(x.Value));
+        }
+    }
 }
