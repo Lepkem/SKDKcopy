@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20201118150147_filters.Designer.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.Designer.cs" />
+    <Compile Remove="Migrations\20201205160931_RemovedNullableNameLT.cs" />
+    <Compile Remove="Migrations\20201205160931_RemovedNullableNameLT.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,6 +74,7 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.3.0" />
     <PackageReference Include="MailKit" Version="2.9.0" />
+    <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -81,5 +84,9 @@
     <PackageReference Include="MySql.Data" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Images\" />
   </ItemGroup>
 </Project>

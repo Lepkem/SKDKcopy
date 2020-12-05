@@ -67,7 +67,6 @@ namespace Stexchange.Data
 				entity.Property(l => l.Title).IsRequired();
 				entity.Property(l => l.Description).IsRequired();
 				entity.Property(l => l.NameNl).IsRequired();
-				entity.Property(l => l.NameLatin).IsRequired();
 				entity.Property(l => l.Visible).HasDefaultValue(1);
 				entity.Property(l => l.Renewed).HasDefaultValue(0);
 			});

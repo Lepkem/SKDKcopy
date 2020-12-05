@@ -115,7 +115,6 @@ namespace Stexchange.Migrations
                         .HasColumnType("timestamp");
 
                     b.Property<string>("NameLatin")
-                        .IsRequired()
                         .HasColumnName("name_lt")
                         .HasColumnType("varchar(30)");
 
@@ -256,12 +255,6 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Chat", b =>
                 {
-                    b.HasOne("Stexchange.Data.Models.Listing", "Listing")
-                        .WithMany()
-                        .HasForeignKey("AdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Stexchange.Data.Models.User", "Responder")
                         .WithMany("ChatInbox")
                         .HasForeignKey("ResponderId")
