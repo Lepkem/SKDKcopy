@@ -10,15 +10,6 @@ namespace Stexchange.Data.Models
 {
     public class ImageData
     {
-        public ImageData(Listing list, byte[] image)
-        {
-            Listing = list;
-        }
-
-        public ImageData(byte[] image)
-        {
-            Image = image;
-        }
 
         [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
