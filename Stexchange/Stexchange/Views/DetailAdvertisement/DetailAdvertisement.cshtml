@@ -1,13 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Advertisement";
 }
-@model TradeViewModel
-@{
-    var advertisement = Model.RetrieveListing(null, int.Parse(TempData["id"].ToString()));
-}
+@model DetailAdvertisementModel
 <link rel="stylesheet" href="~/css/DetailAdvertisement.css" />
 
-<h4>@advertisement.Title</h4>
+<h4>@Model.Title</h4>
 
 
 <div class="section">
@@ -15,8 +12,8 @@
         <img id="imgoutput" src="~/img/background.png" />
     </div>
     <div class="user_information">
-        <p>gebruikersnaam: @advertisement.OwningUserName</p>
-        <p>afstand: @advertisement.Distance</p>
+        <p>gebruikersnaam: @Model.User_id</p>
+        <p>afstand: 41 km </p>
         <p>gemiddelde beoordeling op communicatie</p>
         <span style='font-size:30px;'>&#9734;</span>
         <span style='font-size:30px;'>&#9734;</span>
@@ -41,14 +38,14 @@
 
 <div class="plant_information">
     <div class="basic_information infoblock">
-        <p>nederlandse naam: @advertisement.NameNl</p>
-        <p>latijnse naam: @advertisement.NameLatin</p>
-        <p>hoeveelheid: @advertisement.Quantity</p>
-        <p>beschrijving: @advertisement.Description</p>
-        <p>geplaatst op @advertisement.CreatedAt</p>
+        <p>nederlandse naam: @Model.Name_NL</p>
+        <p>latijnse naam: @Model.Name_LT</p>
+        <p>hoeveelheid: @Model.Quantity</p>
+        <p>beschrijving: @Model.Description</p>
+        <p>geplaatst op @Model.Created_at</p>
     </div>
     <div class="filters_information infoblock">
-        <p>Standplaats: </p>
+        <p>Standplaats: @Model.Filterlist.First()</p>
         <p>Vocht: </p>
         <p>Plantsoort: </p>
         <p>Voeding: </p>

@@ -42,7 +42,8 @@ namespace Stexchange.Data
 			modelBuilder.Entity<UserVerification>()
 				.HasOne(uv => uv.User)
 				.WithOne(u => u.Verification)
-				.HasForeignKey<UserVerification>(uv => uv.Id);
+				.HasForeignKey<UserVerification>(uv => uv.Id)
+				.HasPrincipalKey<User>(u => u.Id);
 
 			modelBuilder.Entity<User>(entity =>
 			{
@@ -55,11 +56,6 @@ namespace Stexchange.Data
 				entity.Property(u => u.Password).IsRequired();
 				entity.Property(u => u.IsVerified).HasDefaultValue(0);
 			});
-
-			modelBuilder.Entity<User>()
-				.HasOne(u => u.Verification)
-				.WithOne(uv => uv.User)
-				.HasForeignKey<UserVerification>(uv => uv.Id);
 
 			modelBuilder.Entity<Listing>(entity =>
             {
@@ -74,12 +70,14 @@ namespace Stexchange.Data
 			modelBuilder.Entity<Listing>()
 				.HasOne(l => l.Owner)
 				.WithMany(u => u.Listings)
-				.HasForeignKey(l => l.UserId);
+				.HasForeignKey(l => l.UserId)
+				.HasPrincipalKey(u => u.Id);
 
 			modelBuilder.Entity<ImageData>()
 				.HasOne(id => id.Listing)
 				.WithMany(l => l.Pictures)
-				.HasForeignKey(id => id.ListingId);
+				.HasForeignKey(id => id.ListingId)
+				.HasPrincipalKey(l => l.Id);
 
 			modelBuilder.Entity<FilterListing>()
 				.HasKey(fl => new { fl.ListingId, fl.Value });
@@ -87,7 +85,8 @@ namespace Stexchange.Data
 			modelBuilder.Entity<FilterListing>()
 				.HasOne(fl => fl.Listing)
 				.WithMany()
-				.HasForeignKey(fl => fl.ListingId);
+				.HasForeignKey(fl => fl.ListingId)
+				.HasPrincipalKey(l => l.Id);
 
 			modelBuilder.Entity<FilterListing>()
 				.HasOne(fl => fl.Filter)
