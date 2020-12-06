@@ -9,8 +9,8 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201119142222_last_modified")]
-    partial class last_modified
+    [Migration("20201206120248_fixed_schema_issues")]
+    partial class fixed_schema_issues
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,30 @@ namespace Stexchange.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Stexchange.Data.Models.Chat", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.Property<long>("AdId")
+                        .HasColumnName("ad_id")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.Property<long>("ResponderId")
+                        .HasColumnName("responder_id")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("AdId", "ResponderId");
+
+                    b.HasIndex("ResponderId");
+
+                    b.ToTable("Chats");
+                });
 
             modelBuilder.Entity("Stexchange.Data.Models.Filter", b =>
                 {
@@ -49,10 +73,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("serial");
+                        .HasColumnType("bigint(20) unsigned");
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -72,10 +96,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("serial");
+                        .HasColumnType("bigint(20) unsigned");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -93,23 +117,22 @@ namespace Stexchange.Migrations
                         .HasColumnType("timestamp");
 
                     b.Property<string>("NameLatin")
-                        .IsRequired()
                         .HasColumnName("name_lt")
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("NameNl")
                         .IsRequired()
                         .HasColumnName("name_nl")
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("Quantity")
                         .HasColumnName("quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int unsigned");
 
                     b.Property<bool>("Renewed")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("renewed")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasDefaultValue(false);
 
                     b.Property<string>("Title")
@@ -124,7 +147,7 @@ namespace Stexchange.Migrations
                     b.Property<bool>("Visible")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("visible")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasDefaultValue(true);
 
                     b.HasKey("Id");
@@ -134,12 +157,44 @@ namespace Stexchange.Migrations
                     b.ToTable("Listings");
                 });
 
-            modelBuilder.Entity("Stexchange.Data.Models.User", b =>
+            modelBuilder.Entity("Stexchange.Data.Models.Message", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("serial");
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.Property<long>("ChatId")
+                        .HasColumnName("chat_id")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnName("content")
+                        .HasColumnType("varchar(1024)");
+
+                    b.Property<long>("SenderId")
+                        .HasColumnName("sender")
+                        .HasColumnType("bigint(20) unsigned");
+
+                    b.Property<DateTime>("Timestamp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("Stexchange.Data.Models.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("bigint(20) unsigned");
 
                     b.Property<DateTime>("Created_At")
                         .ValueGeneratedOnAdd()
@@ -187,6 +242,11 @@ namespace Stexchange.Migrations
                         .HasColumnName("user_id")
                         .HasColumnType("bigint(20) unsigned");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp");
+
                     b.Property<byte[]>("Guid")
                         .IsRequired()
                         .HasColumnName("verification_code")
@@ -198,6 +258,21 @@ namespace Stexchange.Migrations
                         .IsUnique();
 
                     b.ToTable("UserVerifications");
+                });
+
+            modelBuilder.Entity("Stexchange.Data.Models.Chat", b =>
+                {
+                    b.HasOne("Stexchange.Data.Models.Listing", "Listing")
+                        .WithMany()
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Stexchange.Data.Models.User", "Responder")
+                        .WithMany("ChatInbox")
+                        .HasForeignKey("ResponderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stexchange.Data.Models.FilterListing", b =>
@@ -229,6 +304,21 @@ namespace Stexchange.Migrations
                     b.HasOne("Stexchange.Data.Models.User", "Owner")
                         .WithMany("Listings")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Stexchange.Data.Models.Message", b =>
+                {
+                    b.HasOne("Stexchange.Data.Models.Chat", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Stexchange.Data.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
