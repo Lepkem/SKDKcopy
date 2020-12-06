@@ -45,7 +45,7 @@ namespace Stexchange.Migrations
                 {
                     b.Property<string>("Value")
                         .HasColumnName("value")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("Value");
 
@@ -60,7 +60,7 @@ namespace Stexchange.Migrations
 
                     b.Property<string>("Value")
                         .HasColumnName("filter_value")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("ListingId", "Value");
 
@@ -116,21 +116,21 @@ namespace Stexchange.Migrations
 
                     b.Property<string>("NameLatin")
                         .HasColumnName("name_lt")
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("NameNl")
                         .IsRequired()
                         .HasColumnName("name_nl")
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("Quantity")
                         .HasColumnName("quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int unsigned");
 
                     b.Property<bool>("Renewed")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("renewed")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasDefaultValue(false);
 
                     b.Property<string>("Title")
@@ -145,7 +145,7 @@ namespace Stexchange.Migrations
                     b.Property<bool>("Visible")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("visible")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasDefaultValue(true);
 
                     b.HasKey("Id");
@@ -236,9 +236,14 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.UserVerification", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp");
 
                     b.Property<byte[]>("Guid")
                         .IsRequired()
@@ -255,6 +260,12 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Chat", b =>
                 {
+                    b.HasOne("Stexchange.Data.Models.Listing", "Listing")
+                        .WithMany()
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Stexchange.Data.Models.User", "Responder")
                         .WithMany("ChatInbox")
                         .HasForeignKey("ResponderId")

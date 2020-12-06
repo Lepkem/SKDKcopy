@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\NewFolder\**" />
-    <Content Remove="Views\NewFolder\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
-    <None Remove="Views\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Migrations\20201116165817_listing_table.cs" />
     <Compile Remove="Migrations\20201116165817_listing_table.Designer.cs" />
     <Compile Remove="Migrations\20201118123233_refactored_u_uv.cs" />
@@ -36,8 +29,8 @@
     <Compile Remove="Migrations\20201118150147_filters.Designer.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.Designer.cs" />
-    <Compile Remove="Migrations\20201205160931_RemovedNullableNameLT.cs" />
-    <Compile Remove="Migrations\20201205160931_RemovedNullableNameLT.Designer.cs" />
+    <Compile Remove="Migrations\20201206114741_fix_foreign_keys.cs" />
+    <Compile Remove="Migrations\20201206114741_fix_foreign_keys.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,13 +61,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="compilerconfig.json" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\postadvertisement.min.css" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.3.0" />
     <PackageReference Include="MailKit" Version="2.9.0" />
-    <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -87,6 +78,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Images\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 </Project>

@@ -9,13 +9,7 @@ namespace Stexchange.Data.Models
 {
     public class Filter
     {
-        //public Filter(string val)
-        //{
-        //    Value = val;
-        //}
-
-
-        [Column("value", TypeName = "varchar(20)"), Key]
+        [Column("value", TypeName = "varchar(30)"), Key]
         public string Value { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Stexchange.Data.Validation
             RuleFor(x => x.Title.Trim()).Matches(@"[\w]+");
 
             RuleFor(x => x.Quantity).NotNull().WithErrorCode(StandardMessages.RequiredField("hoeveelheid"));
-            RuleFor(x => x.Quantity).GreaterThan(0);
+            //RuleFor(x => x.Quantity).GreaterThan(0);
 
 
             RuleFor(x => x.Description.Trim()).NotEmpty().WithErrorCode(StandardMessages.RequiredField("beschrijving")); 
