@@ -46,7 +46,7 @@ namespace Stexchange.Controllers{    public class AdvertisementController : Co
                         mandatoryFilters.Add(new Filter{ Value = plant_type });
 
                         // non-required properties
-                        List<Filter> validatedFilters = FilterListValidator(mandatoryFilters, ph, water, indigenous, light, nutrients);                        if (!IsNullOrEmpty(name_lt)) listingBuilder.SetProperty("NameLt", StandardMessages.CapitalizeFirst(name_lt).Trim());                        finishedListing = listingBuilder.Complete();                        List<FilterListing> filterListings = MakeFilterListing(validatedFilters, finishedListing);
+                        List<Filter> validatedFilters = FilterListValidator(mandatoryFilters, ph, water, indigenous, light, nutrients);                        if (!IsNullOrEmpty(name_lt)) listingBuilder.SetProperty("NameLatin", StandardMessages.CapitalizeFirst(name_lt).Trim());                        finishedListing = listingBuilder.Complete();                        List<FilterListing> filterListings = MakeFilterListing(validatedFilters, finishedListing);
 
                         // ensures that the listing is inserted before the tables who need this FK
                         await _database.AddAsync(finishedListing);
