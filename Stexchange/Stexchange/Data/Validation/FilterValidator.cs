@@ -37,7 +37,7 @@ namespace Stexchange.Data.Validation
 
     public class LightFilterValidator : AbstractValidator<Filter>
     {
-        private List<string> valueList = new List<string>() { "light_vollezon", "light_halfschaduw", "light_schaduw" };
+        private List<string> valueList = new List<string>() { "light_volle_zon", "light_halfschaduw", "light_schaduw" };
         public LightFilterValidator()
         {
             RuleFor(x => valueList.Contains(x.Value));

@@ -12,8 +12,8 @@ namespace Stexchange.Controllers{    public class AdvertisementController : Co
                 {
                     await file.CopyToAsync(memoryStream);
 
-                    // Upload the file if less than 2 MB
-                    if (memoryStream.Length < 2097152)
+                    // Upload the file if less than 5 MB
+                    if (memoryStream.Length < 4997152)
                     {
                         var imagefile = new ImageData()
                         {
