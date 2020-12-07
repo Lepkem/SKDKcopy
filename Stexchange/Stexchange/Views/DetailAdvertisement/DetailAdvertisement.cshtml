@@ -9,7 +9,7 @@
 
 <div class="section">
     <div class="section-img">
-        <img id="imgoutput" src="~/img/background.png" />
+        <img id="imgoutput" src="@Model.Imagelist.First()" />
     </div>
     <div class="user_information">
         <p>gebruikersnaam: @Model.User_id</p>
@@ -45,14 +45,14 @@
         <p>geplaatst op @Model.Created_at</p>
     </div>
     <div class="filters_information infoblock">
-        <p>Standplaats: @Model.Filterlist.First()</p>
-        <p>Vocht: </p>
-        <p>Plantsoort: </p>
-        <p>Voeding: </p>
-        <p>pH-waarde: </p>
-        <p>Inheems: </p>
-        <p>Voorzien van pot: </p>
-        <p>Gratis: </p>
+        <p>Standplaats: @Model.Filterlist["light"]</p>
+        <p>Vocht: @Model.Filterlist["water"]</p>
+        <p>Plantsoort: @Model.Filterlist["planttype"]</p>
+        <p>Voeding: @Model.Filterlist["nutrients"]</p>
+        <p>pH-waarde: @Model.Filterlist["ph"]</p>
+        <p>Inheems: @Model.Filterlist["indigenous"]</p>
+        <p>Voorzien van pot: @Model.Filterlist["withpot"]</p>
+        <p>Gratis: @Model.Filterlist["giveaway"]</p>
     </div>
 </div>
 

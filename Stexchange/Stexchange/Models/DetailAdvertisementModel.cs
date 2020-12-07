@@ -1,6 +1,7 @@
 ﻿using Stexchange.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace Stexchange.Models
         public bool Visible { get; set; }
         public bool Renewed { get; set; }
         public DateTime Last_modified { get; set; }
-        public List<FilterListing> Filterlist { get; set; }
-        public List<ImageData> Imagelist { get; set; }
+        public Dictionary<string, string> Filterlist { get; set; }
+        public List<string> Imagelist { get; set; }
     }
 }

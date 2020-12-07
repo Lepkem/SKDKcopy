@@ -9,7 +9,7 @@ namespace Stexchange.Data.Models
 {
     public class User
     {
-        [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id", TypeName = "bigint(20) unsigned"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [EmailAddress, Column("email", TypeName = "varchar(254)")]
         public string Email { get; set; }
@@ -27,5 +27,7 @@ namespace Stexchange.Data.Models
         public UserVerification Verification { get; set; }
         [NotMapped]
         public List<Listing> Listings { get; set; }
-	}
+        [NotMapped]
+        public List<Chat> ChatInbox { get; set; }
+    }
 }
