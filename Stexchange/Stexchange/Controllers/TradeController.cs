@@ -24,7 +24,7 @@ namespace Stexchange.Controllers
             return DateTime.Now - _cacheBirth;
         };
         private static bool _readable = false;
-        private static ConcurrentDictionary<int, Listing> _listingCache;
+        private static ConcurrentDictionary<int, Listing> _listingCache = new ConcurrentDictionary<int, Listing>();
         private static ConcurrentDictionary<int, User> _userCache;
         public TradeController(Database db)
         {
@@ -74,12 +74,12 @@ namespace Stexchange.Controllers
         private void RenewListingCache(ref ConcurrentDictionary<int, Listing> cache)
         {
             var newOrModified = (from listing in _db.Listings
-                                 where (_blocked || listing.LastModified >= _cacheBirth)
+                                 where (!_readable || listing.LastModified >= _cacheBirth)
                                  select new ListingBuilder(listing)
-                                    .SetProperty("Pictures",
+                                    /*.SetProperty("Pictures",
                                         (from img in _db.Images
                                          where img.ListingId == listing.Id
-                                         select img).ToList())
+                                         select img).ToList())*/
                                     .SetProperty("Categories",
                                         (from filter in _db.FilterListings
                                          where filter.ListingId == listing.Id
