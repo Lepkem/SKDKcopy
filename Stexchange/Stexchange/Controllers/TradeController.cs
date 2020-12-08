@@ -84,7 +84,6 @@ namespace Stexchange.Controllers
                                         (from filter in _db.FilterListings
                                          where filter.ListingId == listing.Id
                                          select filter.Value).ToList())
-                                    .SetProperty("Owner", _userCache[listing.UserId])
                                     .Complete()
                         ).GetEnumerator();
             while (newOrModified.MoveNext())
@@ -92,6 +91,7 @@ namespace Stexchange.Controllers
                 cache.AddOrUpdate(newOrModified.Current.Id, newOrModified.Current,
                     (key, oldvalue) => newOrModified.Current);
             }
+            newOrModified.Dispose();
         }
 
         /// <summary>
