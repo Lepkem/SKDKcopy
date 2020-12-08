@@ -25,6 +25,8 @@ namespace Stexchange.Data.Validation
             RuleFor(x => x.Quantity).NotNull().WithErrorCode(StandardMessages.RequiredField("hoeveelheid"));
             //RuleFor(x => x.Quantity).GreaterThan(0);
 
+            RuleFor(x => x.UserId).NotNull();
+            RuleFor(x => x.UserId).NotEqual(-1).WithErrorCode(StandardMessages.SomethingWW("user id"));
 
             RuleFor(x => x.Description.Trim()).NotEmpty().WithErrorCode(StandardMessages.RequiredField("beschrijving")); 
             RuleFor(x => x.Description.Trim().Length).LessThanOrEqualTo(MaxDescriptionSize).WithErrorCode(StandardMessages.AmountOfCharacters());
