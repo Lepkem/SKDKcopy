@@ -107,3 +107,34 @@ html {
         float: left;
         color: #015e54;
         background: #4ecd92; }
+    html body #listings {
+      float: left;
+      width: 75%; }
+      html body #listings .Advertisement {
+        float: left;
+        width: 30%;
+        margin-right: 3%;
+        margin-bottom: 3%;
+        background-color: rgba(0, 0, 0, 0.8); }
+        html body #listings .Advertisement .picture {
+          width: 96%;
+          height: calc(30vh);
+          object-fit: cover;
+          margin-left: 2%;
+          margin-top: 2%; }
+        html body #listings .Advertisement .title {
+          float: left;
+          line-height: 2vh;
+          text-transform: uppercase;
+          margin-left: 2%;
+          width: 80%;
+          color: #4ecd92; }
+        html body #listings .Advertisement .description {
+          float: left;
+          margin-left: 2%;
+          width: 80%;
+          color: white; }
+        html body #listings .Advertisement .owner {
+          float: right;
+          margin-right: 2%;
+          color: #4ecd92; }
