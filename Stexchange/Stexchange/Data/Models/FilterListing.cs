@@ -11,7 +11,7 @@ namespace Stexchange.Data.Models
         [Column("listing_id", TypeName = "bigint(20) unsigned")]
         public int ListingId { get; set; }
 
-        [Column("filter_value", TypeName = "varchar(20)")]
+        [Column("filter_value", TypeName = "varchar(30)")]
         public string Value { get; set; }
 
         public Listing Listing { get; set; }
