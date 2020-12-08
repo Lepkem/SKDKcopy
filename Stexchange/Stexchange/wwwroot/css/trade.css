@@ -49,20 +49,63 @@ html {
         display: block; }
       html body ul .span, html body #filter_list .span {
         vertical-align: middle; }
+    html body #search {
+      float: left;
+      width: 75%; }
+    html body #listings {
+      width: 75%;
+      float: left; }
+      html body #listings .advertisement {
+        width: 25%;
+        margin-left: 2%;
+        float: left;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 0.2vh;
+        line-height: 1vh;
+        margin-bottom: 3vh; }
+        html body #listings .advertisement .picture {
+          display: block;
+          float: left;
+          width: 96%;
+          padding: 2%;
+          height: calc(20vh);
+          object-fit: cover;
+          margin-left: auto;
+          margin-right: auto;
+          border-radius: 1vh; }
+        html body #listings .advertisement .title {
+          padding: 2%;
+          width: 98%;
+          float: left;
+          color: #4ecd92;
+          text-transform: uppercase; }
+        html body #listings .advertisement .description {
+          padding: 2%;
+          width: 98%;
+          float: left;
+          color: white;
+          text-transform: uppercase;
+          font-size: 80%; }
+        html body #listings .advertisement .owner {
+          padding: 2%;
+          width: 98%;
+          float: right;
+          color: #4ecd92;
+          text-transform: uppercase;
+          font-size: 60%;
+          text-align: right; }
     html body #filter_list {
       margin: 0px;
       padding: 0px; }
     html body #forms {
       background-color: #e8e8e8;
       color: #4ecd92;
-      padding-left: 3vh;
+      padding-left: 3%;
+      padding-right: 3%;
       width: 15%;
       height: 100%;
-      /*position: fixed;*/
       border-right: 0.3vh solid rgba(0, 0, 0, 0.1);
       float: left;
-      margin-right: 8px;
-      padding-right: 16px;
       font-size: 1.5vh; }
       html body #forms li {
         border-top: 0.1vh solid #4ecd92; }
@@ -107,3 +150,11 @@ html {
         float: left;
         color: #015e54;
         background: #4ecd92; }
+      html body #forms .Advertisement {
+        width: 30%;
+        float: left; }
+      html body #forms img.picture {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 10%;
+        border-radius: 10px; }
