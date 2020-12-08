@@ -8,7 +8,7 @@ namespace Stexchange.Data.Models
 {
     public class Message
     {
-        [Column("id", TypeName = "bigint(20) unsigned"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column("chat_id", TypeName = "bigint(20) unsigned")]

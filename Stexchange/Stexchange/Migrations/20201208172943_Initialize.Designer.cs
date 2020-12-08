@@ -9,7 +9,7 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201206170852_Initialize")]
+    [Migration("20201208172943_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

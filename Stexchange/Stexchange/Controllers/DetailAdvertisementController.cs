@@ -20,7 +20,7 @@ namespace Stexchange.Controllers
         {
             List<string> filteroptions = new List<string>{ "light_", "water_", "plant_type_", "nutrients_", "ph_", "indigenous_", "with_pot_", "give_away_"};
             
-            int testid = 11;
+            int testid = 2;
 
             Listing advertisement = (from ad in Database.Listings
                                  where ad.Id == testid
