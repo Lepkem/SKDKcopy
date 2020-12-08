@@ -4,11 +4,7 @@ using Stexchange.Data.Models;
 using Stexchange.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-
-
 
 namespace Stexchange.Controllers
 {
@@ -24,11 +20,15 @@ namespace Stexchange.Controllers
         {
             List<string> filteroptions = new List<string>{ "light_", "water_", "plant_type_", "nutrients_", "ph_", "indigenous_", "with_pot_", "give_away_"};
             
-            int testid = 6;
+            int testid = 11;
 
             Listing advertisement = (from ad in Database.Listings
                                  where ad.Id == testid
                                  select ad).FirstOrDefault();
+
+            User advertisementOwner = (from u in Database.Users
+                                         where u.Id == advertisement.UserId
+                                         select u).FirstOrDefault();
 
             List<string> advertisementFilters = (from filters in Database.FilterListings
                                         where filters.ListingId == advertisement.Id
@@ -38,18 +38,20 @@ namespace Stexchange.Controllers
                                        where images.ListingId == advertisement.Id
                                        select images.Image).ToList();
 
-            var test = ByteArrayToImage(advertisementImages);
+            var imageList = ByteArrayToImage(advertisementImages);
 
             Dictionary<string, string> Filters = new Dictionary<string, string>();
 
-            // loops through advertisementfilters and compares each filter to each filteroptions
+            // Loops through advertisementfilters and compares each filter to each filteroptions
             for (int i = 0; i < filteroptions.Count; i++)
             {
                 for(int j = 0; j < filteroptions.Count; j++)
                 {
                     if (filteroptions[j].Substring(0, 2) == advertisementFilters[i].Substring(0, 2))
                     {
-                        var filterValue = advertisementFilters[i].Replace(filteroptions[j], "");
+                        // Replaces filteroption name and underscores in filter value with empty strings or white spaces
+                        var filterValue = advertisementFilters[i].Replace(filteroptions[j], "").Replace("_", " ");
+                        // Replaces all underscores in filteroption names with empty strings
                         var filterKey = filteroptions[j].Replace("_", "");
                         Filters.Add(filterKey, filterValue);
                     }
@@ -65,25 +67,25 @@ namespace Stexchange.Controllers
                 Name_LT = advertisement.NameLatin,
                 Quantity = advertisement.Quantity,
                 User_id = advertisement.UserId,
+                Username = advertisementOwner.Username,
                 Created_at = advertisement.CreatedAt,
                 Visible = advertisement.Visible,
                 Renewed = advertisement.Renewed,
                 Last_modified = advertisement.LastModified,
                 Filterlist = Filters,
-                Imagelist = test
+                Imagelist = imageList
             };
             return View(advertisementList);
         }
-
-        
         public List<string> ByteArrayToImage(List<byte[]> images)
         {
             List<string> imageslist = new List<string>();
             foreach (byte[] image in images)
             {
-                //Convert byte arry to base64string   
-                string imreBase64Data = Convert.ToBase64String(image);
-                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                // Convert byte arry to base64string   
+                string base64string = Convert.ToBase64String(image);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", base64string);
+
                 imageslist.Add(imgDataURL);
             }
             return imageslist;

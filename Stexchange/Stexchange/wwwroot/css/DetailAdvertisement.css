@@ -77,7 +77,8 @@
       width: 80%;
       margin-bottom: 3%; }
     body main p {
-      font-size: 2vh; }
+      font-size: 2vh;
+      font-weight: bold; }
     body main .user_information {
       position: relative;
       background-color: #015e54;

@@ -6,13 +6,15 @@
 
 <h4>@Model.Title</h4>
 
-
 <div class="section">
     <div class="section-img">
-        <img id="imgoutput" src="@Model.Imagelist.First()" />
+        <!--@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Imagelist))-->
+        <a onclick="imageslider()">
+            <img id="imgoutput" src="@Model.Imagelist.First()" />
+        </a>
     </div>
     <div class="user_information">
-        <p>gebruikersnaam: @Model.User_id</p>
+        <p>gebruikersnaam: @Model.Username</p>
         <p>afstand: 41 km </p>
         <p>gemiddelde beoordeling op communicatie</p>
         <span style='font-size:30px;'>&#9734;</span>
@@ -55,5 +57,9 @@
         <p>Gratis: @Model.Filterlist["giveaway"]</p>
     </div>
 </div>
+
+<script type="text/javascript" asp-append-version="true">
+    var imgList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Imagelist));
+</script>
 
 <script type="text/javascript" src="~/js/DetailAdvertisement.js" asp-append-version="true"></script>

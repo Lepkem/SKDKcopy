@@ -16,6 +16,7 @@ namespace Stexchange.Models
         public string Name_LT { get; set; }
         public uint Quantity { get; set; }
         public int User_id { get; set; }
+        public string Username { get; set; }
         public DateTime Created_at { get; set; }
         public bool Visible { get; set; }
         public bool Renewed { get; set; }

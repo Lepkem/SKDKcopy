@@ -21,3 +21,11 @@ function switchtab(infosection, tabname) {
     tabs[0].style.backgroundColor = "#015e54";
     tabs[0].style.color = "white";
 }
+
+var imgcount = 1;
+function imageslider() {
+    var image = document.getElementById("imgoutput");
+    image.src = imgList[imgcount % imgList.length];
+    imgcount++;
+}
+
