@@ -9,8 +9,8 @@ using Stexchange.Data;
 namespace Stexchange.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20201206120248_fixed_schema_issues")]
-    partial class fixed_schema_issues
+    [Migration("20201206170852_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,10 +21,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Chat", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<long>("AdId")
                         .HasColumnName("ad_id")
@@ -47,7 +47,7 @@ namespace Stexchange.Migrations
                 {
                     b.Property<string>("Value")
                         .HasColumnName("value")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("Value");
 
@@ -62,7 +62,7 @@ namespace Stexchange.Migrations
 
                     b.Property<string>("Value")
                         .HasColumnName("filter_value")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(30)");
 
                     b.HasKey("ListingId", "Value");
 
@@ -73,10 +73,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.ImageData", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -96,10 +96,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Listing", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -159,10 +159,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.Message", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<long>("ChatId")
                         .HasColumnName("chat_id")
@@ -191,10 +191,10 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<DateTime>("Created_At")
                         .ValueGeneratedOnAdd()
@@ -238,9 +238,9 @@ namespace Stexchange.Migrations
 
             modelBuilder.Entity("Stexchange.Data.Models.UserVerification", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint(20) unsigned");
+                        .HasColumnType("serial");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAddOrUpdate()

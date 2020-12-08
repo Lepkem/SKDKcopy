@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Stexchange.Data.Models
 {
@@ -11,15 +9,17 @@ namespace Stexchange.Data.Models
     {
         [NotMapped]
         private double distance = -1;
-
-        [Column("id", TypeName = "bigint(20) unsigned"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
+        [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column("title", TypeName = "varchar(80)")]
         public string Title { get; set; }
+        
 
         [Column("description", TypeName = "text")]
         public string Description { get; set; }
+    
 
         [Column("name_nl", TypeName = "varchar(50)")]
         public string NameNl { get; set; }

@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace Stexchange.Migrations
 {
-    public partial class fixed_schema_issues : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Stexchange.Migrations
                 name: "Filters",
                 columns: table => new
                 {
-                    value = table.Column<string>(type: "varchar(20)", nullable: false)
+                    value = table.Column<string>(type: "varchar(30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,7 +23,8 @@ namespace Stexchange.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     email = table.Column<string>(type: "varchar(254)", nullable: false),
                     username = table.Column<string>(type: "varchar(15)", nullable: false),
                     postal_code = table.Column<string>(type: "char(6)", nullable: false),
@@ -43,7 +44,8 @@ namespace Stexchange.Migrations
                 name: "Listings",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     title = table.Column<string>(type: "varchar(80)", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     name_nl = table.Column<string>(type: "varchar(50)", nullable: false),
@@ -72,7 +74,7 @@ namespace Stexchange.Migrations
                 name: "UserVerifications",
                 columns: table => new
                 {
-                    user_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    user_id = table.Column<int>(type: "serial", nullable: false),
                     verification_code = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.ComputedColumn)
@@ -92,7 +94,8 @@ namespace Stexchange.Migrations
                 name: "Chats",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ad_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
                     responder_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false)
                 },
@@ -119,7 +122,7 @@ namespace Stexchange.Migrations
                 columns: table => new
                 {
                     listing_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
-                    filter_value = table.Column<string>(type: "varchar(20)", nullable: false)
+                    filter_value = table.Column<string>(type: "varchar(30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,7 +145,8 @@ namespace Stexchange.Migrations
                 name: "Images",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     listing_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
                     image = table.Column<byte[]>(type: "LONGBLOB", nullable: false)
                 },
@@ -161,7 +165,8 @@ namespace Stexchange.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
+                    id = table.Column<int>(type: "serial", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     chat_id = table.Column<long>(type: "bigint(20) unsigned", nullable: false),
                     content = table.Column<string>(type: "varchar(1024)", nullable: false),
                     sender = table.Column<long>(type: "bigint(20) unsigned", nullable: false),

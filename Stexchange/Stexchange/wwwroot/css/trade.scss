@@ -80,6 +80,65 @@ html {
             }
         }
 
+        #search {
+            float: left;
+            width: 75%;
+        }
+
+        #listings {
+            width: 75%;
+            float: left;
+
+            .advertisement {
+                width: 25%;
+                margin-left: 2%;
+                float: left;
+                background-color: $darkshadow;
+                border-radius: 0.2vh;
+                line-height: 1vh;
+                margin-bottom: 3vh;
+
+                .picture {
+                    display: block;
+                    float: left;
+                    width: 96%;
+                    padding: 2%;
+                    height: calc(20vh);
+                    object-fit: cover;
+                    margin-left: auto;
+                    margin-right: auto;
+                    border-radius: 1vh;
+                }
+
+                .title {
+                    padding: 2%;
+                    width: 98%;
+                    float: left;
+                    color: $green;
+                    text-transform: uppercase;
+                }
+
+                .description {
+                    padding: 2%;
+                    width: 98%;
+                    float: left;
+                    color: white;
+                    text-transform: uppercase;
+                    font-size: 80%;
+                }
+
+                .owner {
+                    padding: 2%;
+                    width: 98%;
+                    float: right;
+                    color: $green;
+                    text-transform: uppercase;
+                    font-size: 60%;
+                    text-align: right;
+                }
+            }
+        }
+
         #filter_list {
             margin: 0px;
             padding: 0px;
@@ -88,14 +147,12 @@ html {
         #forms {
             background-color: #e8e8e8;
             color: $green;
-            padding-left: 3vh;
+            padding-left: 3%;
+            padding-right: 3%;
             width: 15%;
             height: 100%;
-            /*position: fixed;*/
             border-right: 0.3vh solid $lightshadow;
             float: left;
-            margin-right: 8px;
-            padding-right: 16px;
             font-size: 1.5vh;
 
             li {
@@ -150,11 +207,22 @@ html {
 
             input[type=range] {
                 width: 100%;
-                float:left;
+                float: left;
                 color: $darkgreen;
                 background: $green;
             }
 
+            .Advertisement {
+                width: 30%;
+                float: left;
+            }
+
+            img.picture {
+                width: 80%;
+                margin-left: 10%;
+                margin-top: 10%;
+                border-radius: 10px;
+            }
         }
     }
 }
