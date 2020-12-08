@@ -41,9 +41,6 @@ namespace Stexchange.Data.Models
         [NotMapped]
         public string OwningUserName { get; set; }
 
-        [NotMapped]
-        public List<string> Categories { get; set; }
-
         [Column("created_at", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreatedAt { get; set; }
 

@@ -80,7 +80,7 @@ namespace Stexchange.Controllers
                                         (from img in _db.Images
                                          where img.ListingId == listing.Id
                                          select img).ToList())*/
-                                    .SetProperty("Categories",
+                                    .SetProperty("Filters",
                                         (from filter in _db.FilterListings
                                          where filter.ListingId == listing.Id
                                          select filter.Value).ToList())
