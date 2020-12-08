@@ -197,7 +197,6 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{new_Use
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.ToString());
 				ViewBag.Error = "Error: " + ex.ToString();
 			}
 			return View("Login");
