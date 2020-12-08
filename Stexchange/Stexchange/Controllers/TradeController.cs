@@ -40,13 +40,13 @@ namespace Stexchange.Controllers
                 _blocked = false;
             }
         }
-        public IActionResult Trade(long token)
+        public IActionResult Trade()
         {
             BlockedPoller(); //Wait for our turn to read the resource
 
             //Shallow copy, this was accounted for in the design of this method.
             var listings = _listingCache.Values.ToList();
-            listings.ForEach(listing => PrepareListing(token, ref listing));
+            listings.ForEach(listing => PrepareListing(ref listing));
             var tradeModel = new TradeViewModel(listings);
 
             //TODO: move releasing the resource to this class' Dispose method
@@ -54,12 +54,12 @@ namespace Stexchange.Controllers
             return View(model: tradeModel);
         }
 
-        public IActionResult Detail(long token, int listingId)
+        public IActionResult Detail(int listingId)
         {
             BlockedPoller(); //Wait for our turn to read the resource
 
             var listing = _listingCache[listingId];
-            PrepareListing(token, ref listing);
+            PrepareListing(ref listing);
 
             //TODO: move releasing the resource to this class' Dispose method
             _blocked = false; //Release the resource
@@ -135,16 +135,24 @@ namespace Stexchange.Controllers
         /// </summary>
         /// <param name="token">The user whose data to use, if logged in.</param>
         /// <param name="listing">The given listing</param>
-        private void PrepareListing(long? token, ref Listing listing)
+        private void PrepareListing(ref Listing listing)
         {
             listing.Owner = _userCache[listing.UserId];
-            if (token is object && ServerController.GetSessionData((long)token, out Tuple<int, string> sessionData))
+            long token;
+            try
             {
-                listing.Distance = calculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
-            }
-            else
+                Request.Cookies.TryGetValue("SessionToken", out string cookieVal);
+                token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session cookie does not exist"));
+                if (ServerController.GetSessionData(token, out Tuple<int, string> sessionData))
+                {
+                    listing.Distance = CalculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
+                }
+            } catch (ArgumentNullException)
             {
                 listing.Distance = -1;
+            } catch (NotImplementedException)
+            {
+                //TODO: remove catch block
             }
             listing.OwningUserName = listing.Owner.Username;
             listing.Owner = null;
@@ -156,7 +164,7 @@ namespace Stexchange.Controllers
         /// <param name="ownerPostalCode"></param>
         /// <param name="myPostalCode"></param>
         /// <returns>distance in km as double</returns>
-        private double calculateDistance(string ownerPostalCode, string myPostalCode)
+        private double CalculateDistance(string ownerPostalCode, string myPostalCode)
         {
             throw new NotImplementedException();
         }
