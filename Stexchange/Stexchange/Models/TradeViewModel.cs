@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Stexchange.Controllers;
 using Stexchange.Data;
-using Stexchange.Data.Builders;
 using Stexchange.Data.Models;
 using System;
 using System.Collections.Concurrent;
@@ -44,7 +43,7 @@ namespace Stexchange.Models
             var start = DateTime.Now;
             var newOrModified = (from listing in db.Listings
                      where (blocked || listing.LastModified >= start)
-                     select new ListingBuilder(listing)
+                     select new EntityBuilder<Listing>(listing)
                         .SetProperty("Pictures",
                             (from img in db.Images
                              where img.ListingId == listing.Id
