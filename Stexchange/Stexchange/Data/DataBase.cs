@@ -42,7 +42,8 @@ namespace Stexchange.Data
 			modelBuilder.Entity<UserVerification>()
 				.HasOne(uv => uv.User)
 				.WithOne(u => u.Verification)
-				.HasForeignKey<UserVerification>(uv => uv.Id);
+				.HasForeignKey<UserVerification>(uv => uv.Id)
+				.HasPrincipalKey<User>(u => u.Id);
 
 			modelBuilder.Entity<User>(entity =>
 			{
@@ -56,17 +57,11 @@ namespace Stexchange.Data
 				entity.Property(u => u.IsVerified).HasDefaultValue(0);
 			});
 
-			modelBuilder.Entity<User>()
-				.HasOne(u => u.Verification)
-				.WithOne(uv => uv.User)
-				.HasForeignKey<UserVerification>(uv => uv.Id);
-
 			modelBuilder.Entity<Listing>(entity =>
             {
 				entity.Property(l => l.Title).IsRequired();
 				entity.Property(l => l.Description).IsRequired();
 				entity.Property(l => l.NameNl).IsRequired();
-				entity.Property(l => l.NameLatin).IsRequired();
 				entity.Property(l => l.Visible).HasDefaultValue(1);
 				entity.Property(l => l.Renewed).HasDefaultValue(0);
 			});
@@ -74,12 +69,14 @@ namespace Stexchange.Data
 			modelBuilder.Entity<Listing>()
 				.HasOne(l => l.Owner)
 				.WithMany(u => u.Listings)
-				.HasForeignKey(l => l.UserId);
+				.HasForeignKey(l => l.UserId)
+				.HasPrincipalKey(u => u.Id);
 
 			modelBuilder.Entity<ImageData>()
 				.HasOne(id => id.Listing)
 				.WithMany(l => l.Pictures)
-				.HasForeignKey(id => id.ListingId);
+				.HasForeignKey(id => id.ListingId)
+				.HasPrincipalKey(l => l.Id);
 
 			modelBuilder.Entity<FilterListing>()
 				.HasKey(fl => new { fl.ListingId, fl.Value });
@@ -87,13 +84,46 @@ namespace Stexchange.Data
 			modelBuilder.Entity<FilterListing>()
 				.HasOne(fl => fl.Listing)
 				.WithMany()
-				.HasForeignKey(fl => fl.ListingId);
+				.HasForeignKey(fl => fl.ListingId)
+				.HasPrincipalKey(l => l.Id);
 
 			modelBuilder.Entity<FilterListing>()
 				.HasOne(fl => fl.Filter)
 				.WithMany()
 				.HasForeignKey(fl => fl.Value)
 				.HasPrincipalKey(f => f.Value);
+
+			modelBuilder.Entity<Chat>()
+				.HasAlternateKey(c => new { c.AdId, c.ResponderId });
+
+			modelBuilder.Entity<Chat>()
+				.HasOne(c => c.Listing)
+				.WithMany()
+				.HasForeignKey(c => c.AdId)
+				.HasPrincipalKey(l => l.Id);
+
+			modelBuilder.Entity<Chat>()
+				.HasOne(c => c.Responder)
+				.WithMany(u => u.ChatInbox)
+				.HasForeignKey(c => c.ResponderId)
+				.HasPrincipalKey(u => u.Id);
+
+			modelBuilder.Entity<Chat>()
+				.HasMany(c => c.Messages)
+				.WithOne()
+				.HasForeignKey(m => m.ChatId)
+				.HasForeignKey(c => c.Id);
+
+			modelBuilder.Entity<Message>(entity =>
+			{
+				entity.Property(m => m.Content).IsRequired();
+			});
+
+			modelBuilder.Entity<Message>()
+				.HasOne(m => m.Sender)
+				.WithMany()
+				.HasForeignKey(m => m.SenderId)
+				.HasPrincipalKey(u => u.Id);
 		}
 
 		public DbSet<User> Users { get; set; }
@@ -102,5 +132,7 @@ namespace Stexchange.Data
 		public DbSet<ImageData> Images { get; set; }
 		public DbSet<Filter> Filters { get; set; }
 		public DbSet<FilterListing> FilterListings { get; set; }
+		public DbSet<Chat> Chats { get; set; }
+		public DbSet<Message> Messages { get; set; }
 	}
 }

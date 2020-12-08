@@ -12,7 +12,7 @@ namespace Stexchange.Data.Models
         [NotMapped]
         private double distance = -1;
 
-        [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id", TypeName = "bigint(20) unsigned"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column("title", TypeName = "varchar(80)")]
@@ -21,14 +21,14 @@ namespace Stexchange.Data.Models
         [Column("description", TypeName = "text")]
         public string Description { get; set; }
 
-        [Column("name_nl", TypeName = "varchar(30)")]
+        [Column("name_nl", TypeName = "varchar(50)")]
         public string NameNl { get; set; }
 
-        [Column("name_lt", TypeName = "varchar(30)")]
+        [Column("name_lt", TypeName = "varchar(50)")]
         public string NameLatin { get; set; }
 
-        [Column("quantity", TypeName = "int"), Range(1, int.MaxValue)]
-        public int Quantity { get; set; }
+        [Column("quantity", TypeName = "int unsigned"), Range(1, uint.MaxValue)]
+        public uint Quantity { get; set; }
 
         [NotMapped]
         public List<ImageData> Pictures { get; set; }
@@ -50,13 +50,16 @@ namespace Stexchange.Data.Models
         [NotMapped]
         public double Distance { get => distance; set => distance = value; }
 
-        [Column("visible", TypeName = "tinyint(1)")]
+        [Column("visible", TypeName = "bit(1)")]
         public bool Visible { get; set; }
 
-        [Column("renewed", TypeName = "tinyint(1)")]
+        [Column("renewed", TypeName = "bit(1)")]
         public bool Renewed { get; set; }
 
         [Column("last_modified", TypeName = "timestamp"), DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastModified { get; set; }
+
+        [NotMapped]
+        public List<string> Filters { get; set; }
     }
 }

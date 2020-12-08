@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20201118150147_filters.Designer.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.cs" />
     <Compile Remove="Migrations\20201119114021_mutable_guid.Designer.cs" />
+    <Compile Remove="Migrations\20201206114741_fix_foreign_keys.cs" />
+    <Compile Remove="Migrations\20201206114741_fix_foreign_keys.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
