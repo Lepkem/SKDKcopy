@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Stexchange.Controllers.Exceptions;
 using Stexchange.Data;
 using Stexchange.Data.Models;
 using Stexchange.Models;
@@ -137,20 +138,15 @@ namespace Stexchange.Controllers
         private void PrepareListing(ref Listing listing)
         {
             listing.Owner = _userCache[listing.UserId];
-            long token;
             try
             {
-                Request.Cookies.TryGetValue("SessionToken", out string cookieVal);
-                token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session cookie does not exist"));
-                if (GetSessionData(token, out Tuple<int, string> sessionData))
-                {
-                    listing.Distance = CalculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
-                }
-            } catch (ArgumentNullException)
+                listing.Distance = CalculateDistance(listing.Owner.Postal_Code);
+            } catch (InvalidSessionException)
             {
                 listing.Distance = -1;
             } catch (NotImplementedException)
             {
+                listing.Distance = -1;
                 //TODO: remove catch block
             }
             listing.OwningUserName = listing.Owner.Username;
@@ -158,12 +154,13 @@ namespace Stexchange.Controllers
         }
 
         /// <summary>
-        /// Calculates the distance between two postal codes
+        /// Calculates the distance between the logged in user
+        /// and the owner of the listing.
         /// </summary>
         /// <param name="ownerPostalCode"></param>
-        /// <param name="myPostalCode"></param>
+        /// <exception cref="InvalidSessionException">If the user is not logged in.</exception>
         /// <returns>distance in km as double</returns>
-        private double CalculateDistance(string ownerPostalCode, string myPostalCode)
+        private double CalculateDistance(string ownerPostalCode)
         {
             throw new NotImplementedException();
         }
