@@ -11,7 +11,7 @@ namespace Stexchange.Controllers
     {
         public static class Cookies
         {
-            public const string SessionData = "SessionData";
+            public const string SessionData = "SessionToken";
         }
 
         /// <summary>
