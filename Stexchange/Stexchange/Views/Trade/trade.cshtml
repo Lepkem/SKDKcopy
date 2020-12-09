@@ -181,7 +181,7 @@
 <div class="" id="listings">
     @foreach (Listing listing in Model.Listings)
     {
-        <a href="@Url.Action("Index", "Home")">
+        <a href="@Url.Action("Detail", "Trade", new { listingId = listing.Id })">
             <div class="Advertisement">
                 <img class="picture" src="@listing.Pictures.First().GetImage()" alt="Foto van de plant">
                 <code class="title">@listing.Title</code>

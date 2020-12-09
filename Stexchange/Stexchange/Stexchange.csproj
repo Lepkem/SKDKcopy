@@ -85,5 +85,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Views\DetailAdvertisement\" />
   </ItemGroup>
 </Project>

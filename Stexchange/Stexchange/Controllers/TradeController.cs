@@ -64,7 +64,33 @@ namespace Stexchange.Controllers
             //TODO: move releasing the resource to this class' Dispose method
             _blocked = false; //Release the resource
             //TODO: put the listing in a model for the detail page.
-            return View();
+            
+            
+            return View("DetailAdvertisement", model: new DetailAdvertisementModel(listing, FormatFilters(listing.Filters)));
+        }
+
+        private Dictionary<string, string> FormatFilters(List<string> filters)
+        {
+            List<string> filteroptions = new List<string> { "light_", "water_", "plant_type_", "nutrients_", "ph_", "indigenous_", "with_pot_", "give_away_" };
+            Dictionary<string, string> Filters = new Dictionary<string, string>();
+
+            // Loops through advertisementfilters and compares each filter to each filteroptions
+            for (int i = 0; i < filteroptions.Count; i++)
+            {
+                for (int j = 0; j < filteroptions.Count; j++)
+                {
+                    if (filters[i].Length >= filteroptions[j].Length &&
+                        filteroptions[j] == filters[i].Substring(0, filteroptions[j].Length))
+                    {
+                        // Replaces filteroption name and underscores in filter value with empty strings or white spaces
+                        var filterValue = filters[i].Replace(filteroptions[j], "").Replace("_", " ");
+                        // Replaces all underscores in filteroption names with empty strings
+                        var filterKey = filteroptions[j].Replace("_", "");
+                        Filters.Add(filterKey, filterValue);
+                    }
+                }
+            }
+            return Filters;
         }
 
         /// <summary>
