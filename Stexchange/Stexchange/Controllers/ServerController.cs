@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Stexchange.Controllers.Exceptions;
 
 namespace Stexchange.Controllers
 {
@@ -42,22 +43,15 @@ namespace Stexchange.Controllers
         /// <summary>
         /// Retrieves the id of the user that is logged in from the Request cookie.
         /// </summary>
-        /// <exception cref="Exception">If the user is not logged in.</exception>
+        /// <exception cref="InvalidSessionException">If the user is not logged in.</exception>
         /// <returns>The id of the user.</returns>
         public int GetUserId()
         {
-            Tuple<int, string> session;
-            try
+            Request.Cookies.TryGetValue(Cookies.SessionData, out string cookieVal);
+            long token = Convert.ToInt64(cookieVal ?? throw new InvalidSessionException("Cookie does not exist", false, null));
+            if (!GetSessionData(token, out Tuple<int, string> session))
             {
-                Request.Cookies.TryGetValue(Cookies.SessionData, out string cookieVal);
-                long token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Cookie does not exist"));
-                if(!GetSessionData(token, out session))
-                {
-                    throw new Exception("Session does not exist");
-                }
-            } catch (ArgumentNullException ane)
-            {
-                throw new Exception(ane.Message, ane);
+                throw new InvalidSessionException("Session does not exist", true, false);
             }
             return session.Item1;
         }
