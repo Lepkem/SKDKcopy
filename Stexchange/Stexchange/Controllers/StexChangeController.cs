@@ -52,6 +52,7 @@ namespace Stexchange.Controllers
             long token = Convert.ToInt64(cookieVal ?? throw new InvalidSessionException("Cookie does not exist", false, null));
             if (!GetSessionData(token, out Tuple<int, string> session))
             {
+                Response.Cookies.Delete(Cookies.SessionData);
                 throw new InvalidSessionException("Session does not exist", true, false);
             }
             return session.Item1;
@@ -76,6 +77,17 @@ namespace Stexchange.Controllers
         public static bool TerminateSession(long token)
         {
             return sessions.Remove(token);
+        }
+
+        public static void ClearSessions(int id)
+        {
+            var tokens = (from value in sessions
+                         where value.Value.Item1 == id
+                         select value.Key).ToList();
+            foreach(long token in tokens)
+            {
+                sessions.Remove(token);
+            }
         }
 
         /// <summary>
