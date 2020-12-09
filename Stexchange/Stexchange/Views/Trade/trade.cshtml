@@ -183,7 +183,7 @@
     {
         <a href="@Url.Action("Index", "Home")">
             <div class="Advertisement">
-                <img class="picture" src="https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512__340.jpg" alt="Girl in a jacket">
+                <img class="picture" src="@listing.Pictures.First().GetImage()" alt="Foto van de plant">
                 <code class="title">@listing.Title</code>
                 <code class="owner">@listing.OwningUserName</code>
                 <span class="distance">Distance: <code>@listing.Distance</code> km</span>
