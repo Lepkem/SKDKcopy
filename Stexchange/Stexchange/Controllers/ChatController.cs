@@ -18,6 +18,13 @@ namespace Stexchange.Controllers
             _db = db;
         }
 
+        /// <summary>
+        /// Route to retrieve the chat inbox of the user.
+        /// User must be logged in.
+        /// If the pre-condition is not met,
+        /// the client will be redirected to the Home view.
+        /// </summary>
+        /// <returns>The Chat view for the user.</returns>
         public IActionResult Chat()
         {
             long token;
