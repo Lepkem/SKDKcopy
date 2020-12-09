@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Stexchange.Controllers
 {
-    public class DetailAdvertisementController : Controller
+    public class DetailAdvertisementController : StexChangeController
     {
         public DetailAdvertisementController(Database db)
         {

@@ -7,7 +7,7 @@ using Stexchange.Controllers.Exceptions;
 
 namespace Stexchange.Controllers
 {
-    public class ServerController : Controller
+    public abstract class StexChangeController : Controller
     {
         public static class Cookies
         {
