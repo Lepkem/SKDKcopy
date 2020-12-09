@@ -281,7 +281,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{new_Use
 
 		public IActionResult Logout()
 		{
-			Response.Cookies.Delete("SessionToken");
+			Response.Cookies.Delete(Cookies.SessionData);
 			return RedirectToAction("Login");
 		}
 	}
