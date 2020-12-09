@@ -58,5 +58,24 @@ namespace Stexchange.Controllers
                      select chat).ToList();
             return View(model: new ChatViewModel(chats));
         }
+
+        /// <summary>
+        /// Route for the client to post a message.
+        /// User must be logged in.
+        /// If the pre-condition is not met,
+        /// the client will be redirected to the Home view.
+        /// If a chat between the sender and receipient does not exist,
+        /// it will be created.
+        /// If sender or receipient blocked either,
+        /// or if the message does not pass the explicit content filter,
+        /// the message will not be send and the client
+        /// will be notified to display an error message.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public IActionResult PostMessage(Message message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
