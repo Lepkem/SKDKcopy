@@ -31,22 +31,19 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Trade" asp-action="Trade">RUILEN</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="DetailAdvertisement" asp-action="DetailAdvertisement">Advertentie</a>
-                </li>
                 @if (!(Context.Request.Cookies.ContainsKey("SessionToken")))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">LOGIN</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">Mijn Account</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="MyAccount" asp-action="MyAccount">MIJN ACCOUNT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Uitloggen</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">UITLOGGEN</a>
                     </li>
                 }
             </ul>
