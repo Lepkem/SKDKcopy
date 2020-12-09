@@ -16,7 +16,7 @@
             return TimeSpanDisplayHelper(timespan.TotalHours, 24, " dag", " dagen");
         } else if(timespan >= TimeSpan.FromMinutes(60))
         {
-            return TimeSpanDisplayHelper(timespan.TotalMinutes, 60, "uur", "uur");
+            return TimeSpanDisplayHelper(timespan.TotalMinutes, 60, " uur", " uur");
         } else
         {
             return "Zojuist";
@@ -32,6 +32,14 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="~/css/trade.css" />
+<div class="fullwidth">
+    <div class="searchbar" id="search">
+        <input type="text" placeholder="Zoek op trefwoord..." name="searchbar" id="searchbar" />
+        <button id="searchquery"><i class="fa fa-search"></i></button>
+        <input type="checkbox" name="search_description" id="search_description" value="search_description" />
+        <label for="search_description">Doorzoek ook de beschrijving</label>
+    </div>
+</div>
 <div class="" id="forms">
     <form id="filer_form">
         <strong>Filters</strong>
@@ -149,15 +157,8 @@
         <button type="submit" id="apply_filter">Filters toepassen</button>
     </form>
     <form id="sort_form">
-        <strong>Sorteren</strong>
-        <br />
-        <label for="sort">Kies een criterium om op te sorteren</label>
-        <select name="sort" id="sort">
-            <option value="recent">Meest recent</option>
-            <option value="distance">Afstand oplopend</option>
-            <option value="rating">Beoordeling aflopend</option>
-        </select>
-        <br />
+        <strong class="sort">Sorteren</strong>
+        <label class="chose" for="sort">Kies een criterium om op te sorteren</label>
 
         <input type="checkbox" class="sort-range-toggle" name="distance_toggle" id="distance_toggle" />
         <label for="distance_toggle">Afstand begrenzen</label>
@@ -177,12 +178,6 @@
         <button type="submit" id="apply_sort">Criteria toepassen</button>
     </form>
 </div>
-<div class="" id="search">
-    <input type="text" placeholder="Zoek op trefwoord..." name="searchbar" id="searchbar" />
-    <button id="searchquery"><i class="fa fa-search"></i></button>
-    <input type="checkbox" name="search_description" id="search_description" value="search_description" />
-    <label for="search_description">Doorzoek ook de beschrijving</label>
-</div>
 <div class="" id="listings">
     @foreach (Listing listing in Model.Listings)
     {
@@ -190,18 +185,21 @@
             <div class="Advertisement">
                 <img class="picture" src="https://cdn.pixabay.com/photo/2015/04/19/08/33/flower-729512__340.jpg" alt="Girl in a jacket">
                 <code class="title">@listing.Title</code>
-                <span class="distance"><code>@listing.Distance</code> km</span>
-                @if (listing.Filters is object)
-                {
-                    @foreach (string filter in listing.Filters)
-                    {
-                        <code class="filter_tag">@filter</code>
-                    }
-                }
-                <span class="since">
+                <code class="owner">@listing.OwningUserName</code>
+                <span class="distance">Distance: <code>@listing.Distance</code> km</span>
+                <span class="since">Uploaded: 
                     <code>@(TimeSpanDisplay(listing.CreatedAt))</code>
                 </span>
-                <code class="owner">@listing.OwningUserName</code>
+
+                <div class="filters">
+                    @if (listing.Filters is object)
+                    {
+                        @foreach (string filter in listing.Filters)
+                        {
+                            <code class="filter_tag">@filter</code>
+                        }
+                    }
+                </div>
             </div>
         </a>
     }
