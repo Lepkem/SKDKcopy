@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stexchange.Data;
-using Stexchange.Data.Builders;
 using Stexchange.Data.Models;
 using Stexchange.Models;
 
@@ -75,7 +74,7 @@ namespace Stexchange.Controllers
         {
             var newOrModified = (from listing in _db.Listings
                                  where (!_readable || listing.LastModified >= _cacheBirth)
-                                 select new ListingBuilder(listing)
+                                 select new EntityBuilder<Listing>(listing)
                                     /*.SetProperty("Pictures",
                                         (from img in _db.Images
                                          where img.ListingId == listing.Id
@@ -143,7 +142,7 @@ namespace Stexchange.Controllers
             {
                 Request.Cookies.TryGetValue("SessionToken", out string cookieVal);
                 token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session cookie does not exist"));
-                if (ServerController.GetSessionData(token, out Tuple<int, string> sessionData))
+                if (GetSessionData(token, out Tuple<int, string> sessionData))
                 {
                     listing.Distance = CalculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
                 }
