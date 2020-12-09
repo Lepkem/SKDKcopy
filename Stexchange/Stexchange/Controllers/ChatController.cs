@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Stexchange.Controllers.Exceptions;
 using Stexchange.Data;
 using Stexchange.Data.Models;
 using Stexchange.Models;
 
 namespace Stexchange.Controllers
 {
-    public class ChatController : Controller
+    public class ChatController : StexChangeController
     {
         private Database _db;
 
@@ -27,23 +28,18 @@ namespace Stexchange.Controllers
         /// <returns>The Chat view for the user.</returns>
         public IActionResult Chat()
         {
-            long token;
+            int userId;
             try
             {
-                Request.Cookies.TryGetValue("SessionToken", out string cookieVal);
-                token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session does not exist."));
-            } catch (ArgumentNullException)
+                userId = GetUserId();
+            } catch (InvalidSessionException)
             {
-                return View("Login");
-            }
-            if (!ServerController.GetSessionData(token, out Tuple<int, string> session))
-            {
-                return View("Login");
+                return RedirectToAction("Login", "Login");
             }
             List<Chat> chats = (from chat in _db.Chats
-                                where (chat.ResponderId == session.Item1 ||
+                                where (chat.ResponderId == userId ||
                                     (from listing in _db.Listings
-                                     where listing.UserId == session.Item1
+                                     where listing.UserId == userId
                                      select listing.Id).Contains(chat.AdId))
                                 select new EntityBuilder<Chat>(chat)
                                 .SetProperty("Messages", (
