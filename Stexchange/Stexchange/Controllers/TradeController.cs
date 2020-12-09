@@ -101,6 +101,7 @@ namespace Stexchange.Controllers
         {
             var newOrModified = (from listing in _db.Listings
                                  where (!_readable || listing.LastModified >= _cacheBirth)
+                                 orderby listing.CreatedAt
                                  select new EntityBuilder<Listing>(listing)
                                     .SetProperty("Pictures",
                                         (from img in _db.Images
