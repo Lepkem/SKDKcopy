@@ -8,6 +8,11 @@ namespace Stexchange.Controllers
 {
     public class ServerController : Controller
     {
+        public static class Cookies
+        {
+            public const string SessionData = "SessionData";
+        }
+
         /// <summary>
         /// Dictionary that contains all currently active session tokens.
         /// </summary>
@@ -32,6 +37,29 @@ namespace Stexchange.Controllers
         public static bool GetSessionData(long token, out Tuple<int, string> data)
         {
             return sessions.TryGetValue(token, out data);
+        }
+
+        /// <summary>
+        /// Retrieves the id of the user that is logged in from the Request cookie.
+        /// </summary>
+        /// <exception cref="Exception">If the user is not logged in.</exception>
+        /// <returns>The id of the user.</returns>
+        public int GetUserId()
+        {
+            Tuple<int, string> session;
+            try
+            {
+                Request.Cookies.TryGetValue(Cookies.SessionData, out string cookieVal);
+                long token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Cookie does not exist"));
+                if(!GetSessionData(token, out session))
+                {
+                    throw new Exception("Session does not exist");
+                }
+            } catch (ArgumentNullException ane)
+            {
+                throw new Exception(ane.Message, ane);
+            }
+            return session.Item1;
         }
         
         /// <summary>
