@@ -10,6 +10,7 @@ namespace Stexchange.Controllers
     {
         /// <summary>
         /// Dictionary that contains all currently active session tokens.
+        /// Value Tuple contains user id and username.
         /// </summary>
         private static readonly Dictionary<long, Tuple<int, string>> sessions = new Dictionary<long, Tuple<int, string>>();
 
@@ -37,7 +38,7 @@ namespace Stexchange.Controllers
         /// <summary>
         /// Creates a key, value pair for the session in the session dictionary.
         /// </summary>
-        /// <param name="user">The value of the session (user data)</param>
+        /// <param name="user">The value of the session (user id and name)</param>
         public static long CreateSession(Tuple<int, string> user)
         {
             long token = generateToken(user);
