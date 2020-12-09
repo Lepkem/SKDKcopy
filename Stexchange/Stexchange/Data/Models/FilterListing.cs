@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Stexchange.Data.Models
 {
     public class FilterListing
-    {
+    {//serial
         [Column("listing_id", TypeName = "bigint(20) unsigned")]
         public int ListingId { get; set; }
 

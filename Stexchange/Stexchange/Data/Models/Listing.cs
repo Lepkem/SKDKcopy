@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Stexchange.Data.Models
 {
@@ -17,9 +15,11 @@ namespace Stexchange.Data.Models
 
         [Column("title", TypeName = "varchar(80)")]
         public string Title { get; set; }
+        
 
         [Column("description", TypeName = "text")]
         public string Description { get; set; }
+    
 
         [Column("name_nl", TypeName = "varchar(50)")]
         public string NameNl { get; set; }

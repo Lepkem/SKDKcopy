@@ -9,7 +9,7 @@ namespace Stexchange.Data.Models
 {
     public class User
     {
-        [Column("id", TypeName = "bigint(20) unsigned"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id", TypeName = "serial"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [EmailAddress, Column("email", TypeName = "varchar(254)")]
         public string Email { get; set; }

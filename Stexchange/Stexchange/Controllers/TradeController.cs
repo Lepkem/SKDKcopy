@@ -13,7 +13,7 @@ using Stexchange.Models;
 
 namespace Stexchange.Controllers
 {
-    public class TradeController : Controller
+    public class TradeController : StexChangeController
     {
         private Database _db;
 
