@@ -125,17 +125,7 @@ namespace Stexchange.Models
         /// <param name="listing">The given listing</param>
         private void PrepareListing(long? token, ref Listing listing)
         {
-            listing.Owner = userCache[listing.UserId];
-            if (token is object && ServerController.GetSessionData((long)token, out Tuple<int, string> sessionData))
-            {
-                listing.Distance = calculateDistance(listing.Owner.Postal_Code, sessionData.Item2);
-            }
-            else
-            {
-                listing.Distance = -1;
-            }
-            listing.OwningUserName = listing.Owner.Username;
-            listing.Owner = null;
+            
         }
 
         /// <summary>
