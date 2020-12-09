@@ -71,7 +71,21 @@ namespace Stexchange.Controllers
         /// <returns></returns>
         public IActionResult PostMessage(Message message)
         {
-            throw new NotImplementedException();
+            int userId;
+            try
+            {
+                userId = GetUserId();
+            } catch (InvalidSessionException) {
+                return RedirectToAction("Login", "Login");
+            }
+            if(message.ChatId == -1)
+            {
+                //TODO: create a new chat
+            }
+            //TODO: implement user blocking
+            //TODO: implement chat content filter
+            _db.Messages.Add(message);
+            return RedirectToAction("Chat");
         }
     }
 }
