@@ -22,7 +22,7 @@ namespace Stexchange.Controllers
         /// Route to retrieve the chat inbox of the user.
         /// User must be logged in.
         /// If the pre-condition is not met,
-        /// the client will be redirected to the Home view.
+        /// the client will be redirected to the Login view.
         /// </summary>
         /// <returns>The Chat view for the user.</returns>
         public IActionResult Chat()
@@ -34,11 +34,11 @@ namespace Stexchange.Controllers
                 token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session does not exist."));
             } catch (ArgumentNullException)
             {
-                return View("Home");
+                return View("Login");
             }
             if (!ServerController.GetSessionData(token, out Tuple<int, string> session))
             {
-                return View("Home");
+                return View("Login");
             }
             List<Chat> chats = (from chat in _db.Chats
                                 where (chat.ResponderId == session.Item1 ||
@@ -63,7 +63,7 @@ namespace Stexchange.Controllers
         /// Route for the client to post a message.
         /// User must be logged in.
         /// If the pre-condition is not met,
-        /// the client will be redirected to the Home view.
+        /// the client will be redirected to the Login view.
         /// If a chat between the sender and receipient does not exist,
         /// it will be created.
         /// If sender or receipient blocked either,
