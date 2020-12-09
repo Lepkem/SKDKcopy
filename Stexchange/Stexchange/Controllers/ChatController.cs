@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Stexchange.Data;
+using Stexchange.Data.Models;
 using Stexchange.Models;
 
 namespace Stexchange.Controllers
@@ -19,7 +20,36 @@ namespace Stexchange.Controllers
 
         public IActionResult Chat()
         {
-            return View(model: new ChatViewModel(_db));
+            long token;
+            try
+            {
+                Request.Cookies.TryGetValue("SessionToken", out string cookieVal);
+                token = Convert.ToInt64(cookieVal ?? throw new ArgumentNullException("Session does not exist."));
+            } catch (ArgumentNullException)
+            {
+                return View("Home");
+            }
+            if (!ServerController.GetSessionData(token, out Tuple<int, string> session))
+            {
+                return View("Home");
+            }
+            List<Chat> chats = (from chat in _db.Chats
+                                where (chat.ResponderId == session.Item1 ||
+                                    (from listing in _db.Listings
+                                     where listing.UserId == session.Item1
+                                     select listing.Id).Contains(chat.AdId))
+                                select new EntityBuilder<Chat>(chat)
+                                .SetProperty("Messages", (
+                                    from message in _db.Messages
+                                    where message.ChatId == chat.Id
+                                    orderby message.Timestamp descending
+                                    select message
+                                ).ToList())
+                                .Complete()).ToList();
+            chats = (from chat in chats
+                     orderby chat.Messages[0].Timestamp descending
+                     select chat).ToList();
+            return View(model: new ChatViewModel(chats));
         }
     }
 }
