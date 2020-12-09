@@ -48,11 +48,21 @@ namespace Stexchange.Controllers
                                     orderby message.Timestamp descending
                                     select message
                                 ).ToList())
+                                .SetProperty("Poster", (
+                                    from user in _db.Users
+                                    join listing in _db.Listings on user.Id equals listing.UserId
+                                    where listing.Id == chat.AdId
+                                    select user).First())
+                                .SetProperty("Responder", (
+                                    from user in _db.Users
+                                    where user.Id == chat.ResponderId
+                                    select user).First())
                                 .Complete()).ToList();
             chats = (from chat in chats
+                     where chat.Messages.Any()
                      orderby chat.Messages[0].Timestamp descending
                      select chat).ToList();
-            return View(model: new ChatViewModel(chats));
+            return View(model: new ChatViewModel(chats, userId));
         }
 
         /// <summary>
@@ -72,9 +82,13 @@ namespace Stexchange.Controllers
         public IActionResult PostMessage(Message message)
         {
             int userId;
+         
             try
             {
                 userId = GetUserId();
+                
+                
+
             } catch (InvalidSessionException) {
                 return RedirectToAction("Login", "Login");
             }
@@ -82,10 +96,20 @@ namespace Stexchange.Controllers
             {
                 //TODO: create a new chat
             }
+            //var newMessage = new Message()
+            //{
+            //    ChatId = ,
+            //    Content = message,
+            //    Sender = userId
+
+            //};
+
             //TODO: implement user blocking
             //TODO: implement chat content filter
             _db.Messages.Add(message);
             return RedirectToAction("Chat");
         }
+
+        
     }
 }

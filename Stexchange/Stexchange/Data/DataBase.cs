@@ -104,7 +104,7 @@ namespace Stexchange.Data
 
 			modelBuilder.Entity<Chat>()
 				.HasOne(c => c.Responder)
-				.WithMany(u => u.ChatInbox)
+				.WithMany()
 				.HasForeignKey(c => c.ResponderId)
 				.HasPrincipalKey(u => u.Id);
 
