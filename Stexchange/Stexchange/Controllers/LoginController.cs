@@ -269,7 +269,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{new_Use
 				// the user will remain logged in unless the session is expired.
 				SameSite = SameSiteMode.Lax
 			};
-			Response.Cookies.Append("SessionToken", sessionToken.ToString(), cookieOptions);
+			Response.Cookies.Append(Cookies.SessionToken, sessionToken.ToString(), cookieOptions);
 		}
 
 		/// <summary>
@@ -281,7 +281,7 @@ https://{ControllerContext.HttpContext.Request.Host}/login/Verification/{new_Use
 
 		public IActionResult Logout()
 		{
-			Response.Cookies.Delete(Cookies.SessionData);
+			Response.Cookies.Delete(Cookies.SessionToken);
 			return RedirectToAction("Login");
 		}
 	}

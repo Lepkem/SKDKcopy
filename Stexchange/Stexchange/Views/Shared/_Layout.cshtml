@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Stexchange.Controllers
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -31,7 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Trade" asp-action="Trade">RUILEN</a>
                 </li>
-                @if (!(Context.Request.Cookies.ContainsKey("SessionToken")))
+                @if (!(Context.Request.Cookies.ContainsKey(StexChangeController.Cookies.SessionToken)))
                 {
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">LOGIN</a>

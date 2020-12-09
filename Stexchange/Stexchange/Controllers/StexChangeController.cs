@@ -11,7 +11,7 @@ namespace Stexchange.Controllers
     {
         public static class Cookies
         {
-            public const string SessionData = "SessionData";
+            public const string SessionToken = "SessionToken";
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Stexchange.Controllers
         /// <returns>The id of the user.</returns>
         public int GetUserId()
         {
-            Request.Cookies.TryGetValue(Cookies.SessionData, out string cookieVal);
+            Request.Cookies.TryGetValue(Cookies.SessionToken, out string cookieVal);
             long token = Convert.ToInt64(cookieVal ?? throw new InvalidSessionException("Cookie does not exist", false, null));
             if (!GetSessionData(token, out Tuple<int, string> session))
             {
